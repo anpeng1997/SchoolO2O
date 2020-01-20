@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pengan.dao.IShopDao">
+    <insert id="insertShop" useGeneratedKeys="true" keyColumn="shop_id" keyProperty="shopId" parameterType="shop">
+        insert into tb_shop values(null,#{owner.userId},#{area.areaId},#{shopCategory.shopCategoryId},
+        #{shopCategory.parentId},#{shopName},#{shopDesc},#{shopAddr},#{phone},#{shopImg},#{longitude},#{latitude},
+        #{priority},#{createTime},#{lastEditTime},#{enableStatus},#{advice})
+    </insert>
+    <update id="updateShop" parameterType="shop">
+        update tb_shop
+        <set>
+            <if test="area != null">
+                area_id = #{area.areaId},
+            </if>
+            <if test="shopCategory != null">
+                shop_category_id = #{shopCategory.shopCategoryId},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName},
+            </if>
+            <if test="shopDesc != null">
+                shop_desc = #{shopDesc},
+            </if>
+            <if test="shopAddr != null">
+                shop_addr = #{shopAddr},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="shopImg !=null">
+                shop_img = #{shopImg},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude},
+            </if>
+            <if test="priority != null">
+                priority = #{priority},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="enableStatus != null">
+                enable_status = #{enableStatus},
+            </if>
+            <if test="advice != null">
+                advice = #{advice}
+            </if>
+        </set>
+        where shop_id = #{shopId}
+    </update>
+
+    <select id="findShopById" resultType="shop" parameterType="long">
+        select * from tb_shop where shop_id = #{shopId};
+    </select>
+</mapper>

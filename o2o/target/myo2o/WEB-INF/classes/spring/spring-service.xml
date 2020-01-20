@@ -10,7 +10,6 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <import resource="spring-dao.xml"></import>
 <!--    service的spring配置,在这里我们需要进行申明式事务的配置-->
 <!--    配置事务管理器-->
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
