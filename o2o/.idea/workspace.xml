@@ -7,88 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41da1526-2c1f-4a30-9c2a-c17b460ee662" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myo2odb.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/ProductCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/ShopController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/AreaApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ProductCategoryApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ShopApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IProductCategoryDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopCategoryDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSourceHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSourceInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/Result.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductCategoryEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/exceptions/ShopOperationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IProductCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ProductCategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopCategoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/CalculatorPaging.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/CodeUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ProductCategoryDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopCategoryDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/spring/master-savle-db-spring-dao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/product/productcategory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shoplist.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shopmanage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shopoperation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/shop/shopOperation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ProductCategoryDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopCategoryDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopCategoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/AreaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IAreaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IAreaDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ShopExecution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ShopExecution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Area.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ShopStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ShopStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/AreaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/AreaServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AreaDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AreaDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/ShopDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-conf.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-conf.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/AreaDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/AreaDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/AreaDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/ShopDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-conf.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/jdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/logback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/mapper/AreaDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/mybatis-conf.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-service.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/watermark.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -402,7 +321,7 @@
       <workItem from="1582248625889" duration="4297000" />
       <workItem from="1582533805114" duration="3781000" />
       <workItem from="1582593042538" duration="5781000" />
-      <workItem from="1583582747769" duration="3996000" />
+      <workItem from="1583582747769" duration="4663000" />
     </task>
     <servers />
   </component>
@@ -446,54 +365,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579680868149" />
-    <state width="1656" height="444" key="GridCell.Tab.0.bottom" timestamp="1583587728920">
+    <state width="1656" height="101" key="GridCell.Tab.0.bottom" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
-    <state width="1656" height="444" key="GridCell.Tab.0.center" timestamp="1583587728920">
+    <state width="1656" height="101" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.0.center" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
-    <state width="1656" height="444" key="GridCell.Tab.0.left" timestamp="1583587728920">
+    <state width="1656" height="101" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.0.left" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
-    <state width="1656" height="444" key="GridCell.Tab.0.right" timestamp="1583587728920">
+    <state width="1656" height="101" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.0.right" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
-    <state width="1656" height="444" key="GridCell.Tab.1.bottom" timestamp="1583587728765">
+    <state width="1656" height="101" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.1.bottom" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
-    <state width="1656" height="444" key="GridCell.Tab.1.center" timestamp="1583587728765">
+    <state width="1656" height="101" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.1.center" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
-    <state width="1656" height="444" key="GridCell.Tab.1.left" timestamp="1583587728765">
+    <state width="1656" height="101" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.1.left" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
-    <state width="1656" height="444" key="GridCell.Tab.1.right" timestamp="1583587728765">
+    <state width="1656" height="101" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.1.right" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
-    <state width="1656" height="444" key="GridCell.Tab.2.bottom" timestamp="1583587728766">
+    <state width="1656" height="101" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.2.bottom" timestamp="1583588384235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
-    <state width="1656" height="444" key="GridCell.Tab.2.center" timestamp="1583587728766">
+    <state width="1656" height="101" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384235" />
+    <state width="1656" height="101" key="GridCell.Tab.2.center" timestamp="1583588384235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
-    <state width="1656" height="444" key="GridCell.Tab.2.left" timestamp="1583587728766">
+    <state width="1656" height="101" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384235" />
+    <state width="1656" height="101" key="GridCell.Tab.2.left" timestamp="1583588384234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
-    <state width="1656" height="444" key="GridCell.Tab.2.right" timestamp="1583587728766">
+    <state width="1656" height="101" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384234" />
+    <state width="1656" height="101" key="GridCell.Tab.2.right" timestamp="1583588384235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="444" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
+    <state width="1656" height="101" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583588384235" />
     <state width="1656" height="353" key="GridCell.Tab.3.bottom" timestamp="1582533982630">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
