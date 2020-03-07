@@ -1,14 +1,14 @@
 package cn.pengan.entity;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class Area {
     private Long areaId;
     private String areaName;
     private String areaDesc;
     private Integer priority;
-    private Data createTime;
-    private Data lastEditTime;
+    private Date createTime;
+    private Date lastEditTime;
 
     public Long getAreaId() {
         return areaId;
@@ -42,19 +42,19 @@ public class Area {
         this.priority = priority;
     }
 
-    public Data getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Data createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public Data getLastEditTime() {
+    public Date getLastEditTime() {
         return lastEditTime;
     }
 
-    public void setLastEditTime(Data lastEditTime) {
+    public void setLastEditTime(Date lastEditTime) {
         this.lastEditTime = lastEditTime;
     }
 

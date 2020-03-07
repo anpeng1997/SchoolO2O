@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IAreaDao {
     List<Area> findAll();
+
+    Area findById(Long areaId);
 }

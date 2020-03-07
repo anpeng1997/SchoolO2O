@@ -1,9 +1,13 @@
 package cn.pengan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Shop {
+@JsonIgnoreProperties(value = "handler")
+public class Shop implements Serializable {
     private Long shopId;
     private Long ownerId;
     private Long areaId;

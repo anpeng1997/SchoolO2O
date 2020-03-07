@@ -11,16 +11,26 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Date;
 
 public class ShopServiceTest extends BaseTest {
     @Autowired
     private IShopService shopService;
 
+    @Test
+    public void modifyShpTest() throws Exception {
+        Shop shop = shopService.findShopById(31L);
+        shop.setShopName("修改之后的名称");
+        File file = new File("E:\\Users\\an\\Pictures\\Desktop\\MD_Wallpaper_Tree.png");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        shopService.modifyShop(shop,fileInputStream,file.getName());
+    }
 
     @Test
-    public void addShopTest(){
-        File file = new File("E:\\Users\\an\\Downloads\\tiger.jpg");
+    public void addShopTest() throws Exception {
+        File file = new File("E:\\Users\\an\\Pictures\\Desktop\\pulppixel22.png");
         Shop shop = new Shop();
         Area area = new Area();
         ShopCategory shopCategory = new ShopCategory();
@@ -36,7 +46,21 @@ public class ShopServiceTest extends BaseTest {
         shop.setPhone("123456789");
         shop.setPriority(1);
         shop.setShopDesc("test");
-        ShopExecution shopExecution = shopService.addShop(shop, file);
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ShopExecution shopExecution = shopService.addShop(shop, fileInputStream,file.getName());
         System.out.println(shopExecution);
+    }
+
+    @Test
+    public void shopListTest() {
+        Shop shopCondition = new Shop();
+        shopCondition.setShopName("书");
+        ShopExecution shopList = shopService.findShopList(shopCondition, 2, 5);
+        System.out.println(shopList);
     }
 }

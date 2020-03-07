@@ -7,31 +7,88 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41da1526-2c1f-4a30-9c2a-c17b460ee662" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/AreaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ShopExecution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ShopStatusEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/util/utilTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/watermark.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myo2odb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/ProductCategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/ShopController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/AreaApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ProductCategoryApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ShopApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IProductCategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopCategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSourceHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/split/DynamicDataSourceInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductCategoryEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/exceptions/ShopOperationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IProductCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ProductCategoryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopCategoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/CalculatorPaging.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/CodeUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ProductCategoryDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopCategoryDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/spring/master-savle-db-spring-dao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/product/productcategory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shoplist.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shopmanage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop/shopoperation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/shop/shopOperation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ProductCategoryDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopCategoryDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopCategoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/AreaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IAreaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IAreaDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IShopDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ShopExecution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ShopExecution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ShopStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ShopStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IShopService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/AreaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/AreaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AreaDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AreaDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/ShopDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/ShopDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-conf.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-conf.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-service.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-service.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/AreaDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/AreaDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ShopDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ShopServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/AreaDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/ShopDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-conf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-service.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/jdbc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/mapper/AreaDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/mybatis-conf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-service.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myo2o/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/watermark.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +99,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="JavaScript File" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Enum" />
         <option value="Class" />
       </list>
@@ -81,26 +140,43 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/html/shop" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\main\webapp\WEB-INF\html\shop" />
+      <recent name="E:\javaCode\o2o\SchoolO2O\o2o" />
       <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\test\resources" />
       <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\main\resources" />
       <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\main\java\cn\pengan\entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\main\webapp\WEB-INF\html" />
       <recent name="E:\javaCode\o2o\SchoolO2O\o2o\src\main\resources\spring" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShopServiceTest.addShopTest">
-    <configuration name="ShopDaoTest.findShopByIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 8.5.47">
+    <configuration name="All in o2o" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="o2o" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AreaDaoTest.findAllTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="o2o" />
       <extension name="coverage">
         <pattern>
@@ -109,14 +185,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.pengan.dao" />
-      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ShopDaoTest" />
-      <option name="METHOD_NAME" value="findShopByIdTest" />
+      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.AreaDaoTest" />
+      <option name="METHOD_NAME" value="findAllTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopDaoTest.insertShopTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCategoryDaoTest.findProductCategoryList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="o2o" />
       <extension name="coverage">
         <pattern>
@@ -125,14 +201,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.pengan.dao" />
-      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ShopDaoTest" />
-      <option name="METHOD_NAME" value="insertShopTest" />
+      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ProductCategoryDaoTest" />
+      <option name="METHOD_NAME" value="findProductCategoryList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopDaoTest.updateShopTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCategoryDaoTest.findProductList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="o2o" />
       <extension name="coverage">
         <pattern>
@@ -141,14 +217,30 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.pengan.dao" />
-      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ShopDaoTest" />
-      <option name="METHOD_NAME" value="updateShopTest" />
+      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ProductCategoryDaoTest" />
+      <option name="METHOD_NAME" value="findProductList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopServiceTest.addShopTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShopCategoryDaoTest.findCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="o2o" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.pengan.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.pengan.dao" />
+      <option name="MAIN_CLASS_NAME" value="cn.pengan.dao.ShopCategoryDaoTest" />
+      <option name="METHOD_NAME" value="findCategoryTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopServiceTest.shopListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="o2o" />
       <extension name="coverage">
         <pattern>
@@ -158,29 +250,15 @@
       </extension>
       <option name="PACKAGE_NAME" value="cn.pengan.service" />
       <option name="MAIN_CLASS_NAME" value="cn.pengan.service.ShopServiceTest" />
-      <option name="METHOD_NAME" value="addShopTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="utilTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="o2o" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.pengan.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.pengan.util" />
-      <option name="MAIN_CLASS_NAME" value="cn.pengan.util.utilTest" />
-      <option name="METHOD_NAME" value="test1" />
+      <option name="METHOD_NAME" value="shopListTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Tomcat 8.5.47" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.47" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="o2o:war">
@@ -253,20 +331,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ShopDaoTest.insertShopTest" />
+      <item itemvalue="JUnit.All in o2o" />
+      <item itemvalue="JUnit.ShopServiceTest.shopListTest" />
+      <item itemvalue="JUnit.ProductCategoryDaoTest.findProductList" />
+      <item itemvalue="JUnit.ProductCategoryDaoTest.findProductCategoryList" />
       <item itemvalue="Tomcat Server.Tomcat 8.5.47" />
-      <item itemvalue="JUnit.ShopDaoTest.findShopByIdTest" />
-      <item itemvalue="JUnit.ShopDaoTest.updateShopTest" />
-      <item itemvalue="JUnit.utilTest.test1" />
-      <item itemvalue="JUnit.ShopServiceTest.addShopTest" />
+      <item itemvalue="JUnit.AreaDaoTest.findAllTest" />
+      <item itemvalue="JUnit.ShopCategoryDaoTest.findCategoryTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ShopServiceTest.addShopTest" />
-        <item itemvalue="JUnit.utilTest.test1" />
-        <item itemvalue="JUnit.ShopDaoTest.updateShopTest" />
-        <item itemvalue="JUnit.ShopDaoTest.findShopByIdTest" />
-        <item itemvalue="JUnit.ShopDaoTest.insertShopTest" />
+        <item itemvalue="JUnit.ShopCategoryDaoTest.findCategoryTest" />
+        <item itemvalue="JUnit.AreaDaoTest.findAllTest" />
+        <item itemvalue="JUnit.ProductCategoryDaoTest.findProductCategoryList" />
+        <item itemvalue="JUnit.ProductCategoryDaoTest.findProductList" />
+        <item itemvalue="JUnit.ShopServiceTest.shopListTest" />
       </list>
     </recent_temporary>
   </component>
@@ -274,12 +353,17 @@
     <option name="viewStates">
       <list>
         <serviceView>
-          <option name="contentProportion" value="0.073051944" />
+          <option name="contentProportion" value="0.103354976" />
           <treeState>
             <expand>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -300,7 +384,25 @@
       <updated>1579232100609</updated>
       <workItem from="1579232103807" duration="19850000" />
       <workItem from="1579399211857" duration="18433000" />
-      <workItem from="1579484570161" duration="23966000" />
+      <workItem from="1579484570161" duration="47191000" />
+      <workItem from="1579681577206" duration="5823000" />
+      <workItem from="1580010177178" duration="2074000" />
+      <workItem from="1580098285275" duration="26717000" />
+      <workItem from="1580970006626" duration="8073000" />
+      <workItem from="1581064067269" duration="61863000" />
+      <workItem from="1581405229588" duration="9854000" />
+      <workItem from="1581495157185" duration="11154000" />
+      <workItem from="1581514720610" duration="3508000" />
+      <workItem from="1581593739551" duration="8020000" />
+      <workItem from="1581739824667" duration="16767000" />
+      <workItem from="1581825348368" duration="15241000" />
+      <workItem from="1581901758548" duration="6116000" />
+      <workItem from="1581991891382" duration="2443000" />
+      <workItem from="1581999777669" duration="9361000" />
+      <workItem from="1582248625889" duration="4297000" />
+      <workItem from="1582533805114" duration="3781000" />
+      <workItem from="1582593042538" duration="5781000" />
+      <workItem from="1583582747769" duration="3996000" />
     </task>
     <servers />
   </component>
@@ -308,69 +410,136 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579253698507">
+    <state x="543" y="184" key="#All_in_o2o" timestamp="1581514562336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579253698507" />
-    <state x="765" y="213" key="#com.intellij.ide.util.MemberChooser" timestamp="1579522857197">
+    <state x="543" y="184" key="#All_in_o2o/0.0.1920.1040@0.0.1920.1040" timestamp="1581514562336" />
+    <state x="572" y="378" width="558" height="283" key="#com.intellij.debugger.actions.ViewTextAction" timestamp="1582095062706">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="213" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579522857197" />
-    <state width="1877" height="417" key="GridCell.Tab.0.bottom" timestamp="1579523194331">
+    <state x="572" y="378" width="558" height="283" key="#com.intellij.debugger.actions.ViewTextAction/0.0.1920.1040@0.0.1920.1040" timestamp="1582095062706" />
+    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581741310564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="417" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579523194331" />
-    <state width="1877" height="417" key="GridCell.Tab.0.center" timestamp="1579523194330">
+    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581741310564" />
+    <state x="765" y="213" key="#com.intellij.ide.util.MemberChooser" timestamp="1581602143120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="417" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579523194330" />
-    <state width="1877" height="417" key="GridCell.Tab.0.left" timestamp="1579523194330">
+    <state x="765" y="213" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581602143120" />
+    <state x="744" y="387" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1579594066121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="417" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579523194330" />
-    <state width="1877" height="417" key="GridCell.Tab.0.right" timestamp="1579523194331">
+    <state x="744" y="387" width="431" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1579594066121" />
+    <state x="603" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581515927355">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="417" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579523194331" />
-    <state width="1712" height="515" key="GridCell.Tab.1.bottom" timestamp="1579428171515">
+    <state x="603" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581515927355" />
+    <state x="690" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581515944477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.1.center" timestamp="1579428171515">
+    <state x="690" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581515944477" />
+    <state x="572" y="108" key="CommitChangelistDialog2" timestamp="1582095961598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.1.left" timestamp="1579428171515">
+    <state x="572" y="108" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1582095961598" />
+    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1579680868149">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.1.right" timestamp="1579428171515">
+    <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579680868149" />
+    <state width="1656" height="444" key="GridCell.Tab.0.bottom" timestamp="1583587728920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.2.bottom" timestamp="1579428171515">
+    <state width="1656" height="444" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
+    <state width="1656" height="444" key="GridCell.Tab.0.center" timestamp="1583587728920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.2.center" timestamp="1579428171515">
+    <state width="1656" height="444" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
+    <state width="1656" height="444" key="GridCell.Tab.0.left" timestamp="1583587728920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.2.left" timestamp="1579428171515">
+    <state width="1656" height="444" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
+    <state width="1656" height="444" key="GridCell.Tab.0.right" timestamp="1583587728920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state width="1712" height="515" key="GridCell.Tab.2.right" timestamp="1579428171515">
+    <state width="1656" height="444" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728920" />
+    <state width="1656" height="444" key="GridCell.Tab.1.bottom" timestamp="1583587728765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1712" height="515" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579428171515" />
-    <state x="652" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1579484623095">
+    <state width="1656" height="444" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
+    <state width="1656" height="444" key="GridCell.Tab.1.center" timestamp="1583587728765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="652" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579484623095" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1579250653217">
+    <state width="1656" height="444" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
+    <state width="1656" height="444" key="GridCell.Tab.1.left" timestamp="1583587728765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579250653217" />
+    <state width="1656" height="444" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
+    <state width="1656" height="444" key="GridCell.Tab.1.right" timestamp="1583587728765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="444" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728765" />
+    <state width="1656" height="444" key="GridCell.Tab.2.bottom" timestamp="1583587728766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="444" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
+    <state width="1656" height="444" key="GridCell.Tab.2.center" timestamp="1583587728766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="444" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
+    <state width="1656" height="444" key="GridCell.Tab.2.left" timestamp="1583587728766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="444" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
+    <state width="1656" height="444" key="GridCell.Tab.2.right" timestamp="1583587728766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="444" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583587728766" />
+    <state width="1656" height="353" key="GridCell.Tab.3.bottom" timestamp="1582533982630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="353" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582533982630" />
+    <state width="1656" height="353" key="GridCell.Tab.3.center" timestamp="1582533982630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="353" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582533982630" />
+    <state width="1656" height="353" key="GridCell.Tab.3.left" timestamp="1582533982630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="353" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582533982630" />
+    <state width="1656" height="353" key="GridCell.Tab.3.right" timestamp="1582533982630">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1656" height="353" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582533982630" />
+    <state x="490" y="178" key="Maven.ArtifactSearchDialog" timestamp="1581745088257">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="178" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581745088257" />
+    <state x="463" y="165" key="SettingsEditor" timestamp="1581080820466">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581080820466" />
+    <state x="652" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583582769311">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="652" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583582769311" />
+    <state x="690" y="291" key="extract.method.dialog" timestamp="1581745353384">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="291" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581745353384" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1582536007281">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582536007281" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581999781599">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581999781599" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="this.shopCategory" custom="cn.pengan.entity.Shop" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

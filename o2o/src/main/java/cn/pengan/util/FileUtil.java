@@ -1,5 +1,8 @@
 package cn.pengan.util;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.util.UUID;
 
 /*
@@ -17,7 +20,7 @@ public class FileUtil {
         //先判断当前计算机系统
         String osName = System.getProperty("os.name");
         String bashPath = "";
-        if (osName.toLowerCase().contains("windows")) {
+        if (osName.toLowerCase().contains("win")) {
             //当前系统为windows系统
             bashPath = "c:/o2o/upload/";
         } else {
@@ -41,4 +44,24 @@ public class FileUtil {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         return uuid;
     }
+
+    /**
+     * 删除文件或文件夹
+     *
+     * @param path 文件目录路径
+     */
+    public static void deleteFileOrDirectory(String path) {
+        String wholePath = getImgBasePath() + path;
+        File fileOrPath = new File(wholePath);
+        if (fileOrPath.exists()) {
+            if (fileOrPath.isDirectory()) {
+                File[] files = fileOrPath.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    files[i].delete();
+                }
+            }
+            fileOrPath.delete();
+        }
+    }
+
 }

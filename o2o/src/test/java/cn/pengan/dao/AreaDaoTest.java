@@ -15,6 +15,9 @@ public class AreaDaoTest extends BaseTest {
     @Test
     public void findAllTest(){
         List<Area> all = areaDao.findAll();
+        for (Area area : all) {
+            System.out.println(area);
+        }
         Assert.assertEquals(all.size(),4);
     }
 }

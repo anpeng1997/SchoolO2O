@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 public class ShopDaoTest extends BaseTest {
 
@@ -37,19 +38,46 @@ public class ShopDaoTest extends BaseTest {
         shop.setShopDesc("test");
         shop.setShopImg("test url");
         int i = shopDao.insertShop(shop);
-        Assert.assertEquals(true, i > 1);
+        Assert.assertEquals(1,i);
     }
 
     @Test
     public void findShopByIdTest() {
-        Shop shop = shopDao.findShopById(1L);
-        System.out.println(shop);
+        Shop shop = shopDao.findShopById(31L);
+        System.out.println(shop.getArea().getAreaName());
+       System.out.println(shop);
     }
 
     @Test
     public void updateShopTest(){
-        Shop shop = shopDao.findShopById(1L);
+        Shop shop = shopDao.findShopById(31L);
         shop.setShopName("张阿姨奶茶店");
         shopDao.updateShop(shop);
     }
+
+    @Test
+    public void findShopListTest() {
+        Shop shopCondition = new Shop();
+//        shopCondition.setShopName("书");
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1L);
+        shopCondition.setOwner(owner);
+        List<Shop> shopList = shopDao.findShopList(shopCondition, 0, 5);
+        Assert.assertEquals(4,shopList.size());
+        for (Shop shop : shopList) {
+            System.out.println(shop);
+        }
+    }
+
+    @Test
+    public void findShopCountTest(){
+        Shop shopCondition = new Shop();
+        shopCondition.setShopName("书");
+//        PersonInfo owner = new PersonInfo();
+//        owner.setUserId(1L);
+//        shopCondition.setOwner(owner);
+        int shopCount = shopDao.findShopCount(shopCondition);
+        System.out.println(shopCount);
+    }
+
 }

@@ -14,5 +14,14 @@
 <!--        打印查询语句-->
         <setting name="logImpl" value="STDOUT_LOGGING" />
 
+        <!-- 配置启用延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--设置按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+
     </settings>
+    <!--  配置mybatis拦截器插件-->
+<!--    <plugins>-->
+<!--        <plugin interceptor="cn.pengan.dao.split.DynamicDataSourceInterceptor"></plugin>-->
+<!--    </plugins>-->
 </configuration>

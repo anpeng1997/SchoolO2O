@@ -7,4 +7,9 @@
         select * from tb_area
         order by priority desc;
     </select>
+
+    <select id="findById" resultType="Area" parameterType="Long">
+        select * from tb_area
+        where area_id = #{areaId}
+    </select>
 </mapper>
