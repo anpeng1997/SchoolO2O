@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+    <style>
+        .row{
+            margin:1rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+<div class="content-block">
+    <div class="row" >
+        <div class="col-50"><a href="" class="button button-big button-fill" id="shopManageBtn">商铺信息</a></div>
+        <div class="col-50"><a href="#" class="button button-big button-fill">商铺管理</a></div>
+    </div>
+    <div class="row">
+        <div class="col-50"><a href="/superadmin/productcategory/list" class="button button-big button-fill">类别管理</a></div>
+    </div>
+    <div class="row">
+        <div class="col-100"><a href="/superadmin/shop/shoplist" class="button button-big button-fill">返回</a></div>
+    </div>
+</div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js'
+        charset='utf-8'></script>
+<script>
+    $(function () {
+        var shopId = getQueryValue("id");
+        $("#shopManageBtn").attr("href","/superadmin/shop/shopoperation?id="+shopId);
+    })
+
+    function getQueryValue(queryName) {
+        var reg = new RegExp("(^|&)" + queryName + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return decodeURI(r[2]);
+        } else {
+            return null;
+        }
+    }
+</script>
+</body>
+</html>

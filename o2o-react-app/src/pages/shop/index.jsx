@@ -2,9 +2,9 @@ import React from "react";
 import { NavBar, Icon } from "antd-mobile"
 import { Route, Switch } from "react-router-dom";
 
-import ShopManage from "../../components/shop/shop-manage"
-import ShopList from "../../components/shop/shop-list"
-import ShopForm from "../../components/shop/shop-form"
+import ShopManage from "./components/shop-manage"
+import ShopList from "./components/shop-list"
+import ShopForm from "./components/shop-form"
 
 class ShopIndex extends React.Component {
 

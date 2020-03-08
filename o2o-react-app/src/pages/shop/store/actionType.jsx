@@ -1,0 +1,1 @@
+export const GETSHOPLIST= "get_shop_list_action_type";

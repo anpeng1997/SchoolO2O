@@ -32,8 +32,6 @@ export function axiosRequest(url, data = {}, method = 'GET', headers = {}) {
             Toast.fail('请求出错，' + error.message);
         });
     })
-
-
 }
 
 export function axiosRequestAll(array) {

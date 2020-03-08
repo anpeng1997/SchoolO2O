@@ -1,6 +1,6 @@
 import React from "react";
 import { createForm } from "rc-form";
-import { reqShopInfo, reqShopOperationInitData, reqRegisterOrModifyShop, reqAll } from '../../api';
+import { reqShopInfo, reqShopOperationInitData, reqRegisterOrModifyShop, reqAll } from '../../../api';
 import {
     List,
     InputItem,
