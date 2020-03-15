@@ -29,6 +29,7 @@ export function axiosRequest(url, data = {}, method = 'GET', headers = {}) {
             resovle(response.data);
         }).catch((error) => {
             //失败了不调用reject,否则还是把错误返回给调用者了
+            Toast.hide()
             Toast.fail('请求出错，' + error.message);
         });
     })

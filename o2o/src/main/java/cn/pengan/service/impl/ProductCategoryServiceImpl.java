@@ -18,4 +18,14 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
     public List<ProductCategory> findProductCategoryList(Long shopId) {
         return productCategoryDao.findProductCategoryList(shopId);
     }
+
+    @Override
+    public int deleteProductCategoryById(Long categoryId) {
+        return  productCategoryDao.deleteProductCategoryById(categoryId);
+    }
+
+    @Override
+    public int insertProductCategory(ProductCategory productCategory) {
+        return  productCategoryDao.insertProductCategory(productCategory);
+    }
 }

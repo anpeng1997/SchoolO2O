@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Toast } from 'antd-mobile';
+import { List } from 'antd-mobile';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as shopActions from "../store/actionCreators";
@@ -7,13 +7,11 @@ import * as shopActions from "../store/actionCreators";
 const Item = List.Item;
 
 
-class ShopList extends React.Component {
+class ShopList extends React.PureComponent {
 
-    async componentDidMount() {
-        Toast.loading("正在加载....", 0);
+    componentDidMount() {
         //在mapDispatchToProps中使用了bindActionCreators,所以是调用props.actions
-        await this.props.actions.getShopListAction();
-        Toast.hide();
+        this.props.actions.getShopListAction();
     }
 
 
@@ -34,13 +32,11 @@ class ShopList extends React.Component {
     }
 
     render() {
-        const { shopData } = this.props;
-        console.log(shopData);
+        const shopList = this.props.shopList.toJS();
         return (<React.Fragment>
-            <List renderHeader={() => !shopData.currentUser ? "" :
-                '欢迎您：' + shopData.currentUser.name} className="my-list" >
+            <List renderHeader={() => "欢迎你"} className="my-list" >
                 {
-                    !shopData.currentUser ? "" : shopData.data.shopList.map((item, index) => {
+                    shopList.map((item, index) => {
                         return <Item key={index}
                             extra={this.getShopStatus(item.enableStatus)}
                             arrow="horizontal"
@@ -57,7 +53,7 @@ class ShopList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        shopData: state.shop
+        shopList: state.getIn(["shopReducer", "shopList"])
     }
 }
 
@@ -68,7 +64,6 @@ const mapDispatchToProps = (dispatch) => {
         // getShopList(){
         //     dispatch(getShopListAction())
         // }
-
         //使用bindActionCreators绑定所有的actions
         actions: bindActionCreators(shopActions, dispatch)
     }

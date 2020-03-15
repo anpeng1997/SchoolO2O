@@ -9,4 +9,16 @@
         where shop_id = #{shopId}
          order by priority desc
     </select>
+
+    <insert id="insertProductCategory" useGeneratedKeys="true" keyProperty="productCategoryId" parameterType="ProductCategory">
+        insert into tb_product_category values(null ,#{productCategoryName},#{productCategoryDesc},
+        #{priority},#{createTime},#{lastEditTime},#{shopId});
+    </insert>
+
+    <delete id="deleteProductCategoryById" parameterType="Long">
+        delete from tb_product_category
+        <where>
+            product_category_id = #{categoryId}
+        </where>
+    </delete>
 </mapper>

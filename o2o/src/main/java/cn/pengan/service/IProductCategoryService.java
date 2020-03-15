@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface IProductCategoryService {
     List<ProductCategory> findProductCategoryList(Long shopId);
+
+    int deleteProductCategoryById(Long categoryId);
+
+    int insertProductCategory(ProductCategory productCategory);
 }

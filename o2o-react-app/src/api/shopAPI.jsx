@@ -28,3 +28,6 @@ export const reqRegisterOrModifyShop = (type, formData, headers) => {
  * @param {Array} arr 请求的pormise对象数组 
  */
 export const reqAll = (arr) => axiosRequestAll(arr);
+
+
+export const reqProductCategoryList = (shopId) => axiosRequest("/api/productcategory/getlist/" + shopId);

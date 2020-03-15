@@ -1,18 +1,20 @@
 import React from "react";
 import { createForm } from "rc-form";
-import { reqShopInfo, reqShopOperationInitData, reqRegisterOrModifyShop, reqAll } from '../../../api';
+import { connect } from "react-redux";
+import { getShopOperationInitDataAction } from "../store/actionCreators";
+import { reqRegisterOrModifyShop, reqShopInfo } from "../../../api/shopAPI"
 import {
     List,
     InputItem,
     ImagePicker,
     Flex,
     Button,
-    Toast,
     Picker,
     TextareaItem,
     WhiteSpace,
     WingBlank
 } from "antd-mobile";
+import { Toast } from "antd-mobile";
 
 const Item = List.Item;
 
@@ -32,60 +34,25 @@ class ShopForm extends React.Component {
 
     async componentDidMount() {
         Toast.loading('正在加载...', 0);
-        const that = this;
-        const shopId = this.state.shopId;
-        let { form } = this.props;
         //获得初始数据
-        const getInitResponse = reqShopOperationInitData();
-        var reqArray = [getInitResponse];
-        if (shopId != null) {
-            //获取的要修改的商店信息
-            const getShopResponse = reqShopInfo(this.state.shopId)
-            reqArray.push(getShopResponse);
-        }
-        const responses = await reqAll(reqArray);
-        //返回的数据是一个数组
-        const initData = responses[0];
-        if (initData.success) {
-            let shopCategoryArray = [];
-            let areaArray = [];
-            initData.shopCategoryList.map(function (item, index) {
-                shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
-                return index;
-            });
-            initData.areaList.map((item, index) => {
-                areaArray.push({ value: item.areaId, label: item.areaName });
-                return index;
+        const shopId = this.props.match.params.id;
+        await this.props.getInitData(shopId);
+        const shopData = await reqShopInfo(shopId)
+        const form = this.props.form;
+        if (shopData.success) {
+            form.setFieldsValue({
+                'shopName': shopData.data.shopName,
+                'shopDesc': shopData.data.shopDesc,
+                'shopAddr': shopData.data.shopAddr,
+                'phone': shopData.data.phone,
+                'areaId': [shopData.data.areaId],
+                'shopCategoryId': [shopData.data.shopCategoryId]
             })
-            that.setState({
-                shopCategoryList: shopCategoryArray,
-                areaList: areaArray
-            })
-            if (!shopId) {
-                Toast.hide()
-            }
+            Toast.hide();
         } else {
-            Toast.hide()
-            console.error(initData)
-            Toast.fail("列表数据加载失败！");
-        }
-        if (responses.length > 1) {
-            const shopData = responses[1];
-            if (shopData.success) {
-                form.setFieldsValue({
-                    'shopName': shopData.data.shopName,
-                    'shopDesc': shopData.data.shopDesc,
-                    'shopAddr': shopData.data.shopAddr,
-                    'phone': shopData.data.phone,
-                    'areaId': [shopData.data.areaId],
-                    'shopCategoryId': [shopData.data.shopCategoryId]
-                })
-                Toast.hide();
-            } else {
-                Toast.hide();
-                console.error(shopData);
-                Toast.fail("数据加载失败!" + shopData.errorMsg, 3);
-            }
+            Toast.hide();
+            console.error(shopData);
+            Toast.fail("数据加载失败!" + shopData.errorMsg, 3);
         }
     }
 
@@ -163,6 +130,7 @@ class ShopForm extends React.Component {
         })
     }
 
+
     /**
      * shopName自定义验证器
      * 
@@ -203,7 +171,7 @@ class ShopForm extends React.Component {
     }
 
     render() {
-        const { shopCategoryList, areaList } = this.state;
+        const { shopCategoryList, areaList } = this.props;
         const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
         return <React.Fragment>
             <List renderHeader={() => this.state.shopId == null ? '注册店铺' : '修改店铺信息'} renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
@@ -213,6 +181,7 @@ class ShopForm extends React.Component {
                 <InputItem clear="true" maxLength="12"
                     {...getFieldProps('shopName', {
                         validateFirst: true,
+                        defaultValue: 100,
                         rules: [
                             //申明式验证
                             { required: true, message: '店铺名称是必须的！' },
@@ -222,12 +191,13 @@ class ShopForm extends React.Component {
                             { validator: this.shopNameValidator },
                         ]
                     })}
+                    defaultValue={100}
                     whitespace="true"
                     error={!!getFieldError('shopName')}
                     placeholder="输入店铺名称">
                     店铺名称
                 </InputItem>
-                <Picker data={shopCategoryList} cols={1}
+                <Picker data={shopCategoryList.toJS()} cols={1}
                     onOk={(val) => { this.setState({ currentPickerShopCategoryId: val }) }}
                     error={!!getFieldError('shopCategoryId')}
                     {...getFieldProps('shopCategoryId', {
@@ -237,7 +207,7 @@ class ShopForm extends React.Component {
                     })} className="forss">
                     <Item arrow="horizontal">店铺类别</Item>
                 </Picker>
-                <Picker data={areaList} cols={1}
+                <Picker data={areaList.toJS()} cols={1}
                     onOk={(val) => { this.setState({ currnetPickerAareaId: val }) }}
                     error={!!getFieldError('areaId')}
                     {...getFieldProps('areaId', {
@@ -326,5 +296,21 @@ class ShopForm extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        shopCategoryList: state.getIn(["shopReducer", "shopOperationInitData", "shopCategoryList"]),
+        areaList: state.getIn(["shopReducer", "shopOperationInitData", "areaList"]),
+        shopInfo: state.getIn(["shopReducer", "shopOperationInitData", "shopInfo"])
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getInitData() {
+            dispatch(getShopOperationInitDataAction())
+        }
+    }
+}
+
 //createForm:高级函数，将一个组件给它，将返回一个新的组件
-export default createForm()(ShopForm);
+export default connect(mapStateToProps, mapDispatchToProps)(createForm()(ShopForm));

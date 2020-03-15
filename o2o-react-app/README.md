@@ -33,7 +33,7 @@ export default withRouter(**);
 
 ## redux&redux-react
 
-> 用来集中管理当前应用的所有stats
+> 用来集中管理当前应用的所有state
 
 ## redux-thunk
 
@@ -81,6 +81,7 @@ const store = createStore(reducer, applyMiddleware(thunk));
         }
     }
 
+    //在这个action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
     export const getShopListAction = () => {
         return async (dispatch) => {
             const shopList = await reqShopList();
@@ -175,3 +176,60 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
     export default store;
     ```
+
+## `immutable.js`
+
+> npm install immutable  
+npm install redux-immutable
+
+### 作用
+
+>immutable对象是不可直接赋值的对象，它可以有效的避免错误赋值的问题  
+常用API <https://www.cnblogs.com/chris-oil/p/8494337.html>
+
+### 使用步骤
+
+1. 在rootReducer中原本使用`import { combineReducers } from "redux";`，替换成`import { combineReducers } from "redux-immutable";`
+
+2. 在reducer中使用fromJS对state进行包装
+
+    ```jsx
+    import { GETSHOPLIST, GETPRODUCTCATEGORY } from "./actionType";
+    import { fromJS } from "immutable";
+
+    const defaultState = fromJS({
+        shopList: [],
+        productCategoryList: []
+    })
+
+    export default (state = defaultState, action) => {
+        switch (action.type) {
+            case GETSHOPLIST:
+                //set state时，也需要使用fromJS包装传递过来的数据
+                return state.set("shopList", fromJS(action.data));
+            case GETPRODUCTCATEGORY:
+                return state.set("productCategoryList", fromJS(action.data))
+            default:
+                return state;
+        }
+    }
+    ```
+
+3. 在组件中的mapStateToProps中,使用`get()` or `getIn()`获得state
+
+    ```jsx
+    const mapStateToProps = (state) => {
+    return {
+        //getIn用来获得多层级的state
+        productCategoryList: state.getIn(["shop","productCategoryList"])
+        }
+    }
+    ```
+
+4. 使用数据时，需要使用`toJS()`,将immutable对象转换成普通的js对象来使用
+
+    ```jsx
+    const shopList = this.props.shopList.toJS();
+    ```
+
+* `state.merge`设置多个属性

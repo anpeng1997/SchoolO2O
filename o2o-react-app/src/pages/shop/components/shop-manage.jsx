@@ -4,14 +4,10 @@ import { Redirect } from "react-router-dom";
 
 export default class ShopManage extends React.Component {
 
-    componentDidMount() {
-        
-    }
-
     render() {
         const { history, match } = this.props;
-        if(!match.params.id){
-            return  <Redirect to="/shop/shoplist" />;
+        if (!match.params.id) {
+            return <Redirect to="/shop/shoplist" />;
         }
         return <React.Fragment>
             <WhiteSpace size="xl" />
@@ -23,11 +19,13 @@ export default class ShopManage extends React.Component {
             </WingBlank>
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
-                <Button type="primary" size="large" >店铺管理</Button>
+                <Button type="primary" size="large" onClick={() => {
+                    history.push("/shop/productcategory/" + match.params.id)
+                }} >商品类别管理</Button>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
-                <Button type="primary" size="large" >商品类别管理</Button>
+                <Button type="primary" size="large" >店铺管理</Button>
             </WingBlank>
         </React.Fragment>
     }

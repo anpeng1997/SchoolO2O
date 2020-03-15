@@ -7,7 +7,7 @@ public class ProductCategory {
     private String productCategoryName;
     private String productCategoryDesc;
     private Integer priority;
-    private Date createId;
+    private Date createTime;
     private Date lastEditTime;
     private Long shopId;
 
@@ -43,12 +43,12 @@ public class ProductCategory {
         this.priority = priority;
     }
 
-    public Date getCreateId() {
-        return createId;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateId(Date createId) {
-        this.createId = createId;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getLastEditTime() {
