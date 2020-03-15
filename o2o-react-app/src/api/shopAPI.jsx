@@ -31,3 +31,5 @@ export const reqAll = (arr) => axiosRequestAll(arr);
 
 
 export const reqProductCategoryList = (shopId) => axiosRequest("/api/productcategory/getlist/" + shopId);
+
+export const reqDelectProductCategory = (categoryId) => axiosRequest("/api/productcategory/delete/" + categoryId,{},"DELETE");

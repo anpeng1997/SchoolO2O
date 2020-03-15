@@ -75,16 +75,6 @@
         <url-pattern>/Kaptcha</url-pattern>
     </servlet-mapping>
 
-<!--    解决put请求获取不到参数的情况-->
-    <filter>
-        <filter-name>HttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>HttpMethodFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

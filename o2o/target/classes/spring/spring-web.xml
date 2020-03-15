@@ -37,6 +37,6 @@
 
 <!--   开启cors跨越，并允许跨域保存cookie-->
     <mvc:cors>
-        <mvc:mapping path="/**"  allow-credentials="true" max-age="86400" allowed-methods="*" allowed-headers="*"></mvc:mapping>
+        <mvc:mapping path="/**"  allow-credentials="true" max-age="86400" allowed-origins="*" allowed-methods="*" allowed-headers="*"></mvc:mapping>
     </mvc:cors>
 </beans>

@@ -19,6 +19,10 @@ export function axiosRequest(url, data = {}, method = 'GET', headers = {}) {
                 params: data,
                 headers: headers
             });
+        } else if (method === "DELETE") {
+            promise = myAxiosInstance.delete(url, data, {
+                headers: headers
+            });
         } else {
             promise = myAxiosInstance.post(url, data, {
                 headers: headers

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { List, Button, Modal, Toast } from 'antd-mobile';
 import { getProductCategoryListAction } from "../store/actionCreators";
+import { reqDelectProductCategory } from "../../../api/shopAPI";
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -22,14 +23,19 @@ class ShopProductCategoryList extends React.PureComponent {
                     productCategorys.map((item, index) => {
                         return <Item key={index}
                             extra={<Button type="warning" size="small" onClick={() =>
-                                alert('Delete', 'Are you sure???', [
+                                alert('Delete', 'confirm delete?', [
                                     { text: 'Cancel', onPress: () => console.log('cancel') },
                                     {
                                         text: 'Ok',
                                         onPress: () =>
-                                            new Promise((resolve) => {
-                                                Toast.info('onPress Promise', 1);
-                                                setTimeout(resolve, 1000);
+                                            new Promise(async (resolve) => {
+                                                const response = await reqDelectProductCategory(item.productCategoryId)
+                                                if (response.success) {
+                                                    Toast.info("操作成功", 2);
+                                                } else {
+                                                    Toast.info(response.errorMsg, 2)
+                                                }
+                                                setTimeout(resolve, 2000);
                                             }),
                                     },
                                 ])} >删除</Button>}>
