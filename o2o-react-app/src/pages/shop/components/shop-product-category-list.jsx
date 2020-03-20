@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { List, Button, Modal, Toast } from 'antd-mobile';
+import { List, Button, Modal, Toast, WingBlank,WhiteSpace } from 'antd-mobile';
 import { getProductCategoryListAction } from "../store/actionCreators";
 import { reqDelectProductCategory } from "../../../api/shopAPI";
 
@@ -33,7 +33,7 @@ class ShopProductCategoryList extends React.PureComponent {
                                                 if (response.success) {
                                                     Toast.info("操作成功", 2);
                                                 } else {
-                                                    Toast.info(response.errorMsg, 2)
+                                                    Toast.fail(response.errorMsg, 2)
                                                 }
                                                 setTimeout(resolve, 2000);
                                             }),
@@ -45,6 +45,12 @@ class ShopProductCategoryList extends React.PureComponent {
                     })
                 }
             </List>
+            <WhiteSpace size="lg"></WhiteSpace>
+            <WingBlank size="lg">
+                <Button type="primary" onClick={() => {
+                    this.props.history.push("/shop/productcategoryoperation");
+                }}> 添加类别 </Button>
+            </WingBlank>
         </React.Fragment>)
     }
 }

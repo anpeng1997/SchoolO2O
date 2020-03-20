@@ -40,6 +40,7 @@ export const getShopOperationInitDataAction = () => {
         let shopCategoryArray = [];
         let areaArray = [];
         const initData =await reqShopOperationInitData();
+        Toast.hide();
         if (initData.success) {
             initData.shopCategoryList.map(function (item, index) {
                 shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
@@ -50,7 +51,6 @@ export const getShopOperationInitDataAction = () => {
                 return index;
             })
         } else {
-            Toast.hide();
             console.error(initData)
             Toast.fail("列表数据加载失败," + initData.errorMsg, 2);
         }

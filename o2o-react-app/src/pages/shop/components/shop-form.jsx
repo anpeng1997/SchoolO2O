@@ -25,8 +25,6 @@ class ShopForm extends React.Component {
         let shopId = !!props.match.params.id ? props.match.params.id : null;
         this.state = {
             shopId: shopId,
-            shopCategoryList: [],
-            areaList: [],
             isAddImg: true,
             verifyCodeUrl: "http://localhost:8080/Kaptcha"
         }
@@ -37,22 +35,24 @@ class ShopForm extends React.Component {
         //获得初始数据
         const shopId = this.props.match.params.id;
         await this.props.getInitData(shopId);
-        const shopData = await reqShopInfo(shopId)
-        const form = this.props.form;
-        if (shopData.success) {
-            form.setFieldsValue({
-                'shopName': shopData.data.shopName,
-                'shopDesc': shopData.data.shopDesc,
-                'shopAddr': shopData.data.shopAddr,
-                'phone': shopData.data.phone,
-                'areaId': [shopData.data.areaId],
-                'shopCategoryId': [shopData.data.shopCategoryId]
-            })
+        if (!!this.state.shopId) {
+            const shopData = await reqShopInfo(shopId)
             Toast.hide();
-        } else {
-            Toast.hide();
-            console.error(shopData);
-            Toast.fail("数据加载失败!" + shopData.errorMsg, 3);
+            const form = this.props.form;
+            if (shopData.success) {
+                form.setFieldsValue({
+                    'shopName': shopData.data.shopName,
+                    'shopDesc': shopData.data.shopDesc,
+                    'shopAddr': shopData.data.shopAddr,
+                    'phone': shopData.data.phone,
+                    'areaId': [shopData.data.areaId],
+                    'shopCategoryId': [shopData.data.shopCategoryId]
+                })
+            } else {
+                Toast.hide();
+                console.error(shopData);
+                Toast.fail("数据加载失败!" + shopData.errorMsg, 3);
+            }
         }
     }
 
