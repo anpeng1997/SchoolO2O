@@ -14,19 +14,28 @@ export function axiosRequest(url, data = {}, method = 'GET', headers = {}) {
 
     return new Promise((resovle, reject) => {
         let promise;
-        if (method === "GET") {
-            promise = myAxiosInstance.get(url, {
-                params: data,
-                headers: headers
-            });
-        } else if (method === "DELETE") {
-            promise = myAxiosInstance.delete(url, data, {
-                headers: headers
-            });
-        } else {
-            promise = myAxiosInstance.post(url, data, {
-                headers: headers
-            });
+
+        switch (method) {
+            case "GET":
+                promise = myAxiosInstance.get(url, {
+                    params: data,
+                    headers: headers
+                });
+                break;
+            case "DELETE":
+                promise = myAxiosInstance.delete(url, data, {
+                    headers: headers
+                });
+                break;
+            case "PUT":
+                promise = myAxiosInstance.put(url, data, {
+                    headers: headers
+                });
+                break;
+            default:
+                promise = myAxiosInstance.post(url, data, {
+                    headers: headers
+                });
         }
         //成功了调用 resolve
         promise.then(response => {

@@ -6,11 +6,21 @@
 <mapper namespace="cn.pengan.dao.IProductCategoryDao">
     <select id="findProductCategoryList" resultType="ProductCategory" parameterType="Long">
         select * from tb_product_category
-        where shop_id = #{shopId}
-         order by priority desc
+        <where>
+            shop_id = #{shopId}
+        </where>
+        order by priority desc
     </select>
 
-    <insert id="insertProductCategory" useGeneratedKeys="true" keyProperty="productCategoryId" parameterType="ProductCategory">
+    <select id="findProductCategory" resultType="ProductCategory" parameterType="Long">
+        select * from tb_product_category
+        <where>
+            product_category_id = #{categoryId}
+        </where>
+    </select>
+
+    <insert id="insertProductCategory" useGeneratedKeys="true" keyProperty="productCategoryId"
+            parameterType="ProductCategory">
         insert into tb_product_category values(null ,#{productCategoryName},#{productCategoryDesc},
         #{priority},#{createTime},#{lastEditTime},#{shopId});
     </insert>
@@ -21,4 +31,17 @@
             product_category_id = #{categoryId}
         </where>
     </delete>
+
+    <update id="updateProductCategory" parameterType="ProductCategory">
+        update tb_product_category
+        <set>
+            product_category_name = #{productCategoryName},
+            product_category_desc = #{productCategoryDesc},
+            priority = #{priority},
+            last_edit_time = #{lastEditTime}
+        </set>
+        <where>
+            product_category_id = #{productCategoryId}
+        </where>
+    </update>
 </mapper>

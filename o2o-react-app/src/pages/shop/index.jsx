@@ -26,7 +26,7 @@ class ShopIndex extends React.Component {
                 <Route path="/shop/shopmanage/:id?" exact component={ShopManage}></Route>
                 <Route path="/shop/shopoperation/:id?" exact component={ShopForm}></Route>
                 <Route path="/shop/productcategory/:id" exact component={ProductCategoryList}></Route>
-                <Route path="/shop/productcategoryoperation/:id?" exact component={ProductCategoryForm}></Route>
+                <Route path="/shop/productcategoryoperation/:sid/:cid?" exact component={ProductCategoryForm}></Route>
                 <Route component={ShopList}></Route>
             </Switch>
         </React.Fragment>

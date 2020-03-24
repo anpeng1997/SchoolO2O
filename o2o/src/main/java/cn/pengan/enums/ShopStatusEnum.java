@@ -1,5 +1,9 @@
 package cn.pengan.enums;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Optional;
+
 /*
  * shop状态的枚举值
  * */
@@ -29,11 +33,7 @@ public enum ShopStatusEnum {
     }
 
     public static ShopStatusEnum statusOf(int index) {
-        for (ShopStatusEnum value : values()) {
-            if (value.getState() == index) {
-                return value;
-            }
-        }
-        return null;
+        Optional<ShopStatusEnum> optional = Arrays.stream(values()).filter(p -> p.getState() == index).findAny();
+        return optional.isPresent() ? optional.get() : null;
     }
 }

@@ -93,10 +93,10 @@ class ShopForm extends React.Component {
 
     onSubmitData = () => {
         const { history, form } = this.props;
-        const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual } = form.getFieldsValue();
-        let shopId = this.state.shopId;
         this.props.form.validateFields(async (error) => {
-            //验证结果
+            const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual } = form.getFieldsValue();
+            let shopId = this.state.shopId;
+            //验证结果,当没有错误时error对象则为null
             if (!error) {
                 let shopInfo = {};
                 shopInfo.shopId = shopId;
@@ -181,7 +181,6 @@ class ShopForm extends React.Component {
                 <InputItem clear="true" maxLength="12"
                     {...getFieldProps('shopName', {
                         validateFirst: true,
-                        defaultValue: 100,
                         rules: [
                             //申明式验证
                             { required: true, message: '店铺名称是必须的！' },
@@ -191,7 +190,6 @@ class ShopForm extends React.Component {
                             { validator: this.shopNameValidator },
                         ]
                     })}
-                    defaultValue={100}
                     whitespace="true"
                     error={!!getFieldError('shopName')}
                     placeholder="输入店铺名称">

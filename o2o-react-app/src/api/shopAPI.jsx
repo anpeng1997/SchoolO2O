@@ -1,6 +1,5 @@
 import { axiosRequest, axiosRequestAll } from './myAxios';
 
-
 export const reqShopList = () => axiosRequest("/api/shop/paginationshop");
 
 //SHOP FORM
@@ -16,7 +15,7 @@ export const reqShopOperationInitData = () => axiosRequest("/api/shop/operationi
  * @param {Array} headers 
  */
 export const reqRegisterOrModifyShop = (type, formData, headers) => {
-    var url = "/api/shop/register";
+    let url = "/api/shop/register";
     if (type === 'modify') {
         url = "/api/shop/modify";
     }
@@ -30,6 +29,12 @@ export const reqRegisterOrModifyShop = (type, formData, headers) => {
 export const reqAll = (arr) => axiosRequestAll(arr);
 
 
-export const reqProductCategoryList = (shopId) => axiosRequest("/api/productcategory/getlist/" + shopId);
+export const reqProductCategoryList = (shopId) => axiosRequest("/api/productcategory/list/" + shopId);
 
-export const reqDelectProductCategory = (categoryId) => axiosRequest("/api/productcategory/delete/" + categoryId,{},"DELETE");
+export const reqProductCategory = (categoryId) => axiosRequest("/api/productcategory/" + categoryId);
+
+export const reqDelectProductCategory = (categoryId) => axiosRequest("/api/productcategory/" + categoryId, {}, "DELETE");
+
+export const reqAddProductCategory = (data) => axiosRequest("/api/productcategory/add", data, "POST");
+
+export const reqModifyProductCategory = (data) => axiosRequest("/api/productcategory/edit", data, "PUT");
