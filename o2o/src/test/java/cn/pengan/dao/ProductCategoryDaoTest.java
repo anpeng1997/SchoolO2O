@@ -3,7 +3,9 @@ package cn.pengan.dao;
 import cn.pengan.BaseTest;
 import cn.pengan.entity.ProductCategory;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.crypto.Data;
@@ -12,6 +14,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+//测试类中的测试方法执行顺序
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductCategoryDaoTest extends BaseTest {
 
     @Autowired

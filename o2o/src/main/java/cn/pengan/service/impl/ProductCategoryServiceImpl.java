@@ -1,8 +1,10 @@
 package cn.pengan.service.impl;
 
 import cn.pengan.dao.IProductCategoryDao;
+import cn.pengan.dto.ProductCategoryExecution;
 import cn.pengan.entity.ProductCategory;
-import cn.pengan.enums.ProductCategoryExecutionEnum;
+import cn.pengan.enums.ProductCategoryStatusEnum;
+import cn.pengan.exceptions.ProductCategoryOperationException;
 import cn.pengan.service.IProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,55 +19,55 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
     private IProductCategoryDao productCategoryDao;
 
     @Override
-    public List<ProductCategory> findProductCategoryList(Long shopId) {
-        return productCategoryDao.findProductCategoryList(shopId);
+    public ProductCategoryExecution findProductCategoryList(Long shopId) {
+        List<ProductCategory> productCategoryList = productCategoryDao.findProductCategoryList(shopId);
+        return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS, productCategoryList);
     }
 
     @Override
-    public ProductCategory findProductCategory(Long categoryId) {
-        return productCategoryDao.findProductCategory(categoryId);
+    public ProductCategoryExecution findProductCategory(Long categoryId) {
+        ProductCategory productCategory = productCategoryDao.findProductCategory(categoryId);
+        return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS, productCategory);
     }
 
     @Override
-    public ProductCategoryExecutionEnum deleteProductCategoryById(Long categoryId) {
+    public ProductCategoryExecution deleteProductCategoryById(Long categoryId) throws ProductCategoryOperationException {
+        //TODO :商品类别下的商品的商品类别ID还要设置为空
         try {
             int i = productCategoryDao.deleteProductCategoryById(categoryId);
-            if (i >= 1) {
-                return ProductCategoryExecutionEnum.SUCCESS;
-            } else {
-                return ProductCategoryExecutionEnum.FAIL;
+            if (i <= 0) {
+                throw new ProductCategoryOperationException("商品类别删除失败！");
             }
+            return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS);
         } catch (Exception ex) {
-            return ProductCategoryExecutionEnum.INTERNAL_ERR;
+            throw new ProductCategoryOperationException("deleteProductCategoryById error:" + ex.getMessage());
         }
     }
 
     @Override
-    public ProductCategoryExecutionEnum insertProductCategory(ProductCategory productCategory) {
+    public ProductCategoryExecution insertProductCategory(ProductCategory productCategory) throws ProductCategoryOperationException {
         try {
             int i = productCategoryDao.insertProductCategory(productCategory);
-            if (i >= 1) {
-                return ProductCategoryExecutionEnum.SUCCESS;
-            } else {
-                return ProductCategoryExecutionEnum.FAIL;
+            if (i <= 0) {
+                throw new ProductCategoryOperationException("商品类别添加失败！");
             }
+            return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS);
         } catch (Exception ex) {
-            return ProductCategoryExecutionEnum.INTERNAL_ERR;
+            throw new ProductCategoryOperationException("insertProductCategory error:" + ex.getMessage());
         }
     }
 
     @Override
-    public ProductCategoryExecutionEnum updateProductCategory(ProductCategory productCategory) {
+    public ProductCategoryExecution updateProductCategory(ProductCategory productCategory) throws ProductCategoryOperationException {
         productCategory.setLastEditTime(new Date());
         try {
             int i = productCategoryDao.updateProductCategory(productCategory);
-            if (i >= 1) {
-                return ProductCategoryExecutionEnum.SUCCESS;
-            } else {
-                return ProductCategoryExecutionEnum.FAIL;
+            if (i <= 0) {
+                throw new ProductCategoryOperationException("商品类别更新失败！");
             }
+            return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS);
         } catch (Exception ex) {
-            return ProductCategoryExecutionEnum.INTERNAL_ERR;
+            throw new ProductCategoryOperationException("updateProductCategory error:" + ex.getMessage());
         }
     }
 }

@@ -1,19 +1,20 @@
 package cn.pengan.service;
 
+import cn.pengan.dto.ProductCategoryExecution;
 import cn.pengan.entity.ProductCategory;
-import cn.pengan.enums.ProductCategoryExecutionEnum;
+import cn.pengan.enums.ProductCategoryStatusEnum;
 
 import java.util.List;
 
 public interface IProductCategoryService {
-    List<ProductCategory> findProductCategoryList(Long shopId);
+    ProductCategoryExecution findProductCategoryList(Long shopId);
 
-    ProductCategory findProductCategory(Long categoryId);
+    ProductCategoryExecution findProductCategory(Long categoryId);
 
-    ProductCategoryExecutionEnum deleteProductCategoryById(Long categoryId);
+    ProductCategoryExecution deleteProductCategoryById(Long categoryId);
 
-    ProductCategoryExecutionEnum insertProductCategory(ProductCategory productCategory);
+    ProductCategoryExecution insertProductCategory(ProductCategory productCategory);
 
-    ProductCategoryExecutionEnum updateProductCategory(ProductCategory productCategory);
+    ProductCategoryExecution updateProductCategory(ProductCategory productCategory);
 
 }

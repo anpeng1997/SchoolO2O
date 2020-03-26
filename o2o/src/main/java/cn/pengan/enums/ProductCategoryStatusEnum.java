@@ -3,7 +3,7 @@ package cn.pengan.enums;
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum ProductCategoryExecutionEnum {
+public enum ProductCategoryStatusEnum {
     SUCCESS(1, "操作成功！"),
     FAIL(-1,"操作失败"),
     INTERNAL_ERR(-1001, "内部错误！"),
@@ -13,13 +13,13 @@ public enum ProductCategoryExecutionEnum {
     private int status;
     private String statusInfo;
 
-    ProductCategoryExecutionEnum(int status, String statusInfo) {
+    ProductCategoryStatusEnum(int status, String statusInfo) {
         this.status = status;
         this.statusInfo = statusInfo;
     }
 
-    public static ProductCategoryExecutionEnum statusOf(int index) {
-        Optional<ProductCategoryExecutionEnum> optional = Arrays.stream(values()).filter(p -> p.status == index).findFirst();
+    public static ProductCategoryStatusEnum statusOf(int index) {
+        Optional<ProductCategoryStatusEnum> optional = Arrays.stream(values()).filter(p -> p.status == index).findFirst();
         return optional.isPresent() ? optional.get() : null;
     }
 
