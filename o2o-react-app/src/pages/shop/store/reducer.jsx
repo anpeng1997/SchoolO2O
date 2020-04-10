@@ -1,4 +1,4 @@
-import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE } from "./actionType";
+import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST } from "./actionType";
 import { fromJS } from "immutable";
 
 const defaultState = fromJS({
@@ -7,7 +7,8 @@ const defaultState = fromJS({
         shopCategoryList: [],
         areaList: []
     },
-    productCategoryList: []
+    productCategoryList: [],
+    productList: []
 })
 
 export default (state = defaultState, action) => {
@@ -19,8 +20,11 @@ export default (state = defaultState, action) => {
         case GET_PRODUCT_CATEGORY_LIST:
             return state.set("productCategoryList", fromJS(action.data));
         case GET_SHOP_OPERATION_INIT_DATE:
+            //嵌套选择
             return state.setIn(["shopOperationInitData", "shopCategoryList"], fromJS(action.shopCategoryList))
                 .setIn(["shopOperationInitData", "areaList"], fromJS(action.areaList));
+        case GET_PRODUCT_LIST:
+            return state.set("productList", fromJS(action.data))
         default:
             return state;
     }

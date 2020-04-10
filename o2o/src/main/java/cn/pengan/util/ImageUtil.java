@@ -1,8 +1,6 @@
 package cn.pengan.util;
 
 import net.coobird.thumbnailator.Thumbnails;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,18 +16,14 @@ public class ImageUtil {
      * @param fileName
      * @return
      */
-    public static String generateThumbnail(InputStream fileInputStream, String targetAddr, String fileName) {
+    public static String generateThumbnail(InputStream fileInputStream, String targetAddr, String fileName) throws IOException {
         String basePath = FileUtil.getImgBasePath();
         String randomFileName = FileUtil.getRandomFileName();
         String suffix = getFileSuffix(fileName);
         mkdirFolder(basePath + targetAddr);
         String relativeAddr = targetAddr + randomFileName + suffix;
         File thumbnailFile = new File(basePath + relativeAddr);
-        try {
-            Thumbnails.of(fileInputStream).size(200, 200).outputQuality(0.5f).toFile(thumbnailFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Thumbnails.of(fileInputStream).size(200, 200).outputQuality(0.5f).toFile(thumbnailFile);
         return relativeAddr;
     }
 
@@ -44,10 +38,13 @@ public class ImageUtil {
         //先获取shop图片的相对路径
         String relativePath = FileUtil.getShopImgPath(shopId);
         //生成缩略图后返回（相对路径加上文件名）
-        String path = generateThumbnail(fileInputStream, relativePath, fileName);
-        return path;
+        return generateThumbnail(fileInputStream, relativePath, fileName);
     }
 
+    public static String saveProductImg(long productId, InputStream inputStream, String fileName) throws IOException {
+        String relativePath = FileUtil.getProductImgPath(productId);
+        return generateThumbnail(inputStream, relativePath, fileName);
+    }
     /**
      * 判断文件夹是否存在，不存在则创建
      */

@@ -1,5 +1,5 @@
-import { reqShopList, reqProductCategoryList, reqShopOperationInitData } from "../../../api/shopAPI";
-import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE } from "./actionType";
+import { reqShopList, reqProductCategoryList, reqShopOperationInitData, reqProductList } from "../../../api/shopAPI";
+import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST } from "./actionType";
 import { Toast } from "antd-mobile";
 
 
@@ -25,7 +25,14 @@ const createShopOperationInitDataAction = (shopCategoryList, areaList) => {
     }
 }
 
-//在这个action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
+const CreateProductListAction = (data) => {
+    return {
+        type: GET_PRODUCT_LIST,
+        data
+    }
+}
+
+//在action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
 export const getShopListAction = () => {
     return async (dispatch) => {
         Toast.loading("正在加载....", 0);
@@ -39,7 +46,7 @@ export const getShopOperationInitDataAction = () => {
     return async (dispatch) => {
         let shopCategoryArray = [];
         let areaArray = [];
-        const initData =await reqShopOperationInitData();
+        const initData = await reqShopOperationInitData();
         Toast.hide();
         if (initData.success) {
             initData.shopCategoryList.map(function (item, index) {
@@ -67,6 +74,17 @@ export const getProductCategoryListAction = (shopId) => {
             dispatch(createProductCategoryListAction(response.data));
         } else {
             Toast.fail(response.errorMsg);
+        }
+    }
+}
+
+export const getProductListAction = (shopId, pageIndex = null, pageSize = null) => {
+    return async (dispatch) => {
+        const response = await reqProductList(shopId, pageIndex, pageSize)
+        if (response.success) {
+            dispatch(CreateProductListAction(response.data.productList))
+        }else{
+            console.warn("reqProductList is false",response)
         }
     }
 }

@@ -35,9 +35,9 @@ class ShopForm extends React.Component {
         //获得初始数据
         const shopId = this.props.match.params.id;
         await this.props.getInitData(shopId);
+        Toast.hide();
         if (!!this.state.shopId) {
-            const shopData = await reqShopInfo(shopId)
-            Toast.hide();
+            const shopData = await reqShopInfo(shopId);
             const form = this.props.form;
             if (shopData.success) {
                 form.setFieldsValue({
@@ -49,7 +49,6 @@ class ShopForm extends React.Component {
                     'shopCategoryId': [shopData.data.shopCategoryId]
                 })
             } else {
-                Toast.hide();
                 console.error(shopData);
                 Toast.fail("数据加载失败!" + shopData.errorMsg, 3);
             }
@@ -115,7 +114,7 @@ class ShopForm extends React.Component {
                 }
                 formData.append("shopImg", currentFile);
                 const registerOrModify = !!shopId ? 'modify' : 'register';
-                const data = await reqRegisterOrModifyShop(registerOrModify, formData, { 'Content-Type': 'multipart/form-data' })
+                const data = await reqRegisterOrModifyShop(registerOrModify, formData)
                 if (data.success) {
                     Toast.success('操作成功！', 2);
                     setTimeout(() => {
@@ -174,7 +173,7 @@ class ShopForm extends React.Component {
         const { shopCategoryList, areaList } = this.props;
         const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
         return <React.Fragment>
-            <List renderHeader={() => this.state.shopId == null ? '注册店铺' : '修改店铺信息'} renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
+            <List renderHeader={() => !this.state.shopId ? '注册店铺' : '修改店铺信息'} renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
                 || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
                 getFieldError('shopDesc') || getFieldError('verifyCodeActual')
             }>

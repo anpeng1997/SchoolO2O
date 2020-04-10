@@ -1,0 +1,1 @@
+export const IMGSERVERURL = "http://localhost:8080/upload";

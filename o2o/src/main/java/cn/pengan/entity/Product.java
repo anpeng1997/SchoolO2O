@@ -1,6 +1,7 @@
 package cn.pengan.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Product {
     private Long productId;
@@ -12,10 +13,16 @@ public class Product {
     private Integer priority;
     private Date createTime;
     private Date lastEditTime;
+    /**
+     * 0：代表下架商品，1：上架商品
+     */
     private Integer enableStatus;
     private Integer point;
     private Long productCategoryId;
     private Long shopId;
+    private List<ProductImg> productImgs;
+    private Shop shop;
+    private ProductCategory productCategory;
 
     public Long getProductId() {
         return productId;
@@ -119,5 +126,48 @@ public class Product {
 
     public void setShopId(Long shopId) {
         this.shopId = shopId;
+    }
+
+    public List<ProductImg> getProductImgs() {
+        return productImgs;
+    }
+
+    public void setProductImgs(List<ProductImg> productImgs) {
+        this.productImgs = productImgs;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productDesc='" + productDesc + '\'' +
+                ", imgAddr='" + imgAddr + '\'' +
+                ", normalPrice='" + normalPrice + '\'' +
+                ", promotionPrice='" + promotionPrice + '\'' +
+                ", priority=" + priority +
+                ", createTime=" + createTime +
+                ", lastEditTime=" + lastEditTime +
+                ", enableStatus=" + enableStatus +
+                ", point=" + point +
+                ", productCategoryId=" + productCategoryId +
+                ", shopId=" + shopId +
+                '}';
     }
 }

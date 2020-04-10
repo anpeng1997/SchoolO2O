@@ -6,26 +6,31 @@ export default class ShopManage extends React.Component {
 
     render() {
         const { history, match } = this.props;
-        if (!match.params.id) {
+        const shopId = match.params.id;
+        if (!shopId) {
             return <Redirect to="/shop/shoplist" />;
         }
         return <React.Fragment>
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <Button type="primary" size="large" onClick={() => {
-                    history.push("/shop/shopoperation/" + match.params.id)
+                    history.push(`/shop/shopoperation/${shopId}`)
                 }} >店铺信息管理
                 </Button>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <Button type="primary" size="large" onClick={() => {
-                    history.push("/shop/productcategory/" + match.params.id)
+                    history.push(`/shop/productcategory/${shopId}`)
                 }} >商品类别管理</Button>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
-                <Button type="primary" size="large" >店铺管理</Button>
+                <Button type="primary" size="large" onClick={
+                    () => {
+                        history.push(`/shop/product/${shopId}`)
+                    }
+                }>商品管理</Button>
             </WingBlank>
         </React.Fragment>
     }

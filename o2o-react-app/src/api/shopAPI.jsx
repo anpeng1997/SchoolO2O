@@ -1,4 +1,5 @@
 import { axiosRequest, axiosRequestAll } from './myAxios';
+import { CT_FORMDATA } from "./httpHeaders";
 
 export const reqShopList = () => axiosRequest("/api/shop/paginationshop");
 
@@ -14,12 +15,12 @@ export const reqShopOperationInitData = () => axiosRequest("/api/shop/operationi
  * @param {Object} formData
  * @param {Array} headers 
  */
-export const reqRegisterOrModifyShop = (type, formData, headers) => {
+export const reqRegisterOrModifyShop = (type, formData) => {
     let url = "/api/shop/register";
     if (type === 'modify') {
         url = "/api/shop/modify";
     }
-    return axiosRequest(url, formData, 'POST', headers);
+    return axiosRequest(url, formData, 'POST', CT_FORMDATA);
 }
 
 /**
@@ -38,3 +39,22 @@ export const reqDelectProductCategory = (categoryId) => axiosRequest("/api/produ
 export const reqAddProductCategory = (data) => axiosRequest("/api/productcategory/add", data, "POST");
 
 export const reqModifyProductCategory = (data) => axiosRequest("/api/productcategory/edit", data, "PUT");
+
+export const reqAddOrModifyProduct = (type, formData) => {
+    let url = "/api/product/add";
+    if (type === "modify") {
+        url = "/api/product/modify";
+    }
+    return axiosRequest(url, formData, "POST", CT_FORMDATA);
+};
+
+export const reqProductList = (shopId, pageIndex, pageSize) => {
+    let url = `/api/product/paginationproduct?shopid=${shopId}`
+    if (pageIndex) {
+        url = + `&pageindex${pageIndex}`
+    }
+    if (pageSize) {
+        url = + `&pagesize${pageSize}`
+    }
+    return axiosRequest(url);
+}

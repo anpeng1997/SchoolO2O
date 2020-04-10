@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class ShopServiceImpl implements IShopService {

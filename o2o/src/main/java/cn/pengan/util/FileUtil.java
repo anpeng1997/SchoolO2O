@@ -14,7 +14,7 @@ public class FileUtil {
     private static final String separator = System.getProperty("file.separator");
 
     /*
-     * 获取上传图片要存放的目录
+     * 获取上传图片要存放的Base目录
      * */
     public static String getImgBasePath() {
         //先判断当前计算机系统
@@ -22,19 +22,21 @@ public class FileUtil {
         String bashPath = "";
         if (osName.toLowerCase().contains("win")) {
             //当前系统为windows系统
-            bashPath = "c:/o2o/upload/";
+            bashPath = "c:/o2o/upload";
         } else {
             //当前系统为apple or linux系统
-            bashPath = "/home/o2o/upload/";
+            bashPath = "/home/o2o/upload";
         }
         bashPath = bashPath.replace("/", separator);
         return bashPath;
     }
 
     public static String getShopImgPath(long shopId) {
-        String path = "/images/item/shop/" + shopId + "/";
-        String newPath = path.replace("/", separator);
-        return newPath;
+        return "/images/item/shop/" + shopId + "/";
+    }
+
+    public static String getProductImgPath(long productId) {
+        return "/images/item/product/" + productId + "/";
     }
 
     /*
@@ -63,5 +65,4 @@ public class FileUtil {
             fileOrPath.delete();
         }
     }
-
 }

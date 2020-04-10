@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -8,35 +9,43 @@
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <context:property-placeholder location="classpath:application.properties"></context:property-placeholder>
+
     <!--   1. 配置spring mvc注解支持-->
     <!-- 简化配置： (1)自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
     <mvc:annotation-driven></mvc:annotation-driven>
 
-<!--   2. 静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
+    <!--   2. 静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
     <mvc:resources mapping="/static/**" location="/static/"></mvc:resources>
+    <!--    配置映射路径展示服务器上upload的文件,使用linux服务器时，应该修改它-->
+    <mvc:resources mapping="/${upload.file.mapping}/**" location="file:${upload.file.local.path}/"></mvc:resources>
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
-<!--   3.视图解析器-->
+    <!--   3.视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/html/"></property>
         <property name="suffix" value=".html"></property>
     </bean>
 
-<!--    4.扫描 controller相关的beans-->
+    <!--    4.扫描 controller相关的beans-->
     <context:component-scan base-package="cn.pengan.controller">
     </context:component-scan>
 
-<!--    swagger bean-->
+    <!--    swagger bean-->
     <bean class="cn.pengan.config.SwaggerConfig"></bean>
 
-<!--    5.权限页面拦截器 -->
+    <!--    5.权限页面拦截器 -->
 
-<!--    6.文件上传解析器-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+    <!--    6.文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
 
-<!--   开启cors跨越，并允许跨域保存cookie-->
+    <!--   开启cors跨越，并允许跨域保存cookie-->
     <mvc:cors>
-        <mvc:mapping path="/**"  allow-credentials="true" max-age="86400" allowed-origins="*" allowed-methods="*" allowed-headers="*"></mvc:mapping>
+        <mvc:mapping path="/**" allow-credentials="true" max-age="86400" allowed-origins="*" allowed-methods="*"
+                     allowed-headers="*"></mvc:mapping>
     </mvc:cors>
 </beans>

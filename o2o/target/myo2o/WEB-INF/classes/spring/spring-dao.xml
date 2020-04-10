@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:application.properties"></context:property-placeholder>
     <!--    在该配置文件下配置mybatis等配置-->
     <!--    dataSources-->
     <bean id="dataSource" destroy-method="close"

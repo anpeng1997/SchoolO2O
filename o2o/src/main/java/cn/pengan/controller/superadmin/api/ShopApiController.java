@@ -93,7 +93,6 @@ public class ShopApiController {
             result.put("success", true);
             result.put("data", shopExecution);
         } catch (IOException e) {
-            shopExecution = new ShopExecution(ShopStatusEnum.INNER_ERROR);
             e.printStackTrace();
             result.put("success", false);
             result.put("errorMsg", "保存图片失败");
@@ -135,7 +134,7 @@ public class ShopApiController {
         return result;
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据商铺ID来获取商铺信息")
     public Map<String, Object> getShopById(@PathVariable("id") Long id) {
         Map<String, Object> result = new HashMap<>();
@@ -151,8 +150,11 @@ public class ShopApiController {
     }
 
     @RequestMapping(value = "/paginationshop", method = RequestMethod.GET)
-    @ApiOperation(value = "分页获取商店数据",notes = "当不传入分页条件时，默认返回从0开始的100条数据")
-    public Map<String, Object> findShopList(@ApiParam(value = "页面索引") Integer pageindex,@ApiParam(value = "页面数据大小") Integer pagesize, HttpServletRequest request) {
+    @ApiOperation(value = "分页获取商店数据", notes = "当不传入分页条件时，默认返回从0开始的100条数据")
+    public Map<String, Object> findShopList(@ApiParam(value = "页面索引")
+                                            @RequestParam(value = "pageindex",required = false) Integer pageindex,
+                                            @ApiParam(value = "页面数据大小")
+                                            @RequestParam(value = "pagesize",required = false) Integer pagesize, HttpServletRequest request) {
         Map<String, Object> result = new HashMap<>();
         //该api是用来做店铺列表的展示的，所以只根据owner_id来查询
         // TODO: 查询真实的session中user
