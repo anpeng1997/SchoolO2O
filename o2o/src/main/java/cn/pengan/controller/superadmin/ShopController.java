@@ -20,14 +20,15 @@ public class ShopController {
     public String shopList() {
         return "/shop/shoplist";
     }
-    @RequestMapping(value = "/shopmanage",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/shopmanage", method = RequestMethod.GET)
     public String shopManage(Long id, HttpServletRequest request) {
         if (id == null && id <= 0) {
             return "/shop/shoplist";
         }
         Shop shop = new Shop();
         shop.setShopId(id);
-        request.getSession().setAttribute("currentShop",shop);
+        request.getSession().setAttribute("currentShop", shop);
         return "/shop/shopmanage";
     }
 }

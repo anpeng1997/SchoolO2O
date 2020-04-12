@@ -25,7 +25,7 @@ public class ShopServiceTest extends BaseTest {
         shop.setShopName("修改之后的名称");
         File file = new File("E:\\Users\\an\\Pictures\\Desktop\\MD_Wallpaper_Tree.png");
         FileInputStream fileInputStream = new FileInputStream(file);
-        shopService.modifyShop(shop,fileInputStream,file.getName());
+        shopService.modifyShop(shop, fileInputStream, file.getName());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ShopServiceTest extends BaseTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        ShopExecution shopExecution = shopService.addShop(shop, fileInputStream,file.getName());
+        ShopExecution shopExecution = shopService.addShop(shop, fileInputStream, file.getName());
         System.out.println(shopExecution);
     }
 

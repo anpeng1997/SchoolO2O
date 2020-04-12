@@ -15,7 +15,7 @@ public class ProductImgDaoTest extends BaseTest {
     private IProductImgDao productImgDao;
 
     @Test
-    public void batchInsertImgTest(){
+    public void batchInsertImgTest() {
         ArrayList<ProductImg> productImgs = new ArrayList<>();
         ProductImg productImg1 = new ProductImg();
         productImg1.setImgAddr("/test/test");
@@ -39,6 +39,6 @@ public class ProductImgDaoTest extends BaseTest {
         productImg3.setProductId(1L);
         productImgs.add(productImg3);
         int i = productImgDao.batchInsertProductImg(productImgs);
-        Assert.assertEquals(3,i);
+        Assert.assertEquals(3, i);
     }
 }

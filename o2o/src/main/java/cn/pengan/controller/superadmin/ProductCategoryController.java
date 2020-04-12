@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/superadmin/productcategory")
 public class ProductCategoryController {
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String ProductCategoryList() {
         return "/product/productcategory";
     }

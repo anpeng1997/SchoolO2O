@@ -13,7 +13,7 @@ public class ShopCategoryDaoTest extends BaseTest {
     private IShopCategoryDao shopCategoryDao;
 
     @Test
-    public void findCategoryTest(){
+    public void findCategoryTest() {
         List<ShopCategory> shopCategoryList = shopCategoryDao.findShopCategoryList(new ShopCategory());
         for (ShopCategory shopCategory : shopCategoryList) {
             System.out.println(shopCategory);

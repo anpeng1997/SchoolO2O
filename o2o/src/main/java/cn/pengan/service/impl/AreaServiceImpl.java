@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class AreaServiceImpl implements IAreaService {
-   private final IAreaDao areaDao;
+    private final IAreaDao areaDao;
 
     public AreaServiceImpl(IAreaDao areaDao) {
         this.areaDao = areaDao;

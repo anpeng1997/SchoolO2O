@@ -12,7 +12,8 @@ public class ShopExecution {
     private Shop shop;
     private List<Shop> shopList;
 
-    public ShopExecution(){}
+    public ShopExecution() {
+    }
 
     //失败调用的构造器
     public ShopExecution(ShopStatusEnum statusEnum) {

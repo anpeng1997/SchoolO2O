@@ -152,9 +152,9 @@ public class ShopApiController {
     @RequestMapping(value = "/paginationshop", method = RequestMethod.GET)
     @ApiOperation(value = "分页获取商店数据", notes = "当不传入分页条件时，默认返回从0开始的100条数据")
     public Map<String, Object> findShopList(@ApiParam(value = "页面索引")
-                                            @RequestParam(value = "pageindex",required = false) Integer pageindex,
+                                            @RequestParam(value = "pageindex", required = false) Integer pageindex,
                                             @ApiParam(value = "页面数据大小")
-                                            @RequestParam(value = "pagesize",required = false) Integer pagesize, HttpServletRequest request) {
+                                            @RequestParam(value = "pagesize", required = false) Integer pagesize, HttpServletRequest request) {
         Map<String, Object> result = new HashMap<>();
         //该api是用来做店铺列表的展示的，所以只根据owner_id来查询
         // TODO: 查询真实的session中user

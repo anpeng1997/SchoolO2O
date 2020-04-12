@@ -45,6 +45,7 @@ public class ImageUtil {
         String relativePath = FileUtil.getProductImgPath(productId);
         return generateThumbnail(inputStream, relativePath, fileName);
     }
+
     /**
      * 判断文件夹是否存在，不存在则创建
      */

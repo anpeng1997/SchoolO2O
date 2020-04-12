@@ -12,7 +12,7 @@ public class ShopCategoryImpl implements IShopCategoryService {
 
     private final IShopCategoryDao shopCategoryDao;
 
-    public ShopCategoryImpl(IShopCategoryDao shopCategoryDao){
+    public ShopCategoryImpl(IShopCategoryDao shopCategoryDao) {
         this.shopCategoryDao = shopCategoryDao;
     }
 

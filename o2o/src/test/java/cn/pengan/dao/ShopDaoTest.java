@@ -38,18 +38,18 @@ public class ShopDaoTest extends BaseTest {
         shop.setShopDesc("test");
         shop.setShopImg("test url");
         int i = shopDao.insertShop(shop);
-        Assert.assertEquals(1,i);
+        Assert.assertEquals(1, i);
     }
 
     @Test
     public void findShopByIdTest() {
         Shop shop = shopDao.findShopById(31L);
         System.out.println(shop.getArea().getAreaName());
-       System.out.println(shop);
+        System.out.println(shop);
     }
 
     @Test
-    public void updateShopTest(){
+    public void updateShopTest() {
         Shop shop = shopDao.findShopById(31L);
         shop.setShopName("张阿姨奶茶店");
         shopDao.updateShop(shop);
@@ -63,14 +63,14 @@ public class ShopDaoTest extends BaseTest {
         owner.setUserId(1L);
         shopCondition.setOwner(owner);
         List<Shop> shopList = shopDao.findShopList(shopCondition, 0, 5);
-        Assert.assertEquals(4,shopList.size());
+        Assert.assertEquals(4, shopList.size());
         for (Shop shop : shopList) {
             System.out.println(shop);
         }
     }
 
     @Test
-    public void findShopCountTest(){
+    public void findShopCountTest() {
         Shop shopCondition = new Shop();
         shopCondition.setShopName("书");
 //        PersonInfo owner = new PersonInfo();

@@ -80,7 +80,8 @@ public class ShopServiceImpl implements IShopService {
             int shopId = shopDao.insertShop(shop);
             if (shopId > 0) {
                 //保存图片
-                String addr = ImageUtil.saveShopImg(shop.getShopId(), shopImgInputStream, fileName);;
+                String addr = ImageUtil.saveShopImg(shop.getShopId(), shopImgInputStream, fileName);
+                ;
                 //更新图片地址
                 shop.setShopImg(addr);
                 shopDao.updateShop(shop);
@@ -88,9 +89,9 @@ public class ShopServiceImpl implements IShopService {
             } else {
                 return new ShopExecution(ShopStatusEnum.INNER_ERROR);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-            throw new ShopOperationException("addShop error,"+ex.getMessage());
+            throw new ShopOperationException("addShop error," + ex.getMessage());
         }
     }
 
@@ -100,7 +101,7 @@ public class ShopServiceImpl implements IShopService {
     }
 
     @Override
-    public ShopExecution findShopList(Shop shopCondition,int pageIndex,int pageSize) {
+    public ShopExecution findShopList(Shop shopCondition, int pageIndex, int pageSize) {
         int offset = CalculatorPaging.calcRowIndex(pageIndex, pageSize);
         List<Shop> shopList = shopDao.findShopList(shopCondition, offset, pageSize);
         int shopCount = shopDao.findShopCount(shopCondition);
@@ -108,7 +109,7 @@ public class ShopServiceImpl implements IShopService {
         if (shopList != null) {
             shopExecution.setShopList(shopList);
             shopExecution.setCount(shopCount);
-        }else{
+        } else {
             shopExecution.setState(ShopStatusEnum.INNER_ERROR.getState());
         }
         return shopExecution;

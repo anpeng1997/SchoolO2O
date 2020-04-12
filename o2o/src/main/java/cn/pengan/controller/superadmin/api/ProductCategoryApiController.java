@@ -56,21 +56,20 @@ public class ProductCategoryApiController {
         try {
             ProductCategoryExecution execution = productCategoryService.deleteProductCategoryById(id);
             return new Result(true, execution.getStateInfo(), execution.getState());
-        }catch(Exception ex){
-            return new Result(false,ex.getMessage(),ProductCategoryStatusEnum.FAIL.getStatus());
+        } catch (Exception ex) {
+            return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
         }
     }
-
 
 
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     @ApiOperation(value = "更新商品类别信息")
     public Result editProductCategory(@RequestBody ProductCategory productCategory) {
-      try{
-          ProductCategoryExecution execution = productCategoryService.updateProductCategory(productCategory);
-          return new Result(true, execution.getStateInfo(), execution.getState());
-      }catch (Exception ex){
-          return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
-      }
+        try {
+            ProductCategoryExecution execution = productCategoryService.updateProductCategory(productCategory);
+            return new Result(true, execution.getStateInfo(), execution.getState());
+        } catch (Exception ex) {
+            return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
+        }
     }
 }

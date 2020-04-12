@@ -18,7 +18,7 @@ public class ProductExecution {
         this.stateInfo = statusEnum.getStateInfo();
     }
 
-    public ProductExecution(ProductStatusEnum statusEnum,Product product) {
+    public ProductExecution(ProductStatusEnum statusEnum, Product product) {
         this.state = statusEnum.getState();
         this.stateInfo = statusEnum.getStateInfo();
         this.product = product;
