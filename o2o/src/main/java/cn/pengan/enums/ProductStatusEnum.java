@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ProductStatusEnum {
-    SUCCESS(1, "操作成功！"),
-    INNER_ERROR(-1001, "操作失败,服务器内部错误！"),
-    IMAGE_EMPTY(-1002, "操作失败，没有上传图片！");
+    SUCCESS(1, "Success"),
+    INNER_ERROR(-1001, "Fail,server error"),
+    IMAGE_EMPTY(-1002, "Fail,img not is empty");
 
     private int state;
     private String stateInfo;

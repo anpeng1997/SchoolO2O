@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ProductCategoryStatusEnum {
-    SUCCESS(1, "操作成功！"),
-    FAIL(-1, "操作失败"),
-    INTERNAL_ERR(-1001, "内部错误！"),
-    NULL_SHOP_ID(-1002, "shopId为空"),
-    EMPTY_LIST(-1002, "商品类别列表为空！");
+    SUCCESS(1, "Success"),
+    FAIL(-1, "fail"),
+    INTERNAL_ERR(-1001, "fail,internal error"),
+    NULL_SHOP_ID(-1002, "fail,shopId not is empty"),
+    EMPTY_LIST(-1002, "fail,product category list not is empty");
 
     private int status;
     private String statusInfo;

@@ -2,6 +2,7 @@ import React from "react";
 import { Button, List, WingBlank, Modal, WhiteSpace } from "antd-mobile";
 import { connect } from "react-redux";
 import { getProductListAction } from "../store/actionCreators";
+import { reqChangeStatus } from "../../../api/shopAPI";
 import ThumbImg from "./thumbImg";
 
 const Item = List.Item;
@@ -26,6 +27,11 @@ class ShopProductList extends React.PureComponent {
         this.props.getProductsAction(this.state.shopId)
     }
 
+    changeStatus = async (productId) => {
+        const response = await reqChangeStatus(productId);
+        console.log(response);
+    }
+
     render() {
         const shopId = this.state.shopId;
         const { history, match, productList } = this.props;
@@ -41,12 +47,12 @@ class ShopProductList extends React.PureComponent {
                                     <WhiteSpace size="md"></WhiteSpace>
                                     <Button type="primary" size="small" onClick={() => history.push(`/shop/productoperation/${shopId}/${item.productId}`)} >编辑</Button>
                                     <WhiteSpace size="md"></WhiteSpace>
-                                    <Button type="ghost" size="small" onClick={() => history.push(``)} >下架</Button>
+                                    <Button type="ghost" size="small" onClick={() => this.changeStatus(item.productId)} >{item.enableStatus === 0 ? "上架" : "下架"}</Button>
                                 </div>
                             }
                         >
                             {item.productName}
-                            <Brief>{item.enableStatus = 0 ? "未上架" : "已上架"}</Brief>
+                            <Brief>{item.enableStatus === 0 ? "未上架" : "已上架"}</Brief>
                             <Brief>促销价格：￥{item.promotionPrice}</Brief>
                             <Brief>原价价格：￥{item.normalPrice}</Brief>
                         </Item>

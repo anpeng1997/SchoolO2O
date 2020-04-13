@@ -14,4 +14,6 @@ public interface IProductService {
     ProductExecution findProductById(Long productId);
 
     ProductExecution findProductList(Long shopId, int pageIndex, int pageSize);
+
+    ProductExecution changeProductStatus(Long productId);
 }

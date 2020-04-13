@@ -39,4 +39,11 @@ public class ProductServiceTest extends BaseTest {
         ProductExecution productExecution = productService.insertProduct(product, files);
         System.out.println(productExecution);
     }
+
+    @Test
+    public void changeStatusTest(){
+        ProductExecution execution = productService.changeProductStatus(13L);
+        System.out.println(execution);
+    }
+
 }

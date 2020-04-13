@@ -43,7 +43,7 @@ export const reqModifyProductCategory = (data) => axiosRequest("/api/productcate
 export const reqAddOrModifyProduct = (type, formData) => {
     let url = "/api/product/add";
     if (type === "modify") {
-        url = "/api/product/modify";
+        url = "/api/product/edit";
     }
     return axiosRequest(url, formData, "POST", CT_FORMDATA);
 };
@@ -58,3 +58,7 @@ export const reqProductList = (shopId, pageIndex, pageSize) => {
     }
     return axiosRequest(url);
 }
+
+export const reqProduct = (productId) => axiosRequest(`/api/product/${productId}`);
+
+export const reqChangeStatus = (productId) => axiosRequest(`/api/product/status/${productId}`,{},"PUT")

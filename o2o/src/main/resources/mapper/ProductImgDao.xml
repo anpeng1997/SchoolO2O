@@ -20,6 +20,6 @@
 
     <delete id="batchDeleteImgByProductId" parameterType="long">
         DELETE FROM tb_product_img
-        WHERE proudct_id = #{productId}
+        WHERE product_id = #{productId}
     </delete>
 </mapper>

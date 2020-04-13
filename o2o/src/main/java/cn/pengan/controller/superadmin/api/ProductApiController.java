@@ -60,7 +60,7 @@ public class ProductApiController {
         return new Result(true, product);
     }
 
-    @PutMapping(value = "/edit")
+    @PostMapping(value = "/edit")
     @ApiOperation("修改商品信息")
     public Result modifyProduct(String productInfo, MultipartFile[] productImgs) {
         Result result;
@@ -94,5 +94,20 @@ public class ProductApiController {
         }
         ProductExecution execution = productService.findProductList(shopId, pageindex, pagesize);
         return new Result(true, execution);
+    }
+
+    @PutMapping("/status/{id}")
+    @ApiOperation("修改商品的状态")
+    public Result changeProductStatus(@PathVariable("id") Long id) {
+        Result result;
+        try{
+            ProductExecution execution = productService.changeProductStatus(id);
+            result = new Result(true,execution);
+        }catch (Exception ex){
+            logger.error("【{}】中的【changeProductStatus】出现错误,{}", ProductApiController.class.getName(), ex.getMessage());
+            result = new Result(false,new ProductExecution(ProductStatusEnum.INNER_ERROR));
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

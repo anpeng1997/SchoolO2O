@@ -1,8 +1,9 @@
 import React from "react";
 import { List, Button, InputItem, ImagePicker, Picker, WhiteSpace, WingBlank, Flex, Toast } from "antd-mobile";
 import { createForm } from "rc-form";
-import { reqProductCategoryList, reqAddOrModifyProduct } from "../../../api/shopAPI";
+import { reqProductCategoryList, reqAddOrModifyProduct, reqProduct } from "../../../api/shopAPI";
 import { Redirect } from "react-router-dom";
+import { IMGSERVERURL } from "../../../common/Constant";
 
 const Item = List.Item;
 
@@ -45,9 +46,27 @@ class ShopProductForm extends React.PureComponent {
                     productCategorys: categoryArray
                 });
             }
-            //获取当前要编辑的商品名称
-            if (productId){
-                
+            //获取当前要编辑的商品信息
+            if (productId) {
+                const response = await reqProduct(productId);
+                if (response.success) {
+                    const form = this.props.form;
+                    const data = response.data;
+                    let imgs = [];
+                    data.product.productImgs.map((item, index) => {
+                        imgs.push({ url: IMGSERVERURL + item.imgAddr, id: item.productImgId })
+                        return index;
+                    });
+                    form.setFieldsValue({
+                        'productName': data.product.productName,
+                        'productDesc': data.product.productDesc,
+                        'normalPrice': data.product.normalPrice,
+                        'promotionPrice': data.product.promotionPrice,
+                        'priority': data.product.priority,
+                        'productCategoryId': [data.product.productCategoryId],
+                        'productImgs': imgs
+                    })
+                }
             }
         }
         Toast.hide();
@@ -75,22 +94,24 @@ class ShopProductForm extends React.PureComponent {
                     priority
                 }
                 let formData = new FormData();
+                console.log(productInfo);
                 formData.append("productInfo", JSON.stringify(productInfo));
-                //TODO : 获取图片list，append to formData
                 productImgs.map(function (item, index) {
                     formData.append("productImgs", item.file);
                     return index;
                 })
                 const requestType = !productId ? "add" : "modify";
                 //send request
-                Toast.loading("正在提交...", 0)
+                Toast.loading("submit...", 0)
                 const response = await reqAddOrModifyProduct(requestType, formData);
                 Toast.hide();
                 if (response.success) {
-                    Toast.success("成功！", 2);
+                    Toast.success("success", 2);
                     setTimeout(() => {
                         history.goBack();
                     }, 2000)
+                } else {
+                    Toast.fail("fail," + response.data.stateInfo)
                 }
             }
         })

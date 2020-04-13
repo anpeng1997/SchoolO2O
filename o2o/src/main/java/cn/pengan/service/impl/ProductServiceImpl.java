@@ -6,7 +6,7 @@ import cn.pengan.dto.ProductExecution;
 import cn.pengan.entity.Product;
 import cn.pengan.entity.ProductImg;
 import cn.pengan.enums.ProductStatusEnum;
-import cn.pengan.exceptions.ProductException;
+import cn.pengan.exceptions.ProductOperationException;
 import cn.pengan.service.IProductService;
 import cn.pengan.util.CalculatorPaging;
 import cn.pengan.util.FileUtil;
@@ -30,7 +30,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ProductExecution insertProduct(Product product, Map<String, InputStream> productImgs) throws ProductException {
+    public ProductExecution insertProduct(Product product, Map<String, InputStream> productImgs) throws ProductOperationException {
         try {
             if (productImgs.size() <= 0) {
                 return new ProductExecution(ProductStatusEnum.IMAGE_EMPTY);
@@ -60,13 +60,13 @@ public class ProductServiceImpl implements IProductService {
             }
             return new ProductExecution(ProductStatusEnum.SUCCESS);
         } catch (Exception ex) {
-            throw new ProductException("插入商品数据出现错误，" + ex.getMessage());
+            throw new ProductOperationException("插入商品数据出现错误，" + ex.getMessage());
         }
     }
 
     @Transactional
     @Override
-    public ProductExecution updateProduct(Product product, Map<String, InputStream> productImgs) throws ProductException {
+    public ProductExecution updateProduct(Product product, Map<String, InputStream> productImgs) throws ProductOperationException {
         try {
             //判断是否上传了新的图片
             if (productImgs.size() > 0) {
@@ -89,7 +89,7 @@ public class ProductServiceImpl implements IProductService {
             productDao.updateProduct(product);
             return new ProductExecution(ProductStatusEnum.SUCCESS);
         } catch (Exception ex) {
-            throw new ProductException("更新商品数据出现错误，" + ex.getMessage());
+            throw new ProductOperationException("更新商品数据出现错误，" + ex.getMessage());
         }
     }
 
@@ -109,6 +109,27 @@ public class ProductServiceImpl implements IProductService {
         return execution;
     }
 
+    @Override
+    public ProductExecution changeProductStatus(Long productId) throws ProductOperationException {
+        Product product = productDao.findProductById(productId);
+        try {
+            Integer newStatus = product.getEnableStatus() == 1 ? 0 : 1;
+            product.setEnableStatus(newStatus);
+            productDao.updateProduct(product);
+            return new ProductExecution(ProductStatusEnum.SUCCESS);
+        } catch (Exception ex) {
+            throw new ProductOperationException("修改商品状态出现异常," + ex.getMessage());
+        }
+    }
+
+    /**
+     * 保存图片集合
+     *
+     * @param productId
+     * @param imgs
+     * @return ProductImg对象集合
+     * @throws IOException
+     */
     private List<ProductImg> saveImgs(Long productId, Map<String, InputStream> imgs) throws IOException {
         List<ProductImg> result = new ArrayList<>();
         for (String key : imgs.keySet()) {  //遍历所有的图片进行添加
