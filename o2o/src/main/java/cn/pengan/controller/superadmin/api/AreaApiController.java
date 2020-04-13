@@ -27,7 +27,7 @@ public class AreaApiController {
         this.areaService = areaService;
     }
 
-    @ApiOperation(value = "获取所有的区域列表信息",httpMethod = "GET")
+    @ApiOperation(value = "获取所有的区域列表信息", httpMethod = "GET")
     @RequestMapping(path = "/getlist", method = {RequestMethod.GET})
     public Map<String, Object> getAreaList(HttpServletRequest request) {
         Map<String, Object> model = new HashMap<>();

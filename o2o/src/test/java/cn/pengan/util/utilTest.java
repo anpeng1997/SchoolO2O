@@ -7,7 +7,7 @@ import java.util.UUID;
 public class utilTest {
 
     @Test
-    public void test1(){
+    public void test1() {
 //        String name = System.getProperty("os.name");
 //        System.out.println(name.toLowerCase().contains("win"));
 //        String s = System.lineSeparator();

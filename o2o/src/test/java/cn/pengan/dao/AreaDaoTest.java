@@ -13,11 +13,11 @@ public class AreaDaoTest extends BaseTest {
     private IAreaDao areaDao;
 
     @Test
-    public void findAllTest(){
+    public void findAllTest() {
         List<Area> all = areaDao.findAll();
         for (Area area : all) {
             System.out.println(area);
         }
-        Assert.assertEquals(all.size(),4);
+        Assert.assertEquals(all.size(), 4);
     }
 }

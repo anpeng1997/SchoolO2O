@@ -16,6 +16,6 @@ public interface IShopService {
 
     Shop findShopById(Long shopId);
 
-    ShopExecution findShopList(Shop shopCondition,int pageIndex,int pageSize);
+    ShopExecution findShopList(Shop shopCondition, int pageIndex, int pageSize);
 
 }

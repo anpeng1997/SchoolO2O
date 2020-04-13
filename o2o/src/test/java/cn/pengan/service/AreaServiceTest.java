@@ -14,8 +14,8 @@ public class AreaServiceTest extends BaseTest {
     private IAreaService areaService;
 
     @Test
-    public void findAllTest(){
+    public void findAllTest() {
         List<Area> all = areaService.findAll();
-        Assert.assertEquals(all.size(),4);
+        Assert.assertEquals(all.size(), 4);
     }
 }
