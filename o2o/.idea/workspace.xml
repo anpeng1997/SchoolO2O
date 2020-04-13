@@ -6,47 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41da1526-2c1f-4a30-9c2a-c17b460ee662" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ProductApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IProductDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dao/IProductImgDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/dto/ProductExecution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductStatusEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/exceptions/ProductException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ProductDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/ProductImgDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ProductDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/dao/ProductImgDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ProductServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/api/shopAPI.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/api/shopAPI.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-manage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-manage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/actionCreators.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/actionCreators.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/actionType.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/actionType.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/reducer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/store/reducer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ShopApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ShopApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/entity/ProductImg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/util/ImageUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/jdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-dao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/myo2o/WEB-INF/classes/spring/spring-web.xml" afterDir="false" />
-    </list>
+    <list default="true" id="41da1526-2c1f-4a30-9c2a-c17b460ee662" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -370,7 +330,7 @@
       <workItem from="1584932392903" duration="8546000" />
       <workItem from="1585014374716" duration="37775000" />
       <workItem from="1585295628436" duration="18453000" />
-      <workItem from="1585615962244" duration="85040000" />
+      <workItem from="1585615962244" duration="85403000" />
     </task>
     <servers />
   </component>
