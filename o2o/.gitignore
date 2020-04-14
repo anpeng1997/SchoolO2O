@@ -10,6 +10,7 @@ gen
 /.idea/
 /out/
 /target/
+.idea/workspace.xml
 
 # Compiled class file
 *.class

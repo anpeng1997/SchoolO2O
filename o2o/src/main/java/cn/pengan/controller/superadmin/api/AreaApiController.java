@@ -4,6 +4,8 @@ import cn.pengan.entity.Area;
 import cn.pengan.service.IAreaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,9 @@ import java.util.Map;
 @Api(value = "区域API")
 @RequestMapping("/api/area")
 public class AreaApiController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AreaApiController.class);
+
     private final IAreaService areaService;
 
     public AreaApiController(IAreaService areaService) {
@@ -40,6 +45,7 @@ public class AreaApiController {
             model.put("success", false);
             model.put("errorMsg", e.getMessage());
         }
+        logger.info("logger info test..................");
         return model;
     }
 }
