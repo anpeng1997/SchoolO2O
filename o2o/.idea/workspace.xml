@@ -7,39 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41da1526-2c1f-4a30-9c2a-c17b460ee662" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/api/shopAPI.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/api/shopAPI.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-product-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-product-form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-product-list.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../o2o-react-app/src/pages/shop/components/shop-product-list.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/logback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/AreaDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/ProductCategoryDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/ProductDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/ProductImgDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/ShopCategoryDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mapper/ShopDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/mybatis-conf.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/spring/master-savle-db-spring-dao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/spring/spring-dao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/spring/spring-service.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/resources/spring/spring-web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/WEB-INF/html/product/productcategory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/WEB-INF/html/shop/shoplist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/WEB-INF/html/shop/shopmanage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/WEB-INF/html/shop/shopoperation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/main/webapp/static/js/shop/shopOperation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/o2o/test/resources/watermark.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/controller/superadmin/api/ProductApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductCategoryStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductCategoryStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/enums/ProductStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/exceptions/ProductException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/exceptions/ProductOperationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/IProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/pengan/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/ProductImgDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/ProductImgDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/pengan/service/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -334,7 +302,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -385,7 +353,7 @@
       <workItem from="1586745148115" duration="5533000" />
       <workItem from="1586760235244" duration="355000" />
       <workItem from="1586760608461" duration="506000" />
-      <workItem from="1586761144216" duration="9196000" />
+      <workItem from="1586761144216" duration="11003000" />
     </task>
     <servers />
   </component>
