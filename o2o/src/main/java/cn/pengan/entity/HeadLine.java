@@ -8,6 +8,9 @@ public class HeadLine {
     private String lineLink;
     private String lineImg;
     private Integer priority;
+    /**
+     * 1:启用，0：禁用
+     */
     private Integer enableStatus;
     private Date createTime;
     private Date lastEditTime;
