@@ -1,5 +1,6 @@
 package cn.pengan.service.impl;
 
+import cn.pengan.annotations.DataOperationLog;
 import cn.pengan.dao.IHeadLineDao;
 import cn.pengan.entity.HeadLine;
 import cn.pengan.service.IHeadLineService;
@@ -18,6 +19,7 @@ public class HeadLineServiceImpl implements IHeadLineService {
         this.headLineDao = headLineDao;
     }
 
+    @DataOperationLog("插入了一个Head Line")
     @Override
     public int insertHeadLine(HeadLine headLine) {
         return headLineDao.batchInsertHeadLine(Arrays.asList(headLine));
@@ -28,6 +30,7 @@ public class HeadLineServiceImpl implements IHeadLineService {
         return headLineDao.findHeadLineList(size);
     }
 
+    @DataOperationLog("删除了一个Head Line")
     @Override
     public int deleteHeadLineById(Long lineId) {
         return headLineDao.deleteHeadLineById(lineId);

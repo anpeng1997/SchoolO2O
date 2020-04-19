@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "首页轮播图API")
 public class HeadLineApiController {
 
-    @GetMapping("/info")
+    @GetMapping("/get")
     @ApiOperation("获得轮播图信息")
     public Result get() {
         return new Result();

@@ -1,5 +1,6 @@
 package cn.pengan.service.impl;
 
+import cn.pengan.annotations.DataOperationLog;
 import cn.pengan.dao.IShopDao;
 import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Shop;
@@ -29,7 +30,8 @@ public class ShopServiceImpl implements IShopService {
 
 
     @Override
-    @Transactional()
+    @Transactional
+    @DataOperationLog("修改商店信息")
     public ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException {
         if (shop == null || shop.getShopId() == null) {
             return new ShopExecution(ShopStatusEnum.NULL_SHOP_INFO);
@@ -64,7 +66,8 @@ public class ShopServiceImpl implements IShopService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
+    @DataOperationLog("添加了一个商店")
     public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException {
         if (shop == null) {
             return new ShopExecution(ShopStatusEnum.NULL_SHOP_INFO);
@@ -81,7 +84,6 @@ public class ShopServiceImpl implements IShopService {
             if (shopId > 0) {
                 //保存图片
                 String addr = ImageUtil.saveShopImg(shop.getShopId(), shopImgInputStream, fileName);
-                ;
                 //更新图片地址
                 shop.setShopImg(addr);
                 shopDao.updateShop(shop);
@@ -91,7 +93,7 @@ public class ShopServiceImpl implements IShopService {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new ShopOperationException("addShop error," + ex.getMessage());
+            throw new ShopOperationException("添加商店信息时出现错误，" + ex.getMessage());
         }
     }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, List, WingBlank, Modal, WhiteSpace } from "antd-mobile";
+import { Button, List, WingBlank, Modal, WhiteSpace, Toast } from "antd-mobile";
 import { connect } from "react-redux";
 import { getProductListAction } from "../store/actionCreators";
 import { reqChangeStatus } from "../../../api/shopAPI";
@@ -29,7 +29,12 @@ class ShopProductList extends React.PureComponent {
 
     changeStatus = async (productId) => {
         const response = await reqChangeStatus(productId);
-        console.log(response);
+        if(response.success){
+            this.getProductList();
+            Toast.success("操作成功！",2);
+        }else{
+            Toast.fail(response.data.stateInfo,2);
+        }
     }
 
     render() {
