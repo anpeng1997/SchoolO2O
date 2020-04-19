@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class IHeadLineServiceImpl implements IHeadLineService {
+public class HeadLineServiceImpl implements IHeadLineService {
 
     private final IHeadLineDao headLineDao;
 
-    public IHeadLineServiceImpl(IHeadLineDao headLineDao) {
+    public HeadLineServiceImpl(IHeadLineDao headLineDao) {
         this.headLineDao = headLineDao;
     }
 

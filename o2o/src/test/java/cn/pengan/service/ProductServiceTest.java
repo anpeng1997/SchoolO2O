@@ -46,4 +46,10 @@ public class ProductServiceTest extends BaseTest {
         System.out.println(execution);
     }
 
+    @Test
+    public void deleteProductTest() {
+        ProductExecution productExecution = productService.deleteProductById(1L);
+        System.out.println(productExecution);
+    }
+
 }

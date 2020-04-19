@@ -110,4 +110,10 @@ public class ProductApiController {
         }
         return result;
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("通过商品id来删除商品")
+    public Result deleteProduct(@PathVariable("id") Long id){
+        return new Result();
+    }
 }

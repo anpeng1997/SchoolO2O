@@ -16,4 +16,6 @@ public interface IProductService {
     ProductExecution findProductList(Long shopId, int pageIndex, int pageSize);
 
     ProductExecution changeProductStatus(Long productId);
+
+    ProductExecution deleteProductById(Long productId);
 }

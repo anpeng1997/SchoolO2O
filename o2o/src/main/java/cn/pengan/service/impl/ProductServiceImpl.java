@@ -122,6 +122,23 @@ public class ProductServiceImpl implements IProductService {
         }
     }
 
+    @Transactional
+    @Override
+    public ProductExecution deleteProductById(Long productId) throws ProductOperationException {
+        //first delete product img
+        try{
+            productImgDao.batchDeleteImgByProductId(productId);
+            productDao.deleteProduct(productId);
+            //get img local path
+            String localProductImgPath = FileUtil.getProductImgPath(productId);
+            //delete local file
+            FileUtil.deleteFileOrDirectory(localProductImgPath);
+            return new ProductExecution(ProductStatusEnum.SUCCESS);
+        }catch (Exception ex){
+            throw new ProductOperationException("删除商品时出现错误，"+ex.getMessage());
+        }
+    }
+
     /**
      * 保存图片集合
      *

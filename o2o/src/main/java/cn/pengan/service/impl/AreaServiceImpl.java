@@ -1,5 +1,6 @@
 package cn.pengan.service.impl;
 
+import cn.pengan.annotations.DataOperationLog;
 import cn.pengan.dao.IAreaDao;
 import cn.pengan.entity.Area;
 import cn.pengan.service.IAreaService;
@@ -16,6 +17,7 @@ public class AreaServiceImpl implements IAreaService {
         this.areaDao = areaDao;
     }
 
+    @DataOperationLog("查询所有的area")
     @Override
     public List<Area> findAll() {
         return areaDao.findAll();
