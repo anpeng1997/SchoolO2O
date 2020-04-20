@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pengan.dao.ILocalAuthDao">
+    <select id="findLocalAuth" parameterType="String" resultType="LocalAuth">
+        SELECT * FROM tb_local_auth
+        WHERE user_name = #{name} and password = #{pwd};
+    </select>
+
+    <insert id="insertLocalAuth" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true" parameterType="LocalAuth">
+        INSERT INTO tb_local_auth VALUES(NULL,#{userId},#{userName},#{password},#{createTime},#{lastEditTime});
+    </insert>
+</mapper>

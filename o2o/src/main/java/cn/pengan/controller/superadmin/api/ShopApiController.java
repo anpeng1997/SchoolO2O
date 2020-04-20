@@ -1,12 +1,10 @@
 package cn.pengan.controller.superadmin.api;
 
-import cn.pengan.controller.superadmin.ShopController;
 import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Area;
 import cn.pengan.entity.PersonInfo;
 import cn.pengan.entity.Shop;
 import cn.pengan.entity.ShopCategory;
-import cn.pengan.enums.ShopStatusEnum;
 import cn.pengan.service.IAreaService;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.service.IShopService;
@@ -36,7 +34,7 @@ public class ShopApiController {
     private final IShopCategoryService shopCategoryService;
     private final IAreaService areaService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShopApiController.class);
 
     public ShopApiController(IShopService shopService, IShopCategoryService shopCategoryService, IAreaService areaService) {
         this.shopService = shopService;

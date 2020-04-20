@@ -24,10 +24,11 @@
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 
     <!--   3.视图解析器-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/html/"></property>
-        <property name="suffix" value=".html"></property>
-    </bean>
+    <!--    因为该应用全部是以API的形式交互，所以视图解析器不需要配置-->
+    <!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--        <property name="prefix" value="/WEB-INF/html/"></property>-->
+    <!--        <property name="suffix" value=".html"></property>-->
+    <!--    </bean>-->
 
     <!--    4.扫描 controller相关的beans-->
     <context:component-scan base-package="cn.pengan.controller">
