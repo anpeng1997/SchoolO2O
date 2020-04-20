@@ -20,7 +20,7 @@
         <setting name="aggressiveLazyLoading" value="false"/>
 
     </settings>
-    <!--  配置mybatis拦截器插件-->
+    <!--  配置mybatis拦截器插件,在进行主从库分离时，需要使用到动态数据源-->
     <!--    <plugins>-->
     <!--        <plugin interceptor="cn.pengan.dao.split.DynamicDataSourceInterceptor"></plugin>-->
     <!--    </plugins>-->

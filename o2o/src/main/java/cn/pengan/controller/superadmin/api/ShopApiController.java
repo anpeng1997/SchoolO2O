@@ -18,12 +18,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +65,7 @@ public class ShopApiController {
     @ApiOperation(value = "注册商铺")
     public Map<String, Object> shopRegister(String shopInfo, HttpServletRequest request,
                                             @RequestParam("shopImg") MultipartFile shopImg) throws JsonProcessingException {
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = Collections.unmodifiableMap(new HashMap<>());
         boolean isVerify = CodeUtil.checkVerifyCode(request);
         if (!isVerify) {
             result.put("success", false);
@@ -99,7 +99,7 @@ public class ShopApiController {
         } catch (Exception e) {
             e.printStackTrace();
             result.put("success", false);
-            result.put("errorMsg", e.getMessage());
+            result.put("errorMsg", "服务器内部错误！");
         }
         return result;
     }

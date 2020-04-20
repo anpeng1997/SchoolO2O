@@ -15,4 +15,6 @@ public interface IProductDao {
     List<Product> findProductList(@Param("shopId") Long shopId, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
     int findProductCount(Long shopId);
+
+    int deleteProduct(Long productId);
 }

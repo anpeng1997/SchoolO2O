@@ -100,14 +100,20 @@ public class ProductApiController {
     @ApiOperation("修改商品的状态")
     public Result changeProductStatus(@PathVariable("id") Long id) {
         Result result;
-        try{
+        try {
             ProductExecution execution = productService.changeProductStatus(id);
-            result = new Result(true,execution);
-        }catch (Exception ex){
+            result = new Result(true, execution);
+        } catch (Exception ex) {
             logger.error("【{}】中的【changeProductStatus】出现错误,{}", ProductApiController.class.getName(), ex.getMessage());
-            result = new Result(false,new ProductExecution(ProductStatusEnum.INNER_ERROR));
+            result = new Result(false, new ProductExecution(ProductStatusEnum.INNER_ERROR));
             ex.printStackTrace();
         }
         return result;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("通过商品id来删除商品")
+    public Result deleteProduct(@PathVariable("id") Long id){
+        return new Result();
     }
 }

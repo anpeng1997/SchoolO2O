@@ -50,10 +50,10 @@ public class FileUtil {
     /**
      * 删除文件或文件夹
      *
-     * @param path 文件目录路径
+     * @param relativePath 文件目录相对路径
      */
-    public static void deleteFileOrDirectory(String path) {
-        String wholePath = getImgBasePath() + path;
+    public static void deleteFileOrDirectory(String relativePath) {
+        String wholePath = getImgBasePath() + relativePath;
         File fileOrPath = new File(wholePath);
         if (fileOrPath.exists()) {
             if (fileOrPath.isDirectory()) {

@@ -94,7 +94,6 @@ class ShopProductForm extends React.PureComponent {
                     priority
                 }
                 let formData = new FormData();
-                console.log(productInfo);
                 formData.append("productInfo", JSON.stringify(productInfo));
                 productImgs.map(function (item, index) {
                     formData.append("productImgs", item.file);
@@ -106,7 +105,7 @@ class ShopProductForm extends React.PureComponent {
                 const response = await reqAddOrModifyProduct(requestType, formData);
                 Toast.hide();
                 if (response.success) {
-                    Toast.success("success", 2);
+                    Toast.success("操作成功", 2);
                     setTimeout(() => {
                         history.goBack();
                     }, 2000)

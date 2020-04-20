@@ -18,6 +18,6 @@ public class ShopCategoryTest extends BaseTest {
         ShopCategory shopCategory = new ShopCategory();
         //shopCategory.setParentId(1L);
         List<ShopCategory> shopCategoryList = shopCategoryService.findShopCategoryList(shopCategory);
-        Assert.assertEquals(2, shopCategoryList.size());
+        Assert.assertEquals(1, shopCategoryList.size());
     }
 }

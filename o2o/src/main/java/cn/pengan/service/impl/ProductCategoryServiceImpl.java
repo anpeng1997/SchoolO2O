@@ -15,8 +15,11 @@ import java.util.List;
 @Service
 public class ProductCategoryServiceImpl implements IProductCategoryService {
 
-    @Autowired
-    private IProductCategoryDao productCategoryDao;
+    private final IProductCategoryDao productCategoryDao;
+
+    public ProductCategoryServiceImpl(IProductCategoryDao productCategoryDao) {
+        this.productCategoryDao = productCategoryDao;
+    }
 
     @Override
     public ProductCategoryExecution findProductCategoryList(Long shopId) {

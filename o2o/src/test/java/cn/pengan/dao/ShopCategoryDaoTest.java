@@ -17,7 +17,6 @@ public class ShopCategoryDaoTest extends BaseTest {
         List<ShopCategory> shopCategoryList = shopCategoryDao.findShopCategoryList(new ShopCategory());
         for (ShopCategory shopCategory : shopCategoryList) {
             System.out.println(shopCategory);
-
         }
     }
 }

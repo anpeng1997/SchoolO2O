@@ -103,7 +103,12 @@
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
-    <select id="findProductCount" resultType="int" parameterType="long">
+    <select id="findProductCount" resultType="int" parameterType="Long">
         select count(*) from tb_product where shop_id = #{shopId};
     </select>
+
+    <delete id="deleteProduct" parameterType="Long">
+        DELETE FROM tb_product
+        WHERE product_id = #{productId};
+    </delete>
 </mapper>

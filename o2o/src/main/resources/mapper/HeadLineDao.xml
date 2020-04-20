@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pengan.dao.IHeadLineDao">
+    <select id="findHeadLineList" resultType="HeadLine" parameterType="int">
+        SELECT * FROM tb_head_line
+        WHERE enable_status = 1
+        ORDER BY priority DESC
+        LIMIT #{size} OFFSET 0;
+    </select>
+
+    <insert id="batchInsertHeadLine" parameterType="java.util.List">
+        INSERT INTO tb_head_line VALUES
+        <foreach collection="list" index="index" item="headLine" separator=",">
+            (
+                null,
+                #{headLine.lineName},
+                #{headLine.lineLink},
+                #{headLine.lineImg},
+                #{headLine.priority},
+                #{headLine.enableStatus},
+                #{headLine.createTime},
+                #{headLine.lastEditTime}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteHeadLineById" parameterType="Long">
+        DELETE FROM tb_head_line
+        WHERE line_id = #{lineId};
+    </delete>
+</mapper>
