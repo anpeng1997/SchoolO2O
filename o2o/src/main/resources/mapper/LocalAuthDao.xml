@@ -3,9 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.pengan.dao.ILocalAuthDao">
-    <select id="findLocalAuth" parameterType="String" resultType="LocalAuth">
-        SELECT * FROM tb_local_auth
-        WHERE user_name = #{name} and password = #{pwd};
+
+    <resultMap id="localAuthMap" type="LocalAuth">
+        <result property="localAuthId" column="local_auth_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="userName" column="user_name"></result>
+        <result property="password" column="password"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="lastEditTime" column="last_edit_time"></result>
+        <association property="personInfo" javaType="PersonInfo">
+            <result property="userId" column="p_user_id"></result>
+            <result property="name" column="name"></result>
+            <result property="birthday" column="birthday"></result>
+            <result property="gender" column="gender"></result>
+            <result property="phone" column="phone"></result>
+            <result property="email" column="email"></result>
+            <result property="profileImg" column="profile_img"></result>
+            <result property="customerFlag" column="customer_flag"></result>
+            <result property="shopOwnerFlag" column="shop_owner_flag"></result>
+            <result property="adminFlag" column="admin_flag"></result>
+            <result property="createTime" column="p_create_time"></result>
+            <result property="lastEditTime" column="p_last_edit_time"></result>
+            <result property="enableStatus" column="enable_status"></result>
+        </association>
+    </resultMap>
+
+    <select id="findLocalAuth" parameterType="String" resultMap="localAuthMap">
+            SELECT
+            auth.local_auth_id,
+            auth.user_id,
+            auth.user_name,
+            auth.`password`,
+            auth.create_time,
+            auth.last_edit_time,
+            per.user_id AS p_user_id,
+            per.`name`,
+            per.birthday,
+            per.gender,
+            per.phone,
+            per.email,
+            per.profile_img,
+            per.customer_flag,
+            per.shop_owner_flag,
+            per.admin_flag,
+            per.create_time AS p_create_time,
+            per.last_edit_time AS p_last_edit_time,
+            per.enable_status
+        FROM
+            tb_local_auth AS auth
+            LEFT JOIN tb_person_info AS per ON auth.user_id = per.user_id
+        WHERE
+            auth.user_name = 'tom'
+            AND auth.`password` = '123456'
     </select>
 
     <insert id="insertLocalAuth" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true" parameterType="LocalAuth">

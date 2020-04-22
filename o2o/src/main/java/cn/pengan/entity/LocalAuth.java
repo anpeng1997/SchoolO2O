@@ -9,6 +9,15 @@ public class LocalAuth {
     private String password;
     private Date createTime;
     private Date lastEditTime;
+    private PersonInfo personInfo;
+
+    public PersonInfo getPersonInfo() {
+        return personInfo;
+    }
+
+    public void setPersonInfo(PersonInfo personInfo) {
+        this.personInfo = personInfo;
+    }
 
     public Long getLocalAuthId() {
         return localAuthId;

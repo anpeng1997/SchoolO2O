@@ -14,6 +14,10 @@ public class Result<T> {
         this.data = data;
     }
 
+    public Result(boolean success, String resultInfo) {
+        this.success = success;
+        this.resultInfo = resultInfo;
+    }
     public Result(boolean success, String resultInfo, int resultCode) {
         this.success = success;
         this.resultInfo = resultInfo;

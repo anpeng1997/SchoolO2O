@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-/**
- * Created by Enzo Cotter on 2020/4/20.
- */
 public class LocalAuthDaoTest extends BaseTest {
 
     @Autowired
@@ -17,8 +14,8 @@ public class LocalAuthDaoTest extends BaseTest {
 
     @Test
     public void findLocalAuth() {
-        LocalAuth tom = dao.findLocalAuth("tom", "123123");
-        System.out.println(tom);
+        LocalAuth tom = dao.findLocalAuth("tom", "123456");
+        System.out.println(tom.getPersonInfo());
     }
 
     @Test
@@ -31,5 +28,10 @@ public class LocalAuthDaoTest extends BaseTest {
         localAuth.setUserName("jerry");
         dao.insertLocalAuth(localAuth);
         System.out.println(localAuth.getLocalAuthId());
+    }
+
+    @Test
+    public void Test() {
+        System.out.println( 5<< 3);
     }
 }
