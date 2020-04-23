@@ -104,8 +104,7 @@ public class ProductServiceImpl implements IProductService {
         int offset = CalculatorPaging.calcRowIndex(pageIndex, pageSize);
         List<Product> productList = productDao.findProductList(shopId, offset, pageSize);
         int productCount = productDao.findProductCount(shopId);
-        ProductExecution execution = new ProductExecution(ProductStatusEnum.SUCCESS, productList);
-        execution.setCount(productCount);
+        ProductExecution execution = new ProductExecution(ProductStatusEnum.SUCCESS, productList, productCount);
         return execution;
     }
 
@@ -126,7 +125,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ProductExecution deleteProductById(Long productId) throws ProductOperationException {
         //first delete product img
-        try{
+        try {
             productImgDao.batchDeleteImgByProductId(productId);
             productDao.deleteProduct(productId);
             //get img local path
@@ -134,8 +133,8 @@ public class ProductServiceImpl implements IProductService {
             //delete local file
             FileUtil.deleteFileOrDirectory(localProductImgPath);
             return new ProductExecution(ProductStatusEnum.SUCCESS);
-        }catch (Exception ex){
-            throw new ProductOperationException("删除商品时出现错误，"+ex.getMessage());
+        } catch (Exception ex) {
+            throw new ProductOperationException("删除商品时出现错误，" + ex.getMessage());
         }
     }
 

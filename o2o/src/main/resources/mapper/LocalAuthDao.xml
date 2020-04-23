@@ -53,11 +53,12 @@
             tb_local_auth AS auth
             LEFT JOIN tb_person_info AS per ON auth.user_id = per.user_id
         WHERE
-            auth.user_name = 'tom'
-            AND auth.`password` = '123456'
+            auth.user_name = #{username}
+            AND auth.`password` = #{password}
     </select>
 
-    <insert id="insertLocalAuth" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true" parameterType="LocalAuth">
+    <insert id="insertLocalAuth" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true"
+            parameterType="LocalAuth">
         INSERT INTO tb_local_auth VALUES(NULL,#{userId},#{userName},#{password},#{createTime},#{lastEditTime});
     </insert>
 </mapper>

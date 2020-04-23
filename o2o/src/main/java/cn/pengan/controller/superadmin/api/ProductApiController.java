@@ -29,7 +29,7 @@ public class ProductApiController {
     @Autowired
     private IProductService productService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation("添加商品,默认将上传图片中的第一张图片设置为商品的缩略图")
     public Result addProduct(String productInfo, MultipartFile[] productImgs) {
         if (productImgs.length <= 0) {
@@ -111,9 +111,16 @@ public class ProductApiController {
         return result;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("通过商品id来删除商品")
-    public Result deleteProduct(@PathVariable("id") Long id){
-        return new Result();
+    public Result deleteProduct(@PathVariable("id") Long id) {
+        Result result;
+        try {
+            ProductExecution execution = productService.deleteProductById(id);
+            result = new Result(true, execution);
+        } catch (Exception ex) {
+            result = new Result(false, new ProductExecution((ProductStatusEnum.INNER_ERROR)));
+        }
+        return result;
     }
 }

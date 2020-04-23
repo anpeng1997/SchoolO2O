@@ -30,6 +30,13 @@ public class ProductExecution {
         this.productList = productList;
     }
 
+    public ProductExecution(ProductStatusEnum statusEnum, List<Product> productList, int count) {
+        this.state = statusEnum.getState();
+        this.stateInfo = statusEnum.getStateInfo();
+        this.productList = productList;
+        this.count = count;
+    }
+
     public int getState() {
         return state;
     }
