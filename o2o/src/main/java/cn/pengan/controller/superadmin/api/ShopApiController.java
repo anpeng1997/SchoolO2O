@@ -81,9 +81,7 @@ public class ShopApiController {
             result.put("success", false);
             result.put("errorMsg", "商店名不能为!");
         }
-        //TODO:从session中获取owner_id;
-        PersonInfo personInfo = new PersonInfo();
-        personInfo.setUserId(1L);
+        PersonInfo personInfo = (PersonInfo)request.getSession().getAttribute("user");
         shopEntity.setOwner(personInfo);
         ShopExecution shopExecution = null;
         try {

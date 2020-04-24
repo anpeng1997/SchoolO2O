@@ -38,6 +38,17 @@
     <bean class="cn.pengan.config.SwaggerConfig"></bean>
 
     <!--    5.权限页面拦截器 -->
+    <mvc:interceptors>
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/api/**"/>-->
+<!--            <bean class="cn.pengan.interceptors.CorsInterceptor"></bean>-->
+<!--        </mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <mvc:exclude-mapping path="/api/login"/>
+            <bean class="cn.pengan.interceptors.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--    6.文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
