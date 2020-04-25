@@ -81,7 +81,7 @@ public class ShopApiController {
             result.put("success", false);
             result.put("errorMsg", "商店名不能为!");
         }
-        PersonInfo personInfo = (PersonInfo)request.getSession().getAttribute("user");
+        PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("user");
         shopEntity.setOwner(personInfo);
         ShopExecution shopExecution = null;
         try {
@@ -152,12 +152,7 @@ public class ShopApiController {
                                             @ApiParam(value = "页面数据大小")
                                             @RequestParam(value = "pagesize", required = false) Integer pagesize, HttpServletRequest request) {
         Map<String, Object> result = new HashMap<>();
-        //该api是用来做店铺列表的展示的，所以只根据owner_id来查询
-        // TODO: 查询真实的session中user
-        PersonInfo currentUser = new PersonInfo();
-        currentUser.setUserId(1L);
-        currentUser.setName("adminTEST");
-        request.getSession().setAttribute("user", currentUser);
+        PersonInfo currentUser = (PersonInfo) request.getSession().getAttribute("user");
         Shop shopCondition = new Shop();
         shopCondition.setOwner(currentUser);
         if (pageindex == null) {

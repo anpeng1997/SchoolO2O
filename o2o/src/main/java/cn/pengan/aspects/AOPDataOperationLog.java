@@ -16,6 +16,8 @@ public class AOPDataOperationLog {
     @Around("@annotation(dataOperationLog)")
     public Object aroundLogger(ProceedingJoinPoint proceedingJoinPoint, DataOperationLog dataOperationLog) {
         Object result = null;
+        String declaringTypeName = proceedingJoinPoint.getSignature().getDeclaringTypeName();
+        String value = dataOperationLog.value();
         try {
             Object[] args = proceedingJoinPoint.getArgs();
             //before
@@ -23,12 +25,11 @@ public class AOPDataOperationLog {
             //after
         } catch (Throwable throwable) {
             // throwing
+            logger.error("【{}】：【{}】", declaringTypeName, throwable.getMessage());
             throwable.printStackTrace();
         } finally {
             //returning
         }
-        String declaringTypeName = proceedingJoinPoint.getSignature().getDeclaringTypeName();
-        String value = dataOperationLog.value();
         logger.debug("【{}】：【{}】", declaringTypeName, value);
         return result;
     }
