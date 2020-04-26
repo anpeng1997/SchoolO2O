@@ -75,7 +75,7 @@ public class ProductApiController {
             result = new Result(true, execution);
         } catch (Exception ex) {
             logger.error("【{}】中的【modifyProduct】出现错误,{}", ProductApiController.class.getName(), ex.getMessage());
-            result = new Result(false, new ProductExecution(ProductStatusEnum.INNER_ERROR));
+            result = new Result(false,ex.getMessage(),ProductStatusEnum.INNER_ERROR.getState() );
             ex.printStackTrace();
         }
         return result;
@@ -105,7 +105,7 @@ public class ProductApiController {
             result = new Result(true, execution);
         } catch (Exception ex) {
             logger.error("【{}】中的【changeProductStatus】出现错误,{}", ProductApiController.class.getName(), ex.getMessage());
-            result = new Result(false, new ProductExecution(ProductStatusEnum.INNER_ERROR));
+            result = new Result(false, ex.getMessage(), ProductStatusEnum.INNER_ERROR.getState());
             ex.printStackTrace();
         }
         return result;
@@ -119,7 +119,7 @@ public class ProductApiController {
             ProductExecution execution = productService.deleteProductById(id);
             result = new Result(true, execution);
         } catch (Exception ex) {
-            result = new Result(false, new ProductExecution((ProductStatusEnum.INNER_ERROR)));
+            result = new Result(false, ex.getMessage(), ProductStatusEnum.INNER_ERROR.getState());
         }
         return result;
     }

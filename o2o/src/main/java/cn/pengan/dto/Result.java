@@ -3,8 +3,8 @@ package cn.pengan.dto;
 public class Result<T> {
     private boolean success;
     private T data;
-    private String resultInfo;
-    private int resultCode;
+    private String errorInfo;
+    private int errorCode;
 
     public Result() {
     }
@@ -14,14 +14,14 @@ public class Result<T> {
         this.data = data;
     }
 
-    public Result(boolean success, String resultInfo) {
+    public Result(boolean success, String errorInfo) {
         this.success = success;
-        this.resultInfo = resultInfo;
+        this.errorInfo = errorInfo;
     }
-    public Result(boolean success, String resultInfo, int resultCode) {
+    public Result(boolean success, String errorInfo, int errorCode) {
         this.success = success;
-        this.resultInfo = resultInfo;
-        this.resultCode = resultCode;
+        this.errorInfo = errorInfo;
+        this.errorCode = errorCode;
     }
 
     public boolean isSuccess() {
@@ -40,19 +40,19 @@ public class Result<T> {
         this.data = data;
     }
 
-    public String getResultInfo() {
-        return resultInfo;
+    public String getErrorInfo() {
+        return errorInfo;
     }
 
-    public void setResultInfo(String resultInfo) {
-        this.resultInfo = resultInfo;
+    public void setErrorInfo(String errorInfo) {
+        this.errorInfo = errorInfo;
     }
 
-    public int getResultCode() {
-        return resultCode;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 }

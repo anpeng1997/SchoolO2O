@@ -12,9 +12,10 @@ import {
     Picker,
     TextareaItem,
     WhiteSpace,
-    WingBlank
+    WingBlank,
+    Toast
 } from "antd-mobile";
-import { Toast } from "antd-mobile";
+import { VERIFY_CODE_URL } from "../../../common/Constant";
 
 const Item = List.Item;
 
@@ -26,16 +27,14 @@ class ShopForm extends React.Component {
         this.state = {
             shopId: shopId,
             isAddImg: true,
-            verifyCodeUrl: "http://localhost:8080/Kaptcha"
+            verifyCodeUrl: VERIFY_CODE_URL
         }
     }
 
     async componentDidMount() {
-        Toast.loading('正在加载...', 0);
         //获得初始数据
         const shopId = this.props.match.params.id;
         await this.props.getInitData(shopId);
-        Toast.hide();
         if (!!this.state.shopId) {
             const shopData = await reqShopInfo(shopId);
             const form = this.props.form;
@@ -121,7 +120,7 @@ class ShopForm extends React.Component {
                         history.goBack();
                     }, 2000)
                 } else {
-                    Toast.fail(data.errorMsg)
+                    Toast.fail(data.erroInfo)
                 }
             } else {
                 console.error("vaildate Filed fail!!!");
@@ -278,7 +277,7 @@ class ShopForm extends React.Component {
                         ]
                     })}
                 >
-                    <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => { this.setState({ verifyCodeUrl: "http://localhost:8080/Kaptcha?time=" + new Date().getTime() }) }} style={{ height: 'auto', width: '100%' }}></img>
+                    <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => { this.setState({ verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime() }) }} style={{ height: 'auto', width: '100%' }}></img>
                 </InputItem>
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">

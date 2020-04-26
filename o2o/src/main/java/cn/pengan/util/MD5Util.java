@@ -2,7 +2,7 @@ package cn.pengan.util;
 
 import java.security.MessageDigest;
 
-public class MD5 {
+public class MD5Util {
 
     /**
      * 获取字符串加密后的MD5值

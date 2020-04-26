@@ -40,11 +40,11 @@ public class ProductCategoryApiController {
     @ApiOperation(value = "添加一个商品类别")
     public Result addProductCategory(@RequestBody ProductCategory productCategory) {
         if (productCategory == null || productCategory.getProductCategoryName() == null || productCategory.getShopId() == null) {
-            return new Result(false, "数据不完整", -1001);
+            return new Result(false, "商品类别信息缺失", ProductCategoryStatusEnum.INFO_MISSING.getStatus());
         }
         try {
             ProductCategoryExecution execution = productCategoryService.insertProductCategory(productCategory);
-            return new Result(true, execution.getStateInfo(), execution.getState());
+            return new Result(true, execution);
         } catch (Exception ex) {
             return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
         }
@@ -55,7 +55,7 @@ public class ProductCategoryApiController {
     public Result deleteProductCategory(@PathVariable("id") Long id) {
         try {
             ProductCategoryExecution execution = productCategoryService.deleteProductCategoryById(id);
-            return new Result(true, execution.getStateInfo(), execution.getState());
+            return new Result(true, execution);
         } catch (Exception ex) {
             return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
         }
@@ -67,7 +67,7 @@ public class ProductCategoryApiController {
     public Result editProductCategory(@RequestBody ProductCategory productCategory) {
         try {
             ProductCategoryExecution execution = productCategoryService.updateProductCategory(productCategory);
-            return new Result(true, execution.getStateInfo(), execution.getState());
+            return new Result(true, execution);
         } catch (Exception ex) {
             return new Result(false, ex.getMessage(), ProductCategoryStatusEnum.FAIL.getStatus());
         }

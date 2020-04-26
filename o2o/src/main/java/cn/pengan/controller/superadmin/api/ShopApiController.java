@@ -1,10 +1,12 @@
 package cn.pengan.controller.superadmin.api;
 
+import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Area;
 import cn.pengan.entity.PersonInfo;
 import cn.pengan.entity.Shop;
 import cn.pengan.entity.ShopCategory;
+import cn.pengan.enums.ShopStatusEnum;
 import cn.pengan.service.IAreaService;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.service.IShopService;
@@ -21,10 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @Api(value = "商铺API")
@@ -44,75 +43,55 @@ public class ShopApiController {
 
     @RequestMapping(value = "/operationinitdata", method = RequestMethod.GET)
     @ApiOperation(value = "操作商铺所需的初始数据")
-    public Map<String, Object> operationShopInitData() {
-        Map<String, Object> result = new HashMap<>();
-        try {
-            List<ShopCategory> shopCategoryList = shopCategoryService.findShopCategoryList(new ShopCategory());
-            List<Area> areaList = areaService.findAll();
-            result.put("success", true);
-            result.put("shopCategoryList", shopCategoryList);
-            result.put("areaList", areaList);
-        } catch (Exception ex) {
-            result.put("success", false);
-            result.put("errorMsg", ex.getMessage());
-        }
-        return result;
+    public Result operationShopInitData() {
+        Map<String, Object> data = new HashMap<>();
+        List<ShopCategory> shopCategoryList = shopCategoryService.findShopCategoryList(new ShopCategory());
+        List<Area> areaList = areaService.findAll();
+        data.put("shopCategoryList", shopCategoryList);
+        data.put("areaList", areaList);
+        return new Result(true, data);
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     @ApiOperation(value = "注册商铺")
-    public Map<String, Object> shopRegister(String shopInfo, HttpServletRequest request,
-                                            @RequestParam("shopImg") MultipartFile shopImg) throws JsonProcessingException {
-        Map<String, Object> result = Collections.unmodifiableMap(new HashMap<>());
+    public Result shopRegister(String shopInfo, HttpServletRequest request,
+                               @RequestParam("shopImg") MultipartFile shopImg) throws JsonProcessingException {
         boolean isVerify = CodeUtil.checkVerifyCode(request);
         if (!isVerify) {
-            result.put("success", false);
-            result.put("errorMsg", "验证码错误！");
-            return result;
+            return new Result(false, "验证码错误!", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
         if (shopImg.isEmpty()) {
-            result.put("success", false);
-            result.put("errorMsg", "商店图片不能为空！");
-            return result;
+            return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
         ObjectMapper objectMapper = new ObjectMapper();
         Shop shopEntity = objectMapper.readValue(shopInfo, Shop.class);
         if (shopEntity.getShopName() == null || "".equals(shopEntity.getShopName().trim())) {
-            result.put("success", false);
-            result.put("errorMsg", "商店名不能为!");
+            return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
+        Result result;
         PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("user");
         shopEntity.setOwner(personInfo);
-        ShopExecution shopExecution = null;
         try {
-            shopExecution = shopService.addShop(shopEntity, shopImg.getInputStream(), shopImg.getOriginalFilename());
-            result.put("success", true);
-            result.put("data", shopExecution);
-        } catch (IOException e) {
-            e.printStackTrace();
-            result.put("success", false);
-            result.put("errorMsg", "保存图片失败");
+            ShopExecution shopExecution = shopService.addShop(shopEntity, shopImg.getInputStream(), shopImg.getOriginalFilename());
+            result = new Result(true, shopExecution);
         } catch (Exception e) {
             e.printStackTrace();
-            result.put("success", false);
-            result.put("errorMsg", "服务器内部错误！");
+            result = new Result(false, e.getMessage(), ShopStatusEnum.INNER_ERROR.getState());
         }
         return result;
     }
 
     @RequestMapping(value = "/modify", method = {RequestMethod.POST})
     @ApiOperation(value = "修改商铺信息")
-    public Map<String, Object> shopModify(String shopInfo, HttpServletRequest request, MultipartFile shopImg) throws JsonProcessingException {
-        Map<String, Object> result = new HashMap<>();
+    public Result shopModify(String shopInfo, HttpServletRequest request, MultipartFile shopImg) throws JsonProcessingException {
         boolean isVerify = CodeUtil.checkVerifyCode(request);
         if (!isVerify) {
-            result.put("success", false);
-            result.put("errorMsg", "验证码错误！");
-            return result;
+            return new Result(false, "验证码错误！");
         }
         ObjectMapper objectMapper = new ObjectMapper();
         Shop shop = objectMapper.readValue(shopInfo, Shop.class);
         ShopExecution shopExecution;
+        Result result;
         try {
             if (shopImg == null) {
                 //没有上传图片
@@ -120,11 +99,9 @@ public class ShopApiController {
             } else {
                 shopExecution = shopService.modifyShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
             }
-            result.put("success", true);
-            result.put("data", shopExecution);
+            result = new Result(true, shopExecution);
         } catch (IOException e) {
-            result.put("success", false);
-            result.put("errorMsg", e.getMessage());
+            result = new Result(false, "服务器内部错误", ShopStatusEnum.INNER_ERROR.getState());
             e.printStackTrace();
         }
         return result;
@@ -132,26 +109,22 @@ public class ShopApiController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据商铺ID来获取商铺信息")
-    public Map<String, Object> getShopById(@PathVariable("id") Long id) {
+    public Result getShopById(@PathVariable("id") Long id) {
         Map<String, Object> result = new HashMap<>();
         Shop shop = shopService.findShopById(id);
         if (shop == null) {
-            result.put("success", false);
-            result.put("errorMsg", "没有查询到ID：" + id + " 的店铺");
-            return result;
+            return new Result(false, "没有查询到ID：" + id + " 的店铺");
         }
-        result.put("success", true);
-        result.put("data", shop);
-        return result;
+        return new Result(true, shop);
     }
 
     @RequestMapping(value = "/paginationshop", method = RequestMethod.GET)
     @ApiOperation(value = "分页获取商店数据", notes = "当不传入分页条件时，默认返回从0开始的100条数据")
-    public Map<String, Object> findShopList(@ApiParam(value = "页面索引")
-                                            @RequestParam(value = "pageindex", required = false) Integer pageindex,
-                                            @ApiParam(value = "页面数据大小")
-                                            @RequestParam(value = "pagesize", required = false) Integer pagesize, HttpServletRequest request) {
-        Map<String, Object> result = new HashMap<>();
+    public Result findShopList(@ApiParam(value = "页面索引")
+                               @RequestParam(value = "pageindex", required = false) Integer pageindex,
+                               @ApiParam(value = "页面数据大小")
+                               @RequestParam(value = "pagesize", required = false) Integer pagesize,
+                               HttpServletRequest request) {
         PersonInfo currentUser = (PersonInfo) request.getSession().getAttribute("user");
         Shop shopCondition = new Shop();
         shopCondition.setOwner(currentUser);
@@ -163,14 +136,9 @@ public class ShopApiController {
         }
         try {
             ShopExecution shopList = shopService.findShopList(shopCondition, pageindex, pagesize);
-            result.put("success", true);
-            result.put("data", shopList);
-            result.put("currentUser", currentUser);
+            return new Result(true, shopList);
         } catch (Exception ex) {
-            ex.printStackTrace();
-            result.put("success", false);
-            result.put("errorMsg", "查询数据错误，" + ex.getMessage());
+            return new Result(false, "查询数据错误，" + ex.getMessage(), ShopStatusEnum.INNER_ERROR.getState());
         }
-        return result;
     }
 }

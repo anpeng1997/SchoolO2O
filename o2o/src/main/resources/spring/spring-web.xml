@@ -39,10 +39,12 @@
 
     <!--    5.权限页面拦截器 -->
     <mvc:interceptors>
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/api/**"/>-->
-<!--            <bean class="cn.pengan.interceptors.CorsInterceptor"></bean>-->
-<!--        </mvc:interceptor>-->
+    <!-- cors跨域拦截器，开发阶段由于前端的Origin不确定，所以这里使用拦截器的方式，
+        实际生产环境应该使用下面的第7项，xml配置的方式，在allowed-origins上配置前端服务器的地址-->
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <bean class="cn.pengan.interceptors.CorsInterceptor"></bean>
+        </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/api/**"/>
             <mvc:exclude-mapping path="/api/login"/>
@@ -55,9 +57,14 @@
         <property name="maxUploadSize" value="5242880"></property>
     </bean>
 
-    <!--   开启cors跨越，并允许跨域保存cookie-->
-    <mvc:cors>
-        <mvc:mapping path="/**" allow-credentials="true" max-age="86400" allowed-origins="*" allowed-methods="*"
-                     allowed-headers="*"></mvc:mapping>
-    </mvc:cors>
+    <!--   7.开启cors跨越，并允许跨域保存cookie-->
+    <!--   注释看： cn.pengan.interceptors.CorsInterceptor-->
+<!--    <mvc:cors>-->
+<!--        <mvc:mapping path="/**"-->
+<!--                     allow-credentials="true"-->
+<!--                     max-age="86400"-->
+<!--                     allowed-origins="http://localhost:3000"-->
+<!--                     allowed-methods="*"-->
+<!--                     allowed-headers="*"></mvc:mapping>-->
+<!--    </mvc:cors>-->
 </beans>

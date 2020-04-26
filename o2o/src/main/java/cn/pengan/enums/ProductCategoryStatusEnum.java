@@ -6,6 +6,7 @@ import java.util.Optional;
 public enum ProductCategoryStatusEnum {
     SUCCESS(1, "Success"),
     FAIL(-1, "fail"),
+    INFO_MISSING(-1000, "fail,missing information"),
     INTERNAL_ERR(-1001, "fail,internal error"),
     NULL_SHOP_ID(-1002, "fail,shopId not is empty"),
     EMPTY_LIST(-1002, "fail,product category list not is empty");

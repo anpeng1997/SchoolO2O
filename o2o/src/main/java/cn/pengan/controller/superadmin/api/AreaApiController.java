@@ -1,5 +1,6 @@
 package cn.pengan.controller.superadmin.api;
 
+import cn.pengan.dto.Result;
 import cn.pengan.entity.Area;
 import cn.pengan.service.IAreaService;
 import io.swagger.annotations.Api;
@@ -34,18 +35,15 @@ public class AreaApiController {
 
     @ApiOperation(value = "获取所有的区域列表信息", httpMethod = "GET")
     @RequestMapping(path = "/getlist", method = {RequestMethod.GET})
-    public Map<String, Object> getAreaList(HttpServletRequest request) {
-        Map<String, Object> model = new HashMap<>();
+    public Result getAreaList(HttpServletRequest request) {
+        Map<String, Object> data = new HashMap<>();
         try {
             List<Area> areas = areaService.findAll();
-            model.put("rows", areas);
-            model.put("total", areas.size());
-            model.put("success", true);
+            data.put("rows", areas);
+            data.put("total", areas.size());
+            return new Result(true, data);
         } catch (Exception e) {
-            model.put("success", false);
-            model.put("errorMsg", e.getMessage());
+            return new Result(false, e.getMessage());
         }
-        logger.info("logger info test..................");
-        return model;
     }
 }

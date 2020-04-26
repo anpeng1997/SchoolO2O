@@ -34,8 +34,13 @@ const CreateProductListAction = (data) => {
 
 //在action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
 export const getShopListAction = () => {
+    console.log("getShopListAction")
     return async (dispatch) => {
         const response = await reqShopList();
+        if (!response.success) {
+            console.error(response);
+            Toast.error("商店列表获取失败", 2);
+        }
         dispatch(createShopListAction(response.data.shopList));
     }
 }
@@ -46,18 +51,20 @@ export const getShopOperationInitDataAction = () => {
         let areaArray = [];
         const initData = await reqShopOperationInitData();
         if (initData.success) {
-            initData.shopCategoryList.map(function (item, index) {
+            initData.data.shopCategoryList.map(function (item, index) {
                 shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
                 return index;
             });
-            initData.areaList.map((item, index) => {
+            initData.data.areaList.map((item, index) => {
                 areaArray.push({ value: item.areaId, label: item.areaName });
                 return index;
-            })
+            });
+            dispatch(createShopOperationInitDataAction(shopCategoryArray, areaArray));
         } else {
-            Toast.fail("列表数据加载失败," + initData.errorMsg, 2);
+            console.error(initData);
+            Toast.fail("列表数据加载失败", 2);
         }
-        dispatch(createShopOperationInitDataAction(shopCategoryArray, areaArray));
+
     }
 }
 
@@ -67,7 +74,8 @@ export const getProductCategoryListAction = (shopId) => {
         if (response.success) {
             dispatch(createProductCategoryListAction(response.data));
         } else {
-            Toast.fail(response.errorMsg);
+            console.error(response);
+            Toast.fail("商品类别列表加载失败", 2);
         }
     }
 }
@@ -77,8 +85,9 @@ export const getProductListAction = (shopId, pageIndex = null, pageSize = null) 
         const response = await reqProductList(shopId, pageIndex, pageSize)
         if (response.success) {
             dispatch(CreateProductListAction(response.data.productList))
-        }else{
-            console.warn("reqProductList is false",response)
+        } else {
+            console.error(response)
+            Toast.fail("商品列表加载失败", 2);
         }
     }
 }

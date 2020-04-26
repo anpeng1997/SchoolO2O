@@ -20,6 +20,22 @@
 export default withRouter(**);
 ```
 
+### react非组件处理路由跳转
+
+>react组件中的跳转有Redirect, Link, withRouter高阶组件包裹跳转等等,但是对于非组件中,如请求接口统一封装调用后的判断跳转, 这时需要创建history对象,调用对应方法跳转, 具体如下:
+
+```npm
+npm i history --save
+```
+
+```jsx
+import { createHashHistory } from 'history'; // hash路由
+// 或者
+import { createBrowserHistory } from 'history'; // history路由
+const history = createHashHistory();
+history.push('/');
+```
+
 ### `prompt`
 
 * 在离开本页面时，发出提示信息

@@ -14,7 +14,7 @@ class Login extends React.Component {
             if (!error) {
                 const response = await reqLogin({ userName, password });
                 if (response.success) {
-                    Toast.success(response.resultInfo, 2);
+                    Toast.success("登录成功", 2);
                     setTimeout(() => {
                         history.push({
                             pathname: "/shop/shoplist"

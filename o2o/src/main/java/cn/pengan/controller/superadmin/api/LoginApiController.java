@@ -6,7 +6,6 @@ import cn.pengan.entity.PersonInfo;
 import cn.pengan.service.ILocalAuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +39,6 @@ public class LoginApiController {
             return new Result(false, "当前登录用户不是管理员");
         }
         servletRequest.getSession().setAttribute("user", personInfo);
-        return new Result(true, "登录成功");
+        return new Result(true, personInfo);
     }
 }
