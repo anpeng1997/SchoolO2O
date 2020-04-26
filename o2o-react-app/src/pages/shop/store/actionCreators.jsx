@@ -35,9 +35,7 @@ const CreateProductListAction = (data) => {
 //在action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
 export const getShopListAction = () => {
     return async (dispatch) => {
-        Toast.loading("正在加载....", 0);
         const response = await reqShopList();
-        Toast.hide();
         dispatch(createShopListAction(response.data.shopList));
     }
 }
@@ -47,7 +45,6 @@ export const getShopOperationInitDataAction = () => {
         let shopCategoryArray = [];
         let areaArray = [];
         const initData = await reqShopOperationInitData();
-        Toast.hide();
         if (initData.success) {
             initData.shopCategoryList.map(function (item, index) {
                 shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
@@ -58,7 +55,6 @@ export const getShopOperationInitDataAction = () => {
                 return index;
             })
         } else {
-            console.error(initData)
             Toast.fail("列表数据加载失败," + initData.errorMsg, 2);
         }
         dispatch(createShopOperationInitDataAction(shopCategoryArray, areaArray));
@@ -67,9 +63,7 @@ export const getShopOperationInitDataAction = () => {
 
 export const getProductCategoryListAction = (shopId) => {
     return async (dispatch) => {
-        Toast.loading('正在加载...', 0);
         const response = await reqProductCategoryList(shopId);
-        Toast.hide();
         if (response.success) {
             dispatch(createProductCategoryListAction(response.data));
         } else {

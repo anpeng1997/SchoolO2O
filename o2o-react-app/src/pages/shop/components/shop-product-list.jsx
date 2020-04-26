@@ -2,7 +2,7 @@ import React from "react";
 import { Button, List, WingBlank, Modal, WhiteSpace, Toast } from "antd-mobile";
 import { connect } from "react-redux";
 import { getProductListAction } from "../store/actionCreators";
-import { reqChangeStatus } from "../../../api/shopAPI";
+import { reqChangeStatus,reqDeleteProduct } from "../../../api/shopAPI";
 import ThumbImg from "./thumbImg";
 
 const Item = List.Item;
@@ -29,11 +29,11 @@ class ShopProductList extends React.PureComponent {
 
     changeStatus = async (productId) => {
         const response = await reqChangeStatus(productId);
-        if(response.success){
+        if (response.success) {
             this.getProductList();
-            Toast.success("操作成功！",2);
-        }else{
-            Toast.fail(response.data.stateInfo,2);
+            Toast.success("操作成功！", 2);
+        } else {
+            Toast.fail(response.data.stateInfo, 2);
         }
     }
 
@@ -48,7 +48,22 @@ class ShopProductList extends React.PureComponent {
                         return <Item key={index} thumb={<ThumbImg src={item.imgAddr} alt={item.productDesc}></ThumbImg>} align="top" multipleLine
                             extra={
                                 <div>
-                                    <Button type="warning" size="small" onClick={() => { }} >删除</Button>
+                                    <Button type="warning" size="small" onClick={() =>
+                                        alert('Delete', 'confirm delete?', [
+                                            { text: 'Cancel', onPress: () => console.log('cancel') },
+                                            {
+                                                text: 'Ok',
+                                                onPress: () =>
+                                                    new Promise(async (resolve) => {
+                                                        const response = await reqDeleteProduct(item.productId)
+                                                        if(response.success){
+                                                            Toast.info("操作成功", 2);
+                                                            setTimeout(this.getProductList, 2000);
+                                                        }
+                                                        resolve();
+                                                    }),
+                                            },
+                                        ])} >删除</Button>
                                     <WhiteSpace size="md"></WhiteSpace>
                                     <Button type="primary" size="small" onClick={() => history.push(`/shop/productoperation/${shopId}/${item.productId}`)} >编辑</Button>
                                     <WhiteSpace size="md"></WhiteSpace>
