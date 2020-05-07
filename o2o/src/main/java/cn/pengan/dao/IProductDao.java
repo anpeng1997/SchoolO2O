@@ -17,4 +17,6 @@ public interface IProductDao {
     int findProductCount(Long shopId);
 
     int deleteProduct(Long productId);
+
+    int updateProductCategoryToNull(Long productCategoryId);
 }

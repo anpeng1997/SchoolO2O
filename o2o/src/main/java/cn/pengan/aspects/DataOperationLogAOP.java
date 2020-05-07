@@ -39,13 +39,13 @@ public class DataOperationLogAOP {
 //            Object[] args = proceedingJoinPoint.getArgs();
 //            //before
 //            result = proceedingJoinPoint.proceed(args);
-//            //after
+//            //AfterReturning
 //        } catch (Throwable throwable) {
 //            // throwing
 //            logger.error("【{}】：【{}】", declaringTypeName, throwable.getMessage());
 //            throwable.printStackTrace();
 //        } finally {
-//            //returning
+//            //After
 //        }
 //        logger.debug("【{}】：【{}】", declaringTypeName, value);
 //        return result;

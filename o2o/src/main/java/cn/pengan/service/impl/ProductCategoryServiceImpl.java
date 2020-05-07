@@ -1,13 +1,16 @@
 package cn.pengan.service.impl;
 
 import cn.pengan.dao.IProductCategoryDao;
+import cn.pengan.dao.IProductDao;
 import cn.pengan.dto.ProductCategoryExecution;
 import cn.pengan.entity.ProductCategory;
 import cn.pengan.enums.ProductCategoryStatusEnum;
 import cn.pengan.exceptions.ProductCategoryOperationException;
 import cn.pengan.service.IProductCategoryService;
+import cn.pengan.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -16,9 +19,11 @@ import java.util.List;
 public class ProductCategoryServiceImpl implements IProductCategoryService {
 
     private final IProductCategoryDao productCategoryDao;
+    private final IProductDao productDao;
 
-    public ProductCategoryServiceImpl(IProductCategoryDao productCategoryDao) {
+    public ProductCategoryServiceImpl(IProductCategoryDao productCategoryDao, IProductDao productDao) {
         this.productCategoryDao = productCategoryDao;
+        this.productDao = productDao;
     }
 
     @Override
@@ -33,13 +38,17 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
         return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS, productCategory);
     }
 
+    @Transactional
     @Override
     public ProductCategoryExecution deleteProductCategoryById(Long categoryId) throws ProductCategoryOperationException {
-        //TODO :商品类别下的商品的商品类别ID还要设置为空
         try {
+            int p = productDao.updateProductCategoryToNull(categoryId);
+            if (p < 0) {
+                throw new ProductCategoryOperationException("商品的商品类别更新失败");
+            }
             int i = productCategoryDao.deleteProductCategoryById(categoryId);
-            if (i <= 0) {
-                throw new ProductCategoryOperationException("商品类别删除失败！");
+            if (i < 0) {
+                throw new ProductCategoryOperationException("商品类别删除时出现异常");
             }
             return new ProductCategoryExecution(ProductCategoryStatusEnum.SUCCESS);
         } catch (Exception ex) {

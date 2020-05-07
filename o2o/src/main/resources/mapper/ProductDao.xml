@@ -111,4 +111,11 @@
         DELETE FROM tb_product
         WHERE product_id = #{productId};
     </delete>
+
+    <update id="updateProductCategoryToNull" parameterType="long">
+        UPDATE tb_product
+        SET product_category_id = NULL
+        WHERE product_category_id = #{productCategoryId}
+    </update>
+
 </mapper>
