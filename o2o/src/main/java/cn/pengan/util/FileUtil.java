@@ -39,6 +39,10 @@ public class FileUtil {
         return "/images/item/product/" + productId + "/";
     }
 
+    public static String getShopCategoryImgPath(long shopCategoryId) {
+        return "/images/item/shopCategory/" + shopCategoryId + "/";
+    }
+
     /*
      * 获取一个随机的文件名
      * */

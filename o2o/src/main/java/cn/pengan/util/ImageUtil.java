@@ -3,8 +3,11 @@ package cn.pengan.util;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ImageUtil {
 
@@ -21,10 +24,10 @@ public class ImageUtil {
         String randomFileName = FileUtil.getRandomFileName();
         String suffix = getFileSuffix(fileName);
         mkdirFolder(basePath + targetAddr);
-        String relativeAddr = targetAddr + randomFileName + suffix;
-        File thumbnailFile = new File(basePath + relativeAddr);
+        String relativePath = targetAddr + randomFileName + suffix;
+        File thumbnailFile = new File(basePath + relativePath);
         Thumbnails.of(fileInputStream).size(200, 200).outputQuality(0.5f).toFile(thumbnailFile);
-        return relativeAddr;
+        return relativePath;
     }
 
     /**
@@ -44,6 +47,21 @@ public class ImageUtil {
     public static String saveProductImg(long productId, InputStream inputStream, String fileName) throws IOException {
         String relativePath = FileUtil.getProductImgPath(productId);
         return generateThumbnail(inputStream, relativePath, fileName);
+    }
+
+    public static String saveShopCategoryImg(long shopCategoryId, InputStream fileInputStream, String fileName) throws IOException {
+        String basePath = FileUtil.getImgBasePath();
+        String targetPath = FileUtil.getShopCategoryImgPath(shopCategoryId);
+        //检查是否存在文件夹
+        mkdirFolder(basePath + targetPath);
+        String randomFileName = FileUtil.getRandomFileName();
+        String suffix = getFileSuffix(fileName);
+        String relativePath = targetPath + randomFileName + suffix;
+        String allPath = basePath + relativePath;
+        //使用的是jdk 1.8中的nio操作
+        Files.copy(fileInputStream, Paths.get(allPath));
+        new File(allPath);
+        return relativePath;
     }
 
     /**

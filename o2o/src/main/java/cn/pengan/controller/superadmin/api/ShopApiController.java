@@ -1,6 +1,7 @@
 package cn.pengan.controller.superadmin.api;
 
 import cn.pengan.dto.Result;
+import cn.pengan.dto.ShopCategoryExecution;
 import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Area;
 import cn.pengan.entity.PersonInfo;
@@ -45,9 +46,9 @@ public class ShopApiController {
     @ApiOperation(value = "操作商铺所需的初始数据")
     public Result operationShopInitData() {
         Map<String, Object> data = new HashMap<>();
-        List<ShopCategory> shopCategoryList = shopCategoryService.findShopCategoryList(new ShopCategory());
+        ShopCategoryExecution execution = shopCategoryService.findShopCategoryList(new ShopCategory());
         List<Area> areaList = areaService.findAll();
-        data.put("shopCategoryList", shopCategoryList);
+        data.put("shopCategoryList", execution.getShopCategoryList());
         data.put("areaList", areaList);
         return new Result(true, data);
     }
