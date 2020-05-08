@@ -5,5 +5,7 @@ import cn.pengan.entity.ShopCategory;
 import java.util.List;
 
 public interface IShopCategoryDao {
-    public List<ShopCategory> findShopCategoryList(ShopCategory category);
+    List<ShopCategory> findShopCategoryList(ShopCategory category);
+    int findCount(ShopCategory category);
+    int insertShopCategory(ShopCategory shopCategory);
 }

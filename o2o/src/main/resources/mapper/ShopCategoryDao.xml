@@ -11,9 +11,31 @@
                 parent_id = #{parentId}
             </if>
             <if test="parentId == null">
-                parent_id is null
+               AND parent_id is null
+            </if>
+            <if test="shopCategoryName != null">
+               AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
             </if>
         </where>
         order by priority desc
+    </select>
+    <insert id="insertShopCategory" parameterType="ShopCategory" useGeneratedKeys="true" keyProperty="shopCategoryId">
+        INSERT INTO tb_shop_category
+        VALUES
+        (NULL,#{shopCategoryName},#{shopCategoryDesc},#{shopCategoryImg},#{priority},#{createTime},#{lastEditTime},#{parentId});
+    </insert>
+    <select id="findCount" parameterType="ShopCategory">
+        SELECT COUNT(*) FROM tb_shop_category
+        <where>
+            <if test="parentId != null">
+                parent_id = #{parentId}
+            </if>
+            <if test="parentId == null">
+                AND parent_id is null
+            </if>
+            <if test="shopCategoryName != null">
+                AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
+            </if>
+        </where>
     </select>
 </mapper>

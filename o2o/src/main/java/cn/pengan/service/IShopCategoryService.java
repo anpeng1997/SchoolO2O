@@ -1,9 +1,12 @@
 package cn.pengan.service;
 
+import cn.pengan.dto.ShopCategoryExecution;
 import cn.pengan.entity.ShopCategory;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface IShopCategoryService {
-    public List<ShopCategory> findShopCategoryList(ShopCategory shopCategory);
+    ShopCategoryExecution findShopCategoryList(ShopCategory shopCategory);
+    ShopCategoryExecution insertShopCategory(ShopCategory shopCategory, InputStream categoryImgInput,String fileName);
 }
