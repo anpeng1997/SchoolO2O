@@ -26,7 +26,7 @@
         (NULL,#{shopCategoryName},#{shopCategoryDesc},#{shopCategoryImg},#{priority},#{createTime},#{lastEditTime},#{parentId});
     </insert>
 
-    <select id="findCount" parameterType="ShopCategory">
+    <select id="findCount" resultType="int" parameterType="ShopCategory">
         SELECT COUNT(*) FROM tb_shop_category
         <where>
             <if test="parentId != null">

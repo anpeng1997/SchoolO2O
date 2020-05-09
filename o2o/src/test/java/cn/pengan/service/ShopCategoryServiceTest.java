@@ -1,8 +1,12 @@
 package cn.pengan.service;
 
 import cn.pengan.BaseTest;
+import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopCategoryExecution;
+import cn.pengan.entity.LocalAuth;
 import cn.pengan.entity.ShopCategory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,6 @@ public class ShopCategoryServiceTest extends BaseTest {
 
     @Test
     public void insertShopCategoryTest() throws FileNotFoundException {
-        //TODO: 测试完成service,还待完成 shopCategory API controller
         File file = new File("C:\\Users\\pengan\\Pictures\\Saved Pictures\\17-1Z613113243C8.png");
         String name = file.getName();
         ShopCategory shopCategory = new ShopCategory();
@@ -38,5 +41,4 @@ public class ShopCategoryServiceTest extends BaseTest {
         ShopCategoryExecution shopCategoryExecution = shopCategoryService.insertShopCategory(shopCategory, fileInputStream, name);
         System.out.println(shopCategoryExecution);
     }
-
 }

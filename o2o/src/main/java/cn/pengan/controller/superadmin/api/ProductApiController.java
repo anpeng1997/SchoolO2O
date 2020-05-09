@@ -26,8 +26,13 @@ public class ProductApiController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductApiController.class);
 
-    @Autowired
-    private IProductService productService;
+    private final IProductService productService;
+    private final ObjectMapper objectMapper;
+
+    public ProductApiController(IProductService productService, ObjectMapper objectMapper) {
+        this.productService = productService;
+        this.objectMapper = objectMapper;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation("添加商品,默认将上传图片中的第一张图片设置为商品的缩略图")
@@ -35,7 +40,6 @@ public class ProductApiController {
         if (productImgs.length <= 0) {
             return new Result(false, new ProductExecution(ProductStatusEnum.IMAGE_EMPTY));
         }
-        ObjectMapper objectMapper = new ObjectMapper();
         Result result;
         try {
             Product product = objectMapper.readValue(productInfo, Product.class);
@@ -64,7 +68,6 @@ public class ProductApiController {
     @ApiOperation("修改商品信息")
     public Result modifyProduct(String productInfo, MultipartFile[] productImgs) {
         Result result;
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             Map<String, InputStream> imgMap = new LinkedHashMap<>();
             Product product = objectMapper.readValue(productInfo, Product.class);
@@ -75,7 +78,7 @@ public class ProductApiController {
             result = new Result(true, execution);
         } catch (Exception ex) {
             logger.error("【{}】中的【modifyProduct】出现错误,{}", ProductApiController.class.getName(), ex.getMessage());
-            result = new Result(false,ex.getMessage(),ProductStatusEnum.INNER_ERROR.getState() );
+            result = new Result(false, ex.getMessage(), ProductStatusEnum.INNER_ERROR.getState());
             ex.printStackTrace();
         }
         return result;

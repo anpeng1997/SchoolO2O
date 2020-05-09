@@ -18,9 +18,11 @@
     <!-- 单独将AOPDataOperationLog切面类交由IOC容器管理，因为上面只配置了自动扫描server包下的类，
     当然我们也可以配置它自动扫描
     -->
-    <bean id="DataOperationLogAOP" class="cn.pengan.aspects.DataOperationLogAOP"></bean>
+    <bean id="dataOperationLogAOP" class="cn.pengan.aspects.DataOperationLogAOP"></bean>
     <bean id="globalExceptionLog" class="cn.pengan.aspects.GlobalExceptionLog"></bean>
 
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
     <!-- 启动AspectJ支持
         AspectJ:解析切面表达式
         -->

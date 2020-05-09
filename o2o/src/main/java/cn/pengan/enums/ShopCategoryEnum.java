@@ -6,7 +6,8 @@ import java.util.Optional;
 public enum ShopCategoryEnum {
     SUCCESS(1, "操作成功"),
     FAIL(-1, "操作失败"),
-    INNER_ERROR(-1001, "内部错误");
+    INNER_ERROR(-1001, "内部错误"),
+    DATE_ERROR(-1002,"数据错误");
 
     private int state;
     private String stateInfo;

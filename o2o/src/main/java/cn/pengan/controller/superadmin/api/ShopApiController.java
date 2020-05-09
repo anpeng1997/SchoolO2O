@@ -33,13 +33,15 @@ public class ShopApiController {
     private final IShopService shopService;
     private final IShopCategoryService shopCategoryService;
     private final IAreaService areaService;
+    private final ObjectMapper objectMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(ShopApiController.class);
 
-    public ShopApiController(IShopService shopService, IShopCategoryService shopCategoryService, IAreaService areaService) {
+    public ShopApiController(IShopService shopService, IShopCategoryService shopCategoryService, IAreaService areaService,ObjectMapper objectMapper) {
         this.shopService = shopService;
         this.shopCategoryService = shopCategoryService;
         this.areaService = areaService;
+        this.objectMapper = objectMapper;
     }
 
     @RequestMapping(value = "/operationinitdata", method = RequestMethod.GET)
@@ -64,7 +66,6 @@ public class ShopApiController {
         if (shopImg.isEmpty()) {
             return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
-        ObjectMapper objectMapper = new ObjectMapper();
         Shop shopEntity = objectMapper.readValue(shopInfo, Shop.class);
         if (shopEntity.getShopName() == null || "".equals(shopEntity.getShopName().trim())) {
             return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
@@ -89,7 +90,6 @@ public class ShopApiController {
         if (!isVerify) {
             return new Result(false, "验证码错误！");
         }
-        ObjectMapper objectMapper = new ObjectMapper();
         Shop shop = objectMapper.readValue(shopInfo, Shop.class);
         ShopExecution shopExecution;
         Result result;

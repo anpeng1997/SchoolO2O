@@ -7,7 +7,6 @@ class Login extends React.Component {
 
 
     onSubmitData = () => {
-
         const { form, history } = this.props;
         const { userName, password } = form.getFieldsValue();
         form.validateFields(async (error) => {
@@ -21,7 +20,7 @@ class Login extends React.Component {
                         })
                     }, 2000)
                 } else {
-                    Toast.fail(response.resultInfo, 2)
+                    Toast.fail(response.errorInfo, 2)
                 }
             }
         })

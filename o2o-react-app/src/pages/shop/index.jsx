@@ -9,6 +9,7 @@ import ProductCategoryList from "./components/shop-product-category-list";
 import ProductCategoryForm from "./components/shop-product-category-form";
 import ProductList from "./components/shop-product-list";
 import ProductForm from "./components/shop-product-form";
+import ShopCategoryForm from "./components/shop-category-form";
 
 class ShopIndex extends React.Component {
 
@@ -31,6 +32,7 @@ class ShopIndex extends React.Component {
                 <Route path="/shop/productcategoryoperation/:sid/:cid?" exact component={ProductCategoryForm}></Route>
                 <Route path="/shop/product/:id" exact component={ProductList}></Route>
                 <Route path="/shop/productoperation/:sid/:pid?" exact component={ProductForm}></Route>
+                <Route path="/shop/shopcategory/:id?" exact component={ShopCategoryForm}></Route>
                 <Route component={ShopList}></Route>
             </Switch>
         </React.Fragment>

@@ -61,6 +61,15 @@ export const reqProductList = (shopId, pageIndex, pageSize) => {
 
 export const reqProduct = (productId) => axiosRequest(`/api/product/${productId}`);
 
-export const reqChangeStatus = (productId) => axiosRequest(`/api/product/status/${productId}`,{},"PUT")
+export const reqChangeStatus = (productId) => axiosRequest(`/api/product/status/${productId}`, {}, "PUT")
 
-export const reqDeleteProduct = (productId) => axiosRequest(`/api/product/${productId}`,{},"DELETE")
+export const reqDeleteProduct = (productId) => axiosRequest(`/api/product/${productId}`, {}, "DELETE")
+
+export const reqAddOrModifyShopCategory = (type, data) => {
+    let url = "/api/shopcategory";
+    if (type === "modify") {
+        //TODO: 修改api
+        url = ""
+    }
+    return axiosRequest(url, data, "POST");
+};
