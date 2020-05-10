@@ -6,15 +6,14 @@ import cn.pengan.entity.ShopCategory;
 import cn.pengan.enums.ShopCategoryEnum;
 import cn.pengan.service.IShopCategoryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.ws.Service;
 import java.io.IOException;
 
 @RestController
@@ -33,7 +32,7 @@ public class ShopCategoryApiController {
     @PostMapping("")
     @ApiOperation("添加一个商品类别")
     public Result addShopCategory(String categoryInfo, MultipartFile imgFile) {
-        if (categoryInfo == null){
+        if (categoryInfo == null) {
             return new Result(false, "商品类别数据不能为空", ShopCategoryEnum.DATE_ERROR.getState());
         }
         if (imgFile == null) {
@@ -55,4 +54,35 @@ public class ShopCategoryApiController {
         }
     }
     //TODO: 查询单个类别及修改类别API
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据ID查询商店类别")
+    public Result getShopCategory(@PathVariable("id") Long id) {
+        ShopCategory shopCategory = shopCategoryService.findShopCategoryById(id);
+        if (shopCategory == null) {
+            return new Result(false, "没有找到ID为：" + id + "的类别");
+        }
+        return new Result(true, shopCategory);
+    }
+
+    @PostMapping("/modify")
+    @ApiOperation("修改商店类别")
+    public Result modifyShopCategory(String categoryInfo, MultipartFile imgFile) {
+        try {
+            ShopCategory shopCategory = objectMapper.readValue(categoryInfo, ShopCategory.class);
+            ShopCategoryExecution execution = null;
+            if (imgFile == null) {
+                execution = shopCategoryService.updateShopCategory(shopCategory, null, null);
+            } else {
+                execution = shopCategoryService.updateShopCategory(shopCategory, imgFile.getInputStream(), imgFile.getOriginalFilename());
+            }
+            return new Result(true, execution);
+        } catch (JsonMappingException jsonMappingException) {
+            jsonMappingException.printStackTrace();
+            return new Result(false, "提交的数据有误，" + jsonMappingException.getMessage(), ShopCategoryEnum.INNER_ERROR.getState());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "更新数据失败，" + e.getMessage(), ShopCategoryEnum.INNER_ERROR.getState());
+        }
+    }
 }

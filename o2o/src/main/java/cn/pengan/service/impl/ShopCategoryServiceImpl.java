@@ -27,6 +27,43 @@ public class ShopCategoryServiceImpl implements IShopCategoryService {
     }
 
     @Override
+    public ShopCategory findShopCategoryById(Long shopCategoryId) {
+        return shopCategoryDao.findShopCategoryById(shopCategoryId);
+    }
+
+    @Override
+    public ShopCategoryExecution updateShopCategory(ShopCategory shopCategory, InputStream inputStream, String fileName) {
+        if (shopCategory == null) {
+            return new ShopCategoryExecution(ShopCategoryEnum.DATE_ERROR);
+        }
+        try {
+            //先判断是否上传了新的图片
+            if (inputStream != null && fileName != null) {
+                //上传了新的图片,先根据id查找旧的category
+                ShopCategory oldShopCategory = shopCategoryDao.findShopCategoryById(shopCategory.getShopCategoryId());
+                if (oldShopCategory == null) {
+                    return new ShopCategoryExecution(ShopCategoryEnum.DATE_EMPTY);
+                }
+                //删除原有的图片
+                String oldImgPath = oldShopCategory.getShopCategoryImg();
+                FileUtil.deleteFileOrDirectory(oldImgPath);
+                //保存当前的上传的图片,并获得新图片的相对路径
+                String relativePath = ImageUtil.saveShopCategoryImg(oldShopCategory.getShopCategoryId(), inputStream, fileName);
+                shopCategory.setShopCategoryImg(relativePath);
+            }
+            shopCategory.setLastEditTime(new Date());
+            int affectedNum = shopCategoryDao.updateShopCategory(shopCategory);
+            if (affectedNum <= 0) {
+                return new ShopCategoryExecution(ShopCategoryEnum.FAIL);
+            }
+            return new ShopCategoryExecution(ShopCategoryEnum.SUCCESS, shopCategory);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ShopCategoryOperationException("modify shop category error," + ex.getMessage());
+        }
+    }
+
+    @Override
     public ShopCategoryExecution findShopCategoryList(ShopCategory shopCategory) {
         List<ShopCategory> shopCategoryList = shopCategoryDao.findShopCategoryList(shopCategory);
         int count = shopCategoryDao.findCount(shopCategory);

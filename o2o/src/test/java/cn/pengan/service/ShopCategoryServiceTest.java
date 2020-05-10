@@ -41,4 +41,18 @@ public class ShopCategoryServiceTest extends BaseTest {
         ShopCategoryExecution shopCategoryExecution = shopCategoryService.insertShopCategory(shopCategory, fileInputStream, name);
         System.out.println(shopCategoryExecution);
     }
+
+    @Test
+    public void updateShopCategoryTest() throws FileNotFoundException {
+        File file = new File("C:\\Users\\pengan\\Pictures\\Saved Pictures\\下载 (1).jpg");
+        String name = file.getName();
+        ShopCategory shopCategory = new ShopCategory();
+        shopCategory.setShopCategoryId(5L);
+        shopCategory.setShopCategoryName("test category123123");
+        shopCategory.setShopCategoryDesc("test desc123123");
+        shopCategory.setPriority(1);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ShopCategoryExecution execution = shopCategoryService.updateShopCategory(shopCategory, fileInputStream, name);
+        System.out.println(execution);
+    }
 }

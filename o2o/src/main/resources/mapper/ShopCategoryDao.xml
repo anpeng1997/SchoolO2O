@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pengan.dao.IShopCategoryDao">
+    <select id="findShopCategoryById" parameterType="Long" resultType="ShopCategory">
+        SELECT * FROM tb_shop_category
+        WHERE shop_category_id = #{shopCategoryId}
+    </select>
+
     <select id="findShopCategoryList" parameterType="ShopCategory" resultType="ShopCategory">
         select * from tb_shop_category
         <where>
