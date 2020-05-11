@@ -19,6 +19,8 @@ gen
 # Log file
 *.log
 
+/catalina.base_IS_UNDEFINED
+
 # BlueJ files
 *.ctxt
 
