@@ -9,7 +9,6 @@ import cn.pengan.exceptions.ShopCategoryOperationException;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.util.FileUtil;
 import cn.pengan.util.ImageUtil;
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("shopCategoryService")
 public class ShopCategoryServiceImpl implements IShopCategoryService {
 
     private final IShopCategoryDao shopCategoryDao;

@@ -4,8 +4,10 @@ import cn.pengan.dto.Result;
 import cn.pengan.entity.LocalAuth;
 import cn.pengan.entity.PersonInfo;
 import cn.pengan.service.ILocalAuthService;
+import cn.pengan.service.ITokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginApiController {
 
     private final ILocalAuthService localAuthService;
+    private final ITokenService tokenService;
 
-    public LoginApiController(ILocalAuthService localAuthService) {
+    public LoginApiController(ILocalAuthService localAuthService, ITokenService tokenService) {
         this.localAuthService = localAuthService;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("")
@@ -38,7 +42,14 @@ public class LoginApiController {
         if (personInfo.getAdminFlag() != 1) {
             return new Result(false, "当前登录用户不是管理员");
         }
-        servletRequest.getSession().setAttribute("user", personInfo);
-        return new Result(true, personInfo);
+        //servletRequest.getSession().setAttribute("user", personInfo);
+        String token = tokenService.generateAuthenticateToken(personInfo);
+        if (StringUtils.isEmpty(token)) {
+            return new Result(false, "登录失败，获取token为null");
+        }
+        Result result = new Result();
+        result.setSuccess(true);
+        result.setData(token);
+        return result;
     }
 }

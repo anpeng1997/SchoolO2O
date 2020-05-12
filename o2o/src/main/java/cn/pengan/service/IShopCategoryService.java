@@ -4,7 +4,6 @@ import cn.pengan.dto.ShopCategoryExecution;
 import cn.pengan.entity.ShopCategory;
 
 import java.io.InputStream;
-import java.util.List;
 
 public interface IShopCategoryService {
     ShopCategory findShopCategoryById(Long shopCategoryId);

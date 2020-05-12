@@ -19,6 +19,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,15 +33,20 @@ import java.util.*;
 @RequestMapping("/api/shop")
 public class ShopApiController {
     private final IShopService shopService;
-    private final IShopCategoryService shopCategoryService;
+    @Autowired
+    @Qualifier("shopCategoryService")
+    private IShopCategoryService shopcategoryservice;
     private final IAreaService areaService;
     private final ObjectMapper objectMapper;
 
     private static final Logger logger = LoggerFactory.getLogger(ShopApiController.class);
 
-    public ShopApiController(IShopService shopService, IShopCategoryService shopCategoryService, IAreaService areaService,ObjectMapper objectMapper) {
+    public ShopApiController(IShopService shopService,
+                            // IShopCategoryService shopcategoryservice,
+                             IAreaService areaService,
+                             ObjectMapper objectMapper) {
         this.shopService = shopService;
-        this.shopCategoryService = shopCategoryService;
+        //this.shopcategoryservice = shopcategoryservice;
         this.areaService = areaService;
         this.objectMapper = objectMapper;
     }
@@ -48,7 +55,7 @@ public class ShopApiController {
     @ApiOperation(value = "操作商铺所需的初始数据")
     public Result operationShopInitData() {
         Map<String, Object> data = new HashMap<>();
-        ShopCategoryExecution execution = shopCategoryService.findShopCategoryList(new ShopCategory());
+        ShopCategoryExecution execution = shopcategoryservice.findShopCategoryList(new ShopCategory());
         List<Area> areaList = areaService.findAll();
         data.put("shopCategoryList", execution.getShopCategoryList());
         data.put("areaList", areaList);

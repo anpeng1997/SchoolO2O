@@ -5,11 +5,12 @@ import { createHashHistory } from 'history';
 
 const history = createHashHistory();
 
+
 //使用create创建出来的本身就是一个promise()
 const myAxiosInstance = axios.create({
     baseURL: "http://localhost:8080",
     timeout: 10000,
-
+    // withCredentials: true
     /**
      * 【允许携带跨域cookie】
      * 一方面要服务器同意，指定Access-Control-Allow-Credentials字段，另一方面，开发者必须在AJAX请求中打开withCredentials属性
@@ -21,11 +22,21 @@ const myAxiosInstance = axios.create({
      * 
      * https://www.ruanyifeng.com/blog/2016/04/cors.html
      */
-    withCredentials: true
+
 });
+
+myAxiosInstance.defaults.headers.post['Authenticate-Token'] = localStorage.getItem("Authenticate-Token");
+// myAxiosInstance.defaults.headers.get['Authenticate-Token'] = localStorage.getItem("Authenticate-Token");
 
 myAxiosInstance.interceptors.request.use(function (config) {
     Toast.loading("Loading....", 0);
+    let token = window.localStorage.getItem("Authenticate-Token")
+    if (token) {
+        //将token放到请求头发送给服务器,将tokenkey放在请求头中
+        //也可以这种写法
+         config.headers['Authenticate-Token'] = token;
+        return config;
+    }
     return config;
 }, function (error) {
     //请求错误

@@ -1,9 +1,7 @@
 package cn.pengan.service;
 
 import cn.pengan.BaseTest;
-import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopCategoryExecution;
-import cn.pengan.entity.LocalAuth;
 import cn.pengan.entity.ShopCategory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +32,7 @@ public class ShopCategoryServiceTest extends BaseTest {
         File file = new File("C:\\Users\\pengan\\Pictures\\Saved Pictures\\17-1Z613113243C8.png");
         String name = file.getName();
         ShopCategory shopCategory = new ShopCategory();
-        shopCategory.setShopCategoryName("test category");
+        shopCategory.setShopCategoryName("test category123123");
         shopCategory.setShopCategoryDesc("test desc");
         shopCategory.setPriority(1);
         FileInputStream fileInputStream = new FileInputStream(file);

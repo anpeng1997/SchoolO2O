@@ -12,8 +12,10 @@ class Login extends React.Component {
         form.validateFields(async (error) => {
             if (!error) {
                 const response = await reqLogin({ userName, password });
+                console.log(response);
                 if (response.success) {
                     Toast.success("登录成功", 2);
+                    localStorage.setItem("Authenticate-Token",response.data);
                     setTimeout(() => {
                         history.push({
                             pathname: "/shop/shoplist"
