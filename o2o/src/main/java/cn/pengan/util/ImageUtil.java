@@ -50,8 +50,17 @@ public class ImageUtil {
     }
 
     public static String saveShopCategoryImg(long shopCategoryId, InputStream fileInputStream, String fileName) throws IOException {
-        String basePath = FileUtil.getImgBasePath();
         String targetPath = FileUtil.getShopCategoryImgPath(shopCategoryId);
+        return saveOriginSizeImg(targetPath, fileInputStream, fileName);
+    }
+
+    public static String saveHeadLineImg(long headLineId, InputStream fileInputStream, String fileName) throws IOException {
+        String targetPath = FileUtil.getHeadLinePath(headLineId);
+        return saveOriginSizeImg(targetPath, fileInputStream, fileName);
+    }
+
+    private static String saveOriginSizeImg(String targetPath, InputStream inputStream, String fileName) throws IOException {
+        String basePath = FileUtil.getImgBasePath();
         //检查是否存在文件夹
         mkdirFolder(basePath + targetPath);
         String randomFileName = FileUtil.getRandomFileName();
@@ -59,7 +68,7 @@ public class ImageUtil {
         String relativePath = targetPath + randomFileName + suffix;
         String allPath = basePath + relativePath;
         //使用的是jdk 1.8中的nio操作
-        Files.copy(fileInputStream, Paths.get(allPath));
+        Files.copy(inputStream, Paths.get(allPath));
         new File(allPath);
         return relativePath;
     }
@@ -74,9 +83,13 @@ public class ImageUtil {
         }
     }
 
+    /**
+     * 获取文件名的后缀
+     * @param fileName
+     * @return
+     */
     public static String getFileSuffix(String fileName) {
         int index = fileName.lastIndexOf(".");
-        String suffix = fileName.substring(index);
-        return suffix;
+        return fileName.substring(index);
     }
 }

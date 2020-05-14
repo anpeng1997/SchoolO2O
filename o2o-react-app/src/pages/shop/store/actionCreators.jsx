@@ -34,7 +34,6 @@ const CreateProductListAction = (data) => {
 
 //在action中之所以能做复杂的逻辑，是因为我们配置了redux-thunk中间键
 export const getShopListAction = () => {
-    console.log("getShopListAction")
     return async (dispatch) => {
         const response = await reqShopList();
         if (!response.success) {

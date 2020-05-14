@@ -56,8 +56,8 @@ class ShopCategoryForm extends React.Component {
         }
         callback();
     }
-    bac
-    k = () => {
+    
+    back = () => {
         this.props.history.goBack();
     }
 

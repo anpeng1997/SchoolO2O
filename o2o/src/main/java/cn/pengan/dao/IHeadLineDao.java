@@ -11,4 +11,6 @@ public interface IHeadLineDao {
     List<HeadLine> findHeadLineList(int size);
 
     int deleteHeadLineById(Long lineId);
+
+    int updateHeadLine(HeadLine headLine);
 }

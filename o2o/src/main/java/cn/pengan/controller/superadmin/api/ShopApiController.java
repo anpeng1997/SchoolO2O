@@ -1,5 +1,6 @@
 package cn.pengan.controller.superadmin.api;
 
+import cn.pengan.cache.JedisUtil;
 import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopCategoryExecution;
 import cn.pengan.dto.ShopExecution;
@@ -11,6 +12,7 @@ import cn.pengan.enums.ShopStatusEnum;
 import cn.pengan.service.IAreaService;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.service.IShopService;
+import cn.pengan.service.ITokenService;
 import cn.pengan.util.CodeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +21,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,29 +34,31 @@ import java.util.*;
 @RequestMapping("/api/shop")
 public class ShopApiController {
     private final IShopService shopService;
-    @Autowired
-    @Qualifier("shopCategoryService")
-    private IShopCategoryService shopcategoryservice;
+    private final IShopCategoryService shopCategoryService;
     private final IAreaService areaService;
     private final ObjectMapper objectMapper;
+    private final ITokenService tokenService;
+
 
     private static final Logger logger = LoggerFactory.getLogger(ShopApiController.class);
 
     public ShopApiController(IShopService shopService,
-                            // IShopCategoryService shopcategoryservice,
                              IAreaService areaService,
-                             ObjectMapper objectMapper) {
+                             ObjectMapper objectMapper,
+                             @Qualifier("shopCategoryService") IShopCategoryService shopCategoryService,
+                             ITokenService tokenService) {
         this.shopService = shopService;
-        //this.shopcategoryservice = shopcategoryservice;
         this.areaService = areaService;
         this.objectMapper = objectMapper;
+        this.shopCategoryService = shopCategoryService;
+        this.tokenService = tokenService;
     }
 
     @RequestMapping(value = "/operationinitdata", method = RequestMethod.GET)
     @ApiOperation(value = "操作商铺所需的初始数据")
     public Result operationShopInitData() {
         Map<String, Object> data = new HashMap<>();
-        ShopCategoryExecution execution = shopcategoryservice.findShopCategoryList(new ShopCategory());
+        ShopCategoryExecution execution = shopCategoryService.findShopCategoryList(new ShopCategory());
         List<Area> areaList = areaService.findAll();
         data.put("shopCategoryList", execution.getShopCategoryList());
         data.put("areaList", areaList);
@@ -78,14 +81,14 @@ public class ShopApiController {
             return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
         Result result;
-        PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("user");
+        PersonInfo personInfo = tokenService.getPersonByToken(request);
         shopEntity.setOwner(personInfo);
         try {
             ShopExecution shopExecution = shopService.addShop(shopEntity, shopImg.getInputStream(), shopImg.getOriginalFilename());
             result = new Result(true, shopExecution);
         } catch (Exception e) {
             e.printStackTrace();
-            result = new Result(false, e.getMessage(), ShopStatusEnum.INNER_ERROR.getState());
+            result = new Result(false, "服务器内部错误", ShopStatusEnum.INNER_ERROR.getState());
         }
         return result;
     }
@@ -133,9 +136,9 @@ public class ShopApiController {
                                @ApiParam(value = "页面数据大小")
                                @RequestParam(value = "pagesize", required = false) Integer pagesize,
                                HttpServletRequest request) {
-        PersonInfo currentUser = (PersonInfo) request.getSession().getAttribute("user");
+        PersonInfo personInfo = tokenService.getPersonByToken(request);
         Shop shopCondition = new Shop();
-        shopCondition.setOwner(currentUser);
+        shopCondition.setOwner(personInfo);
         if (pageindex == null) {
             pageindex = 0;
         }
@@ -146,7 +149,7 @@ public class ShopApiController {
             ShopExecution shopList = shopService.findShopList(shopCondition, pageindex, pagesize);
             return new Result(true, shopList);
         } catch (Exception ex) {
-            return new Result(false, "查询数据错误，" + ex.getMessage(), ShopStatusEnum.INNER_ERROR.getState());
+            return new Result(false, "查询数据错误", ShopStatusEnum.INNER_ERROR.getState());
         }
     }
 }

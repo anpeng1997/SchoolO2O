@@ -19,7 +19,7 @@
 
     <!--   2. 静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
     <mvc:resources mapping="/static/**" location="/static/"></mvc:resources>
-    <!--    配置映射路径展示服务器上upload的文件,使用linux服务器时，应该修改它-->
+    <!--    配置映射路径，展示服务器上upload的文件,使用linux服务器时，应该修改它-->
     <mvc:resources mapping="/${upload.file.mapping}/**" location="file:${upload.file.local.path}/"></mvc:resources>
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 

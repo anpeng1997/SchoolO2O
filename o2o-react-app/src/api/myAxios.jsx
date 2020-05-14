@@ -25,20 +25,18 @@ const myAxiosInstance = axios.create({
 
 });
 
-myAxiosInstance.defaults.headers.post['Authenticate-Token'] = localStorage.getItem("Authenticate-Token");
-// myAxiosInstance.defaults.headers.get['Authenticate-Token'] = localStorage.getItem("Authenticate-Token");
 
 myAxiosInstance.interceptors.request.use(function (config) {
     Toast.loading("Loading....", 0);
     let token = window.localStorage.getItem("Authenticate-Token")
     if (token) {
         //将token放到请求头发送给服务器,将tokenkey放在请求头中
-        //也可以这种写法
-         config.headers['Authenticate-Token'] = token;
+        config.headers['Authenticate-Token'] = token;
         return config;
     }
     return config;
 }, function (error) {
+    console.log(error)
     //请求错误
 })
 
@@ -47,9 +45,13 @@ myAxiosInstance.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     Toast.hide();
-    if (error.response.status === 401) {
-        console.log(error.response.status)
-        history.push("/login");
+    try {
+        if (error.response.status === 401) {
+            history.push("/login");
+        }
+    } catch (ex) {
+        console.log(ex);
+        Toast.fail("网络错误...", 2);
     }
     return Promise.reject(error);
 })
@@ -58,7 +60,6 @@ export function axiosRequest(url, data = {}, method = 'GET', headers = {}) {
 
     return new Promise((resovle, reject) => {
         let promise;
-
         switch (method) {
             case "GET":
                 promise = myAxiosInstance.get(url, {

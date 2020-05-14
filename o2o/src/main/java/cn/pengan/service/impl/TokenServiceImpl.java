@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 @Service
 public class TokenServiceImpl implements ITokenService {
+
+    private final String HEADER_TOKEN_KEY = "Authenticate-Token";
 
     @Value("${redis.user.session.key}")
     private String REDIS_SESSION_KEY;
@@ -24,9 +27,12 @@ public class TokenServiceImpl implements ITokenService {
 
     private final JedisUtil.Strings jedisString;
 
-    public TokenServiceImpl(ObjectMapper objectMapper, JedisUtil.Strings jedisString) {
+    private final JedisUtil jedisUtil;
+
+    public TokenServiceImpl(ObjectMapper objectMapper, JedisUtil.Strings jedisString, JedisUtil jedisUtil) {
         this.objectMapper = objectMapper;
         this.jedisString = jedisString;
+        this.jedisUtil = jedisUtil;
     }
 
     @Override
@@ -50,7 +56,8 @@ public class TokenServiceImpl implements ITokenService {
         }
     }
 
-    public PersonInfo getPersonByToken(String token) {
+    public PersonInfo getPersonByToken(HttpServletRequest request) {
+        String token = request.getHeader(HEADER_TOKEN_KEY);
         if (StringUtils.isEmpty(token)) {
             return null;
         }
@@ -58,6 +65,8 @@ public class TokenServiceImpl implements ITokenService {
         if (StringUtils.isEmpty(personJson)) {
             return null;
         }
+        //获取成功后，重置一下该Token的过期时间
+        jedisUtil.expire(REDIS_SESSION_KEY + ":" + token, REDIS_SESSION_EXPIRED);
         try {
             PersonInfo personInfo = objectMapper.readValue(personJson, PersonInfo.class);
             return personInfo;

@@ -155,4 +155,9 @@
         </where>
     </select>
 
+    <delete id="deleteShop" parameterType="long">
+        DELETE FROM tb_shop
+        WHERE shop_id = #{shopId}
+    </delete>
+
 </mapper>

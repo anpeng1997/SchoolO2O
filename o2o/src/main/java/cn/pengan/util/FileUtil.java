@@ -35,6 +35,10 @@ public class FileUtil {
         return "/images/item/shop/" + shopId + "/";
     }
 
+    public static String getHeadLinePath(long headLineId) {
+        return "/images/item/headline/" + headLineId + "/";
+    }
+
     public static String getProductImgPath(long productId) {
         return "/images/item/product/" + productId + "/";
     }

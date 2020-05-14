@@ -31,7 +31,7 @@ public class LoginApiController {
     @PostMapping("")
     @ApiOperation("login")
     public Result login(@RequestBody LocalAuth user, HttpServletRequest servletRequest) {
-        if (user.getUserName() == null || user.getPassword() == null) {
+        if (StringUtils.isEmpty(user.getUserName().trim()) || StringUtils.isEmpty(user.getPassword().trim())) {
             return new Result(false, "账号和密码不能为空");
         }
         LocalAuth localAuth = localAuthService.findLocalAuth(user.getUserName(), user.getPassword());
@@ -42,7 +42,6 @@ public class LoginApiController {
         if (personInfo.getAdminFlag() != 1) {
             return new Result(false, "当前登录用户不是管理员");
         }
-        //servletRequest.getSession().setAttribute("user", personInfo);
         String token = tokenService.generateAuthenticateToken(personInfo);
         if (StringUtils.isEmpty(token)) {
             return new Result(false, "登录失败，获取token为null");
