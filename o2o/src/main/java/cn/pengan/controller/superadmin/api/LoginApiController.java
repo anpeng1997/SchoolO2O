@@ -7,6 +7,7 @@ import cn.pengan.service.ILocalAuthService;
 import cn.pengan.service.ITokenService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,8 @@ public class LoginApiController {
         if (StringUtils.isEmpty(user.getUserName().trim()) || StringUtils.isEmpty(user.getPassword().trim())) {
             return new Result(false, "账号和密码不能为空");
         }
+        String md5Pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+        user.setPassword(md5Pwd);
         LocalAuth localAuth = localAuthService.findLocalAuth(user.getUserName(), user.getPassword());
         if (localAuth == null) {
             return new Result(false, "账号或密码错误");

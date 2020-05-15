@@ -5,6 +5,7 @@ import cn.pengan.entity.PersonInfo;
 import cn.pengan.service.ITokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -28,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         PersonInfo person = tokenService.getPersonByToken(request);
         if (person == null) {
-            response.setStatus(401);
+            response.setStatus(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase());
             response.setContentType("application/json;charset=UTF-8");
             String jsonStr = objectMapper.writeValueAsString(new Result(false, "用户未登录"));
             response.getWriter().println(jsonStr);

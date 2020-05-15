@@ -9,6 +9,7 @@ import cn.pengan.service.ILocalAuthService;
 import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 @Service
 public class LocalAuthServiceImpl implements ILocalAuthService {
@@ -30,6 +31,9 @@ public class LocalAuthServiceImpl implements ILocalAuthService {
     public LocalAuthExecution insertLocalAuth(LocalAuth auth) throws LocalAuthException {
         LocalAuthExecution execution;
         try {
+            String password = auth.getPassword();
+            String mdsPwd = DigestUtils.md5DigestAsHex(password.getBytes());
+            auth.setPassword(mdsPwd);
             int result = localAuthDao.insertLocalAuth(auth);
             if (result >= 1) {
                 execution = new LocalAuthExecution(LocalAuthStatusEnum.SUCCESS);
