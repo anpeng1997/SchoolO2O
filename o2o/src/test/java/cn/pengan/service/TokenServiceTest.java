@@ -15,10 +15,10 @@ public class TokenServiceTest extends BaseTest {
 
     @Test
     public void getToken(){
-        LocalAuth localAuth = new LocalAuth();
-        localAuth.setUserName("test");
-        localAuth.setPassword("password");
-        String s = tokenService.generateAuthenticateToken(localAuth);
-        System.out.println(s);
+//        LocalAuth localAuth = new LocalAuth();
+//        localAuth.setUserName("test");
+//        localAuth.setPassword("password");
+//        String s = tokenService.generateAuthenticateToken(localAuth);
+//        System.out.println(s);
     }
 }

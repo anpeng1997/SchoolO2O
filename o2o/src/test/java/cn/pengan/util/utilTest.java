@@ -1,6 +1,7 @@
 package cn.pengan.util;
 
 import org.junit.Test;
+import org.springframework.util.DigestUtils;
 
 import java.util.UUID;
 
@@ -19,4 +20,11 @@ public class utilTest {
 //        s= s.replace("-","");
 //        System.out.println(s);
     }
+
+    @Test
+    public void test2() {
+        String s = DigestUtils.md5DigestAsHex("123123".getBytes());
+        System.out.println(s);
+    }
+
 }

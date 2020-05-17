@@ -11,7 +11,7 @@ public interface ITokenService {
      * @param userInfo 需要保存的用户对象
      * @return
      */
-    String generateAuthenticateToken(Object userInfo);
+    String generateAuthenticateToken(PersonInfo userInfo);
 
     /**
      * 根据request Header token获取redis中的personInfo

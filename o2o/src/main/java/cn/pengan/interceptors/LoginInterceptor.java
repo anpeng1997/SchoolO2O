@@ -29,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
         PersonInfo person = tokenService.getPersonByToken(request);
         if (person == null) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase());
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json;charset=UTF-8");
             String jsonStr = objectMapper.writeValueAsString(new Result(false, "用户未登录"));
             response.getWriter().println(jsonStr);

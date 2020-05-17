@@ -36,7 +36,7 @@ public class TokenServiceImpl implements ITokenService {
     }
 
     @Override
-    public String generateAuthenticateToken(Object userInfo) {
+    public String generateAuthenticateToken(PersonInfo userInfo) {
         if (userInfo == null) {
             return null;
         }

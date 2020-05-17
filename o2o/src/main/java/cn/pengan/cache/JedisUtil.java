@@ -29,6 +29,9 @@ public class JedisUtil {
      */
     public class Strings {
 
+        public Strings(JedisUtil jedisUtil) {
+        }
+
         /**
          * 根据key值来获取value
          * @param key
