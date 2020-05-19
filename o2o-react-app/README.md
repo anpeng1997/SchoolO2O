@@ -249,3 +249,28 @@ npm install redux-immutable
     ```
 
 * `state.merge`设置多个属性
+
+## react中的模块样式——module.css
+
+### 说明
+
+> create-react-app脚手架中内置了使用 CSS Modules 的配置,将css文件作为一个模块引入，这个模块中的css只作用于当前组件。不会影响当前组件的后代组件
+
+### 使用
+
+>将所有的 .css/.lee/.scss 等样式文件都修改成 .module.css/.module.less/.module.scss 等。即可使用 CSS Modules 的方式进行引入使用了。
+
+ ```css
+    .spaceCarousel {
+    padding: 16px;
+    background: #DEF1E5;
+    overflow: hidden;
+    }
+ ```
+
+ ```jsx
+ import HomeCss from "../../css/home.module.css"
+
+  <Carousel className={HomeCss.spaceCarousel}>
+  </Carousel>
+ ```
