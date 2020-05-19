@@ -1,5 +1,6 @@
 import React from "react";
-import { NavBar, Icon, Carousel } from "antd-mobile";
+import { NavBar, Icon, Carousel, Card, Grid } from "antd-mobile";
+import CategoryItem from "./components/category-item";
 //将css文件作为一个模块引入，这个模块中的css只作用于当前组件。不会影响当前组件的后代组件
 //(create-react-app 中内置了使用 CSS Modules 的配置，当前方式就是使用 create-react-app 内置的用法)
 import HomeCss from "../../css/home.module.css"
@@ -58,7 +59,17 @@ class Index extends React.Component {
                     </a>
                 ))}
             </Carousel>
-
+            <Card full>
+                <Card.Header title="This is title"
+                    thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
+                    extra={<span>this is extra</span>}>
+                </Card.Header>
+                <Card.Body>
+                    {
+                        Array.from(new Array(9)).map((_val, i) => <CategoryItem></CategoryItem>)
+                    }
+                </Card.Body>
+            </Card>
         </React.Fragment>
     }
 }
