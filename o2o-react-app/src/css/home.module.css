@@ -1,24 +1,36 @@
 .spaceCarousel {
-    padding: 15px;
+    padding: 16px;
     overflow: hidden;
-    background: white;
+    background-color: white;
 }
 
 .categoryWrapper {
     width: 50%;
     float: left;
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
 }
 
 .categoryImg {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     float: left;
 }
 
 .descDiv {
-    height: 50px;
+    height: 60px;
     float: left;
-    line-height: 50px;
-    margin-left: 10px
+    margin-left: 10px;
+    color: black;
+}
+
+.categoryNameDiv {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.categoryDescDiv {
+    height: 25px;
+    line-height: 25px;
+    font-size: 10px;
 }

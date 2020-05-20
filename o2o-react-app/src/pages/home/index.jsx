@@ -1,23 +1,39 @@
 import React from "react";
-import { NavBar, Icon, Carousel, Card, Grid } from "antd-mobile";
+import { NavBar, Icon, Carousel, Card } from "antd-mobile";
+import { reqHeadLine, reqShopCategory } from "../../api/homeAPI";
 import CategoryItem from "./components/category-item";
+import { IMGSERVERURL } from "../../common/Constant";
+
 //将css文件作为一个模块引入，这个模块中的css只作用于当前组件。不会影响当前组件的后代组件
 //(create-react-app 中内置了使用 CSS Modules 的配置，当前方式就是使用 create-react-app 内置的用法)
 import HomeCss from "../../css/home.module.css"
 
 class Index extends React.Component {
-
-    state = {
-        data: ['1', '2', '3'],
-        imgHeight: 176,
+    constructor(props) {
+        super(props);
+        this.state = {
+            headLines: [],
+            categorys: [],
+            imgHeight: 200,
+        }
     }
-    componentDidMount() {
+
+
+    async componentDidMount() {
         // simulate img loading
-        setTimeout(() => {
+        const headResponse = await reqHeadLine(4);
+        const categoryResponse = await reqShopCategory();
+        if (headResponse.success) {
             this.setState({
-                data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-            });
-        }, 100);
+                headLines: headResponse.data
+            })
+        }
+        console.log(categoryResponse)
+        if (categoryResponse.success) {
+            this.setState({
+                categorys: categoryResponse.data.shopCategoryList
+            })
+        }
     }
 
     render() {
@@ -27,7 +43,6 @@ class Index extends React.Component {
                 icon={<Icon type="left" />}
                 onLeftClick={() => console.log('onLeftClick')}
                 rightContent={[
-                    <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
                     <Icon key="1" type="ellipsis" />,
                 ]}
             >O2O</NavBar>
@@ -37,17 +52,16 @@ class Index extends React.Component {
                 infinite
                 cellSpacing={10}
                 slideWidth={0.8}
-                beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                afterChange={index => console.log('slide to', index)}
+                afterChange={index => this.setState({ slideIndex: index })}
             >
-                {this.state.data.map(val => (
+                {this.state.headLines.map((val, index) => (
                     <a
-                        key={val}
+                        key={val.lineImg}
                         href="#"
                         style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                     >
                         <img
-                            src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
+                            src={`${IMGSERVERURL}/${val.lineImg}`}
                             alt=""
                             style={{ width: '100%', verticalAlign: 'top' }}
                             onLoad={() => {
@@ -57,16 +71,19 @@ class Index extends React.Component {
                             }}
                         />
                     </a>
-                ))}
+                ))
+                }
             </Carousel>
             <Card full>
-                <Card.Header title="This is title"
-                    thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-                    extra={<span>this is extra</span>}>
+                <Card.Header title="全部商品"
+                    thumb="/imgs/shop.png"
+                    extra={<span></span>}>
                 </Card.Header>
                 <Card.Body>
                     {
-                        Array.from(new Array(9)).map((_val, i) => <CategoryItem></CategoryItem>)
+                        this.state.categorys.map((item, index) =>
+                            <CategoryItem shopCategory={item} key={index}></CategoryItem>
+                        )
                     }
                 </Card.Body>
             </Card>

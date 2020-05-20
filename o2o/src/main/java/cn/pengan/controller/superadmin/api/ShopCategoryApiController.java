@@ -28,6 +28,13 @@ public class ShopCategoryApiController {
         this.shopCategoryService = shopCategoryService;
     }
 
+    @GetMapping("")
+    @ApiOperation("获得最高级的商店类别（parentId为null的）")
+    public Result getShopCategorys() {
+        ShopCategoryExecution shopCategoryList = shopCategoryService.findShopCategoryList(new ShopCategory());
+        return new Result(true, shopCategoryList);
+    }
+
     @PostMapping("")
     @ApiOperation("添加一个商品类别")
     public Result addShopCategory(String categoryInfo, MultipartFile imgFile) {

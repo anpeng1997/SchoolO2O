@@ -55,7 +55,6 @@ public class HeadLineApiController {
         } catch (IOException e) {
             return new Result(false, "提交图片出现错误");
         }
-
     }
 }
 
