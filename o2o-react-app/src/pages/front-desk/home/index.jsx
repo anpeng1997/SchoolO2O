@@ -1,12 +1,13 @@
 import React from "react";
-import { NavBar, Icon, Carousel, Card } from "antd-mobile";
-import { reqHeadLine, reqShopCategory } from "../../api/homeAPI";
+import { Carousel, Card } from "antd-mobile";
+import { reqHeadLine, reqShopCategory } from "../../../api/homeAPI";
 import CategoryItem from "./components/category-item";
-import { IMGSERVERURL } from "../../common/Constant";
+import { IMGSERVERURL } from "../../../common/Constant";
 
 //将css文件作为一个模块引入，这个模块中的css只作用于当前组件。不会影响当前组件的后代组件
 //(create-react-app 中内置了使用 CSS Modules 的配置，当前方式就是使用 create-react-app 内置的用法)
-import HomeCss from "../../css/home.module.css"
+import HomeCss from "../../../css/home.module.css"
+
 
 class Index extends React.Component {
     constructor(props) {
@@ -38,14 +39,6 @@ class Index extends React.Component {
 
     render() {
         return <React.Fragment>
-            <NavBar
-                mode="light"
-                icon={<Icon type="left" />}
-                onLeftClick={() => console.log('onLeftClick')}
-                rightContent={[
-                    <Icon key="1" type="ellipsis" />,
-                ]}
-            >O2O</NavBar>
             <Carousel className={HomeCss.spaceCarousel}
                 autoplay={true}
                 autoplayInterval={3000}

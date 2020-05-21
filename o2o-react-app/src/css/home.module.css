@@ -2,6 +2,8 @@
     padding: 16px;
     overflow: hidden;
     background-color: white;
+    /* 当触控事件发生在元素上时，不进行任何操作。 */
+    touch-action: none;
 }
 
 .categoryWrapper {

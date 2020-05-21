@@ -27,4 +27,11 @@ public class utilTest {
         System.out.println(s);
     }
 
+    @Test
+    public void test3() {
+        Integer i = null;
+        int i2= (int)i;
+        System.out.println(i2);
+    }
+
 }

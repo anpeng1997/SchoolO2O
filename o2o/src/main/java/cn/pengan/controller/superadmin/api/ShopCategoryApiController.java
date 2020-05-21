@@ -59,7 +59,6 @@ public class ShopCategoryApiController {
             return new Result(false, "服务器内部错误", ShopCategoryEnum.INNER_ERROR.getState());
         }
     }
-    //TODO: 查询单个类别及修改类别API
 
     @GetMapping("/{id}")
     @ApiOperation("根据ID查询商店类别")

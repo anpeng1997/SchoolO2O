@@ -1,6 +1,6 @@
 import React from "react";
-import HomeCss from "../../../css/home.module.css"
-import { IMGSERVERURL } from "../../../common/Constant";
+import HomeCss from "../../../../css/home.module.css"
+import { IMGSERVERURL } from "../../../../common/Constant";
 
 class CategoryItem extends React.Component {
 
