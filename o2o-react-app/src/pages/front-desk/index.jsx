@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { NavBar, Icon } from "antd-mobile";
 import Home from "./home";
+import ShopList from "./shop-list"
 
 class Index extends React.Component {
 
@@ -17,6 +18,7 @@ class Index extends React.Component {
             >O2O</NavBar>
             <Switch>
                 <Route path="/frontdesk/home" exact component={Home}></Route>
+                <Route path="/frontdesk/Shops" exact component={ShopList}></Route>
             </Switch>
         </React.Fragment>
     }

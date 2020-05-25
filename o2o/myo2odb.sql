@@ -15,8 +15,8 @@ INSERT INTO `tb_area` VALUES (3,'东苑','东苑',12,'2017-06-04 19:12:58','2017
 CREATE TABLE `tb_head_line` (
   `line_id` int(100) NOT NULL AUTO_INCREMENT,
   `line_name` varchar(1000) DEFAULT NULL,
-  `line_link` varchar(2000) NOT NULL,
-  `line_img` varchar(2000) NOT NULL,
+  `line_link` varchar(2000) DEFAULT NULL,
+  `line_img` varchar(2000) DEFAULT NULL,
   `priority` int(2) DEFAULT NULL,
   `enable_status` int(2) NOT NULL DEFAULT '0',
   `create_time` datetime DEFAULT NULL,

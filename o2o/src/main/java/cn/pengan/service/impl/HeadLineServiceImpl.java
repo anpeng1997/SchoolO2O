@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("headLineService")
 public class HeadLineServiceImpl implements IHeadLineService {
 
     private final IHeadLineDao headLineDao;
