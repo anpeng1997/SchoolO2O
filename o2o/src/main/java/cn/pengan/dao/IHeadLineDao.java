@@ -8,7 +8,7 @@ public interface IHeadLineDao {
 
     int batchInsertHeadLine(List<HeadLine> headLines);
 
-    List<HeadLine> findHeadLineList(int size);
+    List<HeadLine> findHeadLineList(HeadLine headLineCondition);
 
     int deleteHeadLineById(Long lineId);
 

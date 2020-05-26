@@ -7,6 +7,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -29,19 +30,20 @@ public class HeadLineDaoTest extends BaseTest {
         headLine.setPriority(1);
         List<HeadLine> headLines = Collections.nCopies(5, headLine);
         int i = headLineDao.batchInsertHeadLine(headLines);
-        Assert.assertEquals(5,i);
+        Assert.assertEquals(5, i);
     }
 
     @Test
     public void b_FindHeadLineList() {
-        List<HeadLine> headLineList = headLineDao.findHeadLineList(5);
+        HeadLine headLine = new HeadLine();
+        List<HeadLine> headLineList = headLineDao.findHeadLineList(headLine);
         headLineList.forEach(System.out::println);
-        Assert.assertEquals(5,headLineList.size());
+        Assert.assertEquals(5, headLineList.size());
     }
 
     @Test
     public void c_DeleteHeadLine() {
         int i = headLineDao.deleteHeadLineById(1L);
-        Assert.assertEquals(1,i);
+        Assert.assertEquals(1, i);
     }
 }

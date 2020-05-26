@@ -5,9 +5,12 @@
 <mapper namespace="cn.pengan.dao.IHeadLineDao">
     <select id="findHeadLineList" resultType="HeadLine" parameterType="int">
         SELECT * FROM tb_head_line
-        WHERE enable_status = 1
-        ORDER BY priority DESC
-        LIMIT #{size} OFFSET 0;
+        <where>
+            <if test="#{enableStatus} != null">
+                enable_status = #{enableStatus}
+            </if>
+        </where>
+        ORDER BY priority DESC;
     </select>
 
     <insert id="batchInsertHeadLine" parameterType="java.util.List" keyProperty="lineId" keyColumn="line_id"

@@ -28,13 +28,6 @@ public class HeadLineApiController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/{size}")
-    @ApiOperation("获得轮播图信息")
-    public Result get(@PathVariable("size") Integer size) {
-        List<HeadLine> headLineList = headLineService.findHeadLineList(size);
-        return new Result(true, headLineList);
-    }
-
     @PostMapping("")
     @ApiOperation("添加一个轮播图")
     public Result add(String headLine, MultipartFile imgFile) {

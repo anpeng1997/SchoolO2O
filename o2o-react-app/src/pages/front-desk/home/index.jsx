@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Card } from "antd-mobile";
-import { reqHeadLine, reqShopCategory } from "../../../api/homeAPI";
+import { reqHomeInitData } from "../../../api/homeAPI";
 import CategoryItem from "./components/category-item";
 import { IMGSERVERURL } from "../../../common/Constant";
 
@@ -22,17 +22,12 @@ class Index extends React.Component {
 
     async componentDidMount() {
         // simulate img loading
-        const headResponse = await reqHeadLine(4);
-        const categoryResponse = await reqShopCategory();
-        if (headResponse.success) {
+        const initData = await reqHomeInitData();
+        console.log(initData)
+        if (initData.success) {
             this.setState({
-                headLines: headResponse.data
-            })
-        }
-        console.log(categoryResponse)
-        if (categoryResponse.success) {
-            this.setState({
-                categorys: categoryResponse.data.shopCategoryList
+                categorys: initData.data.shopCategoryList,
+                headLines: initData.data.headLineList
             })
         }
     }

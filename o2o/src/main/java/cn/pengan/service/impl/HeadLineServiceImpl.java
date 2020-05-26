@@ -43,8 +43,8 @@ public class HeadLineServiceImpl implements IHeadLineService {
     }
 
     @Override
-    public List<HeadLine> findHeadLineList(int size) {
-        return headLineDao.findHeadLineList(size);
+    public List<HeadLine> findHeadLineList(HeadLine headLineCondition) {
+        return headLineDao.findHeadLineList(headLineCondition);
     }
 
     @DataOperationLog("删除了一个Head Line")
