@@ -8,13 +8,23 @@ import java.util.List;
 public interface IShopDao {
     Shop findShopById(Long shopId);
 
-    List<Shop> findShopList(@Param("shopCondition") Shop shopCondition, @Param("offset") int offset, @Param("pageSize") int pageSize);
+    /**
+     * 根据条件获取商店列表
+     *
+     * @param shopCondition   商店条件
+     * @param shopCategoryIds 商店子类别条件（根据多类别筛选）
+     * @param offset
+     * @param pageSize
+     * @return
+     */
+    List<Shop> findShopList(@Param("shopCondition") Shop shopCondition, @Param("categoryIds") List<Long> shopCategoryIds, @Param("offset") int offset, @Param("pageSize") int pageSize);
 
     int insertShop(Shop shop);
 
     int updateShop(Shop shop);
 
-    int findShopCount(@Param("shopCondition") Shop shopCondition);
+    int findShopCount(@Param("shopCondition") Shop shopCondition, @Param("categoryIds") List<Long> shopCategoryIds);
 
     int deleteShop(String shopId);
+
 }

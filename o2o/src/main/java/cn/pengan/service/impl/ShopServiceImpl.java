@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -103,10 +104,10 @@ public class ShopServiceImpl implements IShopService {
     }
 
     @Override
-    public ShopExecution findShopList(Shop shopCondition, int pageIndex, int pageSize) {
+    public ShopExecution findShopList(Shop shopCondition, List<Long> shopCategoryIds, int pageIndex, int pageSize) {
         int offset = CalculatorPaging.calcRowIndex(pageIndex, pageSize);
-        List<Shop> shopList = shopDao.findShopList(shopCondition, offset, pageSize);
-        int shopCount = shopDao.findShopCount(shopCondition);
+        List<Shop> shopList = shopDao.findShopList(shopCondition, shopCategoryIds, offset, pageSize);
+        int shopCount = shopDao.findShopCount(shopCondition,shopCategoryIds);
         ShopExecution shopExecution = new ShopExecution();
         if (shopList != null) {
             shopExecution.setShopList(shopList);

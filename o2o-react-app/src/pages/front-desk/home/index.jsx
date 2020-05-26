@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Card } from "antd-mobile";
-import { reqHomeInitData } from "../../../api/homeAPI";
+import { reqHomeInitData } from "../../../api/frontDeskApi";
 import CategoryItem from "./components/category-item";
 import { IMGSERVERURL } from "../../../common/Constant";
 

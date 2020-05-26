@@ -6,12 +6,12 @@ import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@JsonIgnoreProperties(value = "handler")
 public class Shop implements Serializable {
     private Long shopId;
     private Long ownerId;
     private Long areaId;
     private Long shopCategoryId;
+    private Long parentCategoryId;
     private String shopName;
     private String shopDesc;
     private String shopAddr;
@@ -27,6 +27,14 @@ public class Shop implements Serializable {
     private PersonInfo owner;
     private Area area;
     private ShopCategory shopCategory;
+
+    public Long getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
+    }
 
     public Long getShopId() {
         return shopId;
@@ -183,7 +191,12 @@ public class Shop implements Serializable {
     @Override
     public String toString() {
         return "Shop{" +
-                "shopName='" + shopName + '\'' +
+                "shopId=" + shopId +
+                ", ownerId=" + ownerId +
+                ", areaId=" + areaId +
+                ", shopCategoryId=" + shopCategoryId +
+                ", parentCategoryId=" + parentCategoryId +
+                ", shopName='" + shopName + '\'' +
                 ", shopDesc='" + shopDesc + '\'' +
                 ", shopAddr='" + shopAddr + '\'' +
                 ", phone='" + phone + '\'' +
@@ -195,6 +208,9 @@ public class Shop implements Serializable {
                 ", lastEditTime=" + lastEditTime +
                 ", enableStatus=" + enableStatus +
                 ", advice='" + advice + '\'' +
+                ", owner=" + owner +
+                ", area=" + area +
+                ", shopCategory=" + shopCategory +
                 '}';
     }
 }

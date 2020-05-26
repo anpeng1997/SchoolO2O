@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/home")
+@RequestMapping("/api/frontdesk/home")
 @Api("前台首页API")
 public class HomePageApiController {
     private final IHeadLineService headLineService;

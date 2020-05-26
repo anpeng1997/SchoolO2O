@@ -120,7 +120,7 @@ class ShopForm extends React.Component {
                         history.goBack();
                     }, 2000)
                 } else {
-                    Toast.fail(data.erroInfo)
+                    Toast.fail(data.errorInfo)
                 }
             } else {
                 console.error("vaildate Filed fail!!!");

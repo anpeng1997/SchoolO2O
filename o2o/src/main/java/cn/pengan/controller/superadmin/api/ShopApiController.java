@@ -70,9 +70,9 @@ public class ShopApiController {
     public Result shopRegister(String shopInfo, HttpServletRequest request,
                                @RequestParam("shopImg") MultipartFile shopImg) throws JsonProcessingException {
         boolean isVerify = CodeUtil.checkVerifyCode(request);
-        if (!isVerify) {
-            return new Result(false, "验证码错误!", ShopStatusEnum.NULL_SHOP_INFO.getState());
-        }
+//        if (!isVerify) {
+//            return new Result(false, "验证码错误!", ShopStatusEnum.NULL_SHOP_INFO.getState());
+//        }
         if (shopImg.isEmpty()) {
             return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
         }
@@ -146,7 +146,7 @@ public class ShopApiController {
             pagesize = 100;
         }
         try {
-            ShopExecution shopList = shopService.findShopList(shopCondition, pageindex, pagesize);
+            ShopExecution shopList = shopService.findShopList(shopCondition, null, pageindex, pagesize);
             return new Result(true, shopList);
         } catch (Exception ex) {
             return new Result(false, "查询数据错误", ShopStatusEnum.INNER_ERROR.getState());

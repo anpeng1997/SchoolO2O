@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ShopServiceTest extends BaseTest {
@@ -60,7 +61,7 @@ public class ShopServiceTest extends BaseTest {
     public void shopListTest() {
         Shop shopCondition = new Shop();
         shopCondition.setShopName("书");
-        ShopExecution shopList = shopService.findShopList(shopCondition, 2, 5);
+        ShopExecution shopList = shopService.findShopList(shopCondition, Arrays.asList(9L),2, 5);
         System.out.println(shopList);
     }
 }

@@ -10,6 +10,7 @@
         <result property="ownerId" column="owner_id"></result>
         <result property="areaId" column="area_id"></result>
         <result property="shopCategoryId" column="shop_category_id"></result>
+        <result property="parentCategoryId" column="parent_category_id"></result>
         <result property="shopName" column="shop_name"></result>
         <result property="shopDesc" column="shop_desc"></result>
         <result property="shopAddr" column="shop_addr"></result>
@@ -53,19 +54,25 @@
         tb_person_info p
         <where>
             <if test="shopCondition.shopName != null">
-                and s.shop_name like '%${shopCondition.shopName}%'
+                AND s.shop_name like '%${shopCondition.shopName}%'
             </if>
             <if test="shopCondition.owner != null">
-                and s.owner_id = #{shopCondition.owner.userId}
-            </if>
-            <if test="shopCondition.shopCategory != null">
-                and s.shop_category_id = #{shopCondition.shopCategory.shopCategoryId}
+                AND s.owner_id = #{shopCondition.owner.userId}
             </if>
             <if test="shopCondition.area != null">
-                and s.area_id = #{shopCondition.area.areaId}
+                AND s.area_id = #{shopCondition.area.areaId}
+            </if>
+            <if test="shopCondition.parentCategoryId != null">
+                AND s.parent_category_id = #{shopCondition.parentCategoryId}
+            </if>
+            <if test="categoryIds != null">
+                AND s.shop_category_id in
+                <foreach collection="categoryIds" index="index" item="category" open="(" separator="," close=")">
+                    #{category}
+                </foreach>
             </if>
             <if test="shopCondition.enableStatus != null">
-                and s.enable_status = #{shopCondition.enableStatus}
+                AND s.enable_status = #{shopCondition.enableStatus}
             </if>
             AND sc.shop_category_id = s.shop_category_id
             AND a.area_id = s.area_id
@@ -148,6 +155,12 @@
             </if>
             <if test="shopCondition.enableStatus != null">
                 and s.enable_status = #{shopCondition.enableStatus}
+            </if>
+            <if test="categoryIds != null">
+                AND s.shop_category_id in
+                <foreach collection="categoryIds" index="index" item="category" open="(" separator="," close=")">
+                    #{category}
+                </foreach>
             </if>
             AND sc.shop_category_id = s.shop_category_id
             AND a.area_id = s.area_id
