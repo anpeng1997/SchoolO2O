@@ -19,6 +19,7 @@ class Index extends React.Component {
             <Switch>
                 <Route path="/frontdesk/home" exact component={Home}></Route>
                 <Route path="/frontdesk/Shops/:parentId" exact component={ShopList}></Route>
+                <Route path="/" component={Home}></Route>
             </Switch>
         </React.Fragment>
     }

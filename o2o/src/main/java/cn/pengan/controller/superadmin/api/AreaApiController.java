@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "区域API")
-@RequestMapping("/api/area")
+@RequestMapping("/api/areas")
 public class AreaApiController {
 
     private static final Logger logger = LoggerFactory.getLogger(AreaApiController.class);
@@ -34,7 +34,7 @@ public class AreaApiController {
     }
 
     @ApiOperation(value = "获取所有的区域列表信息", httpMethod = "GET")
-    @RequestMapping(path = "/getlist", method = {RequestMethod.GET})
+    @RequestMapping(path = "", method = {RequestMethod.GET})
     public Result getAreaList(HttpServletRequest request) {
         Map<String, Object> data = new HashMap<>();
         try {

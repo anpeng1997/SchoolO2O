@@ -28,11 +28,26 @@ const myAxiosInstance = axios.create({
 
 myAxiosInstance.interceptors.request.use(function (config) {
     Toast.loading("Loading....", 0);
+    
+    // get参数编码,防止api接收不到还有特殊字符的参数
+    // statement: https://segmentfault.com/a/1190000018384777
+    let url = config.url
+    
+    if (config.method === 'get' && config.params) {
+        url += '?'
+        let keys = Object.keys(config.params)
+        for (let key of keys) {
+            url += `${key}=${encodeURIComponent(config.params[key])}&`
+        }
+        url = url.substring(0, url.length - 1)
+        config.params = {}
+    }
+    config.url = url
+    
     let token = window.localStorage.getItem("Authenticate-Token")
     if (token) {
         //将token放到请求头发送给服务器,将tokenkey放在请求头中
         config.headers['Authenticate-Token'] = token;
-        return config;
     }
     return config;
 }, function (error) {
