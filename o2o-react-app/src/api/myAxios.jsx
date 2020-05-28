@@ -29,7 +29,7 @@ const myAxiosInstance = axios.create({
 myAxiosInstance.interceptors.request.use(function (config) {
     Toast.loading("Loading....", 0);
     
-    // get参数编码,防止api接收不到还有特殊字符的参数
+    // get参数编码,防止api接收不到含有特殊字符的参数
     // statement: https://segmentfault.com/a/1190000018384777
     let url = config.url
     
@@ -65,7 +65,7 @@ myAxiosInstance.interceptors.response.use((response) => {
             history.push("/login");
         }
     } catch (ex) {
-        console.log(ex);
+        console.error(ex);
         Toast.fail("网络错误...", 2);
     }
     return Promise.reject(error);

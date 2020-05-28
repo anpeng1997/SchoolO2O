@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button } from "antd-mobile";
-import { reqShopList, reqShopCategoryList, reqAreaList } from "../../../api/frontDeskApi";
+import { reqShopList, reqShopCategoryList } from "../../../api/frontDeskApi";
 import { IMGSERVERURL } from "../../../common/Constant";
 import { DateTimeFormat } from "../../../common/utils";
 
@@ -35,29 +35,34 @@ class Index extends React.Component {
             });
         }
         const shopCategoryResponse = await reqShopCategoryList(parentId);
+        console.log(shopCategoryResponse)
         if (shopCategoryResponse.success) {
-            const { shopCategoryList } = shopCategoryResponse.data;
-            this.setState({
-                shopCategoryList
-            })
-        }
-        const areaResponse = await reqAreaList();
-        if (areaResponse.success) {
-            let areas = [{ label: "全部区域", value: -1 }];
-            areaResponse.data.rows.map((item, index) => {
-                areas.push({ label: item.areaName, value: item.areaId });
+            const { shopCategoryList, areas } = shopCategoryResponse.data;
+            let areasData = [{ label: "全部区域", value: -1 }];
+            areas.map((item, index) => {
+                areasData.push({ label: item.areaName, value: item.areaId });
                 return index;
             })
             this.setState({
-                areas
+                shopCategoryList,
+                areas: areasData
             })
         }
     }
 
-    //TODO: 搜索关键字搜索框清空数据后，没有触发事件加载新的数据
     searchBarChange = (value) => {
         this.setState({
             searchValue: value
+        })
+    }
+
+    searchBarCancel = (val) => {
+        this.setState({
+            searchValue: ""
+        }, async () => {
+            if (val !== "") {
+                await this.byConditionGetShopData();
+            }
         })
     }
 
@@ -117,7 +122,6 @@ class Index extends React.Component {
         this.setState({
             categoryFilterCondition: newArray
         }, async () => {
-            console.log(this.state.categoryFilterCondition)
             await this.byConditionGetShopData();
         })
 
@@ -129,8 +133,11 @@ class Index extends React.Component {
     }
 
     areaPickOnOk = (val) => {
+        const oldVal = this.state.selectAreaId;
         this.setState({ selectAreaId: val }, async () => {
-            await this.byConditionGetShopData();
+            if (oldVal !== val) {
+                await this.byConditionGetShopData();
+            }
         })
     }
 
@@ -140,6 +147,7 @@ class Index extends React.Component {
             <SearchBar value={searchValue} placeholder="输入店铺关键字" maxLength={10}
                 onChange={(val) => this.searchBarChange(val)}
                 onSubmit={(val) => this.searchBarSubmit(val)}
+                onCancel={(val) => this.searchBarCancel(val)}
             />
             <WingBlank size="sm">
                 <Button type={this.isSelectCondition(-1)} onClick={() => this.conditionBtnClick(-1)} inline size="small" style={{ margin: '5px 10px 5px 0px' }}>全部类别</Button>

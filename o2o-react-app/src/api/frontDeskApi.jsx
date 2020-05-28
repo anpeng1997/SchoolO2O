@@ -25,5 +25,3 @@ export const reqShopList = (parentId, searchKey = null, shopCategoryIds = null, 
     }
     return axiosRequest(url, data);
 }
-
-export const reqAreaList = () => axiosRequest("/api/areas");

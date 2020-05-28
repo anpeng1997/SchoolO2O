@@ -48,6 +48,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/api/**"/>
             <mvc:exclude-mapping path="/api/login"/>
+            <mvc:exclude-mapping path="/api/frontdesk/**"/>
             <bean class="cn.pengan.interceptors.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

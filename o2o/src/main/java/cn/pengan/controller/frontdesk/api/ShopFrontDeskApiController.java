@@ -6,6 +6,7 @@ import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Area;
 import cn.pengan.entity.Shop;
 import cn.pengan.entity.ShopCategory;
+import cn.pengan.service.IAreaService;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.service.IShopService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,19 +27,27 @@ public class ShopFrontDeskApiController {
 
     private final IShopCategoryService shopCategoryService;
     private final IShopService shopService;
+    private final IAreaService areaService;
 
-    public ShopFrontDeskApiController(IShopCategoryService shopCategoryService, IShopService shopService) {
+    public ShopFrontDeskApiController(IShopCategoryService shopCategoryService,
+                                      IShopService shopService,
+                                      IAreaService areaService) {
         this.shopCategoryService = shopCategoryService;
         this.shopService = shopService;
+        this.areaService = areaService;
     }
 
     @GetMapping("/shopcategorys/{parentId}")
-    @ApiOperation("根据一级类别ID获取二级类别列表")
+    @ApiOperation("根据一级类别ID获取二级类别列表,还有区域列表")
     public Result getShopList(@PathVariable("parentId") Long parentId) {
         ShopCategory shopCategoryCondition = new ShopCategory();
         shopCategoryCondition.setParentId(parentId);
-        ShopCategoryExecution shopCategoryList = shopCategoryService.findShopCategoryList(shopCategoryCondition);
-        return new Result(true, shopCategoryList);
+        ShopCategoryExecution shopCategory = shopCategoryService.findShopCategoryList(shopCategoryCondition);
+        List<Area> areas = areaService.findAll();
+        Map<String, Object> data = new HashMap<>();
+        data.put("shopCategoryList",shopCategory.getShopCategoryList());
+        data.put("areas",areas);
+        return new Result(true, data);
     }
 
     @GetMapping("/{parentId}")
