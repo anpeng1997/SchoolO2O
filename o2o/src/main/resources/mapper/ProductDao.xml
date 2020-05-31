@@ -93,18 +93,53 @@
 
     <select id="findProductList" resultType="product">
         SELECT
-            *
+        *
         FROM
-            tb_product
-        WHERE
-            shop_id = #{shopId}
+        tb_product
+        <where>
+            <if test="condition.shopId != null">
+                shop_id = #{condition.shopId}
+            </if>
+            <if test="condition.enableStatus != null">
+                AND enable_status = #{condition.enableStatus}
+            </if>
+            <if test="condition.productName != null">
+                AND product_name LIKE CONCAT('%',#{condition.productName},'%')
+            </if>
+            <if test="categoryIds != null">
+                AND product_category_id IN
+                <foreach collection="categoryIds" item="category" index="index" separator="," open="(" close=")">
+                    #{category}
+                </foreach>
+            </if>
+        </where>
         ORDER BY
-            priority DESC
+        priority DESC
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
     <select id="findProductCount" resultType="int" parameterType="Long">
-        select count(*) from tb_product where shop_id = #{shopId};
+        SELECT
+        COUNT(*)
+        FROM
+        tb_product
+        <where>
+            <if test="condition.shopId != null">
+                shop_id = #{condition.shopId}
+            </if>
+            <if test="condition.enableStatus != null">
+                AND enable_status = #{condition.enableStatus}
+            </if>
+            <if test="condition.productName != null">
+                AND product_name LIKE CONCAT('%',#{condition.productName},'%')
+            </if>
+            <if test="categoryIds != null">
+                AND product_category_id IN
+                <foreach collection="categoryIds" item="category" index="index" separator="," open="(" close=")">
+                    #{category}
+                </foreach>
+            </if>
+        </where>
     </select>
 
     <delete id="deleteProduct" parameterType="Long">

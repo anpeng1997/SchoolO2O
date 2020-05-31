@@ -1,5 +1,6 @@
 package cn.pengan.controller.frontdesk.api;
 
+import cn.pengan.dto.ProductCategoryExecution;
 import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopCategoryExecution;
 import cn.pengan.dto.ShopExecution;
@@ -7,6 +8,7 @@ import cn.pengan.entity.Area;
 import cn.pengan.entity.Shop;
 import cn.pengan.entity.ShopCategory;
 import cn.pengan.service.IAreaService;
+import cn.pengan.service.IProductCategoryService;
 import cn.pengan.service.IShopCategoryService;
 import cn.pengan.service.IShopService;
 import io.swagger.annotations.Api;
@@ -28,13 +30,16 @@ public class ShopFrontDeskApiController {
     private final IShopCategoryService shopCategoryService;
     private final IShopService shopService;
     private final IAreaService areaService;
+    private final IProductCategoryService productCategoryService;
 
     public ShopFrontDeskApiController(IShopCategoryService shopCategoryService,
                                       IShopService shopService,
-                                      IAreaService areaService) {
+                                      IAreaService areaService,
+                                      IProductCategoryService productCategoryService) {
         this.shopCategoryService = shopCategoryService;
         this.shopService = shopService;
         this.areaService = areaService;
+        this.productCategoryService = productCategoryService;
     }
 
     @GetMapping("/shopcategorys/{parentId}")
@@ -45,8 +50,8 @@ public class ShopFrontDeskApiController {
         ShopCategoryExecution shopCategory = shopCategoryService.findShopCategoryList(shopCategoryCondition);
         List<Area> areas = areaService.findAll();
         Map<String, Object> data = new HashMap<>();
-        data.put("shopCategoryList",shopCategory.getShopCategoryList());
-        data.put("areas",areas);
+        data.put("shopCategoryList", shopCategory.getShopCategoryList());
+        data.put("areas", areas);
         return new Result(true, data);
     }
 
@@ -76,5 +81,16 @@ public class ShopFrontDeskApiController {
         }
         ShopExecution shopList = shopService.findShopList(shopCondition, shopCategorys, pageIndex, pageSize);
         return new Result(true, shopList);
+    }
+
+    @GetMapping("/shopdetail/{shopId}")
+    @ApiOperation("获得商店详情页数据")
+    public Result getShopDetailData(@PathVariable("shopId") Long shopId) {
+        Shop shop = shopService.findShopById(shopId);
+        ProductCategoryExecution productCategoryExecution = productCategoryService.findProductCategoryList(shopId);
+        Map<String, Object> data = new HashMap<>();
+        data.put("shop", shop);
+        data.put("productCategoryList", productCategoryExecution.getProductCategories());
+        return new Result(true, data);
     }
 }

@@ -12,9 +12,13 @@ public interface IProductDao {
 
     Product findProductById(Long productId);
 
-    List<Product> findProductList(@Param("shopId") Long shopId, @Param("offset") int offset, @Param("pageSize") int pageSize);
+    List<Product> findProductList(@Param("condition") Product productCondition,
+                                  @Param("categoryIds") Long[] categoryIds,
+                                  @Param("offset") int offset,
+                                  @Param("pageSize") int pageSize);
 
-    int findProductCount(Long shopId);
+    int findProductCount(@Param("condition") Product productCondition,
+                         @Param("categoryIds") Long[] ids);
 
     int deleteProduct(Long productId);
 

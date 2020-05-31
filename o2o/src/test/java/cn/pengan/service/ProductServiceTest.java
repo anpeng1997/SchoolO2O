@@ -52,4 +52,12 @@ public class ProductServiceTest extends BaseTest {
         System.out.println(productExecution);
     }
 
+    @Test
+    public void findProductListTest() {
+        Product product = new Product();
+        product.setShopId(1L);
+        ProductExecution productList = productService.findProductList(product, null, 0, 100);
+        System.out.println(productList.getProductList().size());
+    }
+
 }
