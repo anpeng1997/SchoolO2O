@@ -1,8 +1,8 @@
 import React from "react";
-import {createForm} from "rc-form";
-import {connect} from "react-redux";
-import {getShopOperationInitDataAction} from "../store/actionCreators";
-import {reqRegisterOrModifyShop, reqShopInfo} from "../../../api/shopAPI"
+import { createForm } from "rc-form";
+import { connect } from "react-redux";
+import { getShopOperationInitDataAction } from "../store/actionCreators";
+import { reqRegisterOrModifyShop, reqShopInfo } from "../../../api/shopAPI"
 import {
     List,
     InputItem,
@@ -15,7 +15,7 @@ import {
     WingBlank,
     Toast
 } from "antd-mobile";
-import {VERIFY_CODE_URL} from "../../../common/Constant";
+import { VERIFY_CODE_URL } from "../../../common/Constant";
 
 const Item = List.Item;
 
@@ -33,11 +33,11 @@ class ShopForm extends React.Component {
 
     async componentDidMount() {
         //获得初始数据
-        const shopId = this.props.match.params.id;
-        await this.props.getInitData(shopId);
-        if (!!this.state.shopId) {
+        const { match, getInitData, form } = this.props;
+        const shopId = match.params.id;
+        getInitData(shopId);
+        if (this.state.shopId) {
             const shopData = await reqShopInfo(shopId);
-            const form = this.props.form;
             if (shopData.success) {
                 form.setFieldsValue({
                     'shopName': shopData.data.shopName,
@@ -45,7 +45,7 @@ class ShopForm extends React.Component {
                     'shopAddr': shopData.data.shopAddr,
                     'phone': shopData.data.phone,
                     'areaId': [shopData.data.areaId],
-                    'shopCategoryId': [shopData.data.shopCategoryId]
+                    'shopCategoryId': [shopData.data.parentCategoryId, shopData.data.shopCategoryId]
                 })
             } else {
                 console.error(shopData);
@@ -90,18 +90,20 @@ class ShopForm extends React.Component {
     }
 
     onSubmitData = () => {
-        const {history, form} = this.props;
-        this.props.form.validateFields(async (error) => {
-            const {shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual} = form.getFieldsValue();
-            let shopId = this.state.shopId;
+        const { history, form } = this.props;
+        const { shopId } = this.state;
+        form.validateFields(async (error) => {
+            console.log("validateFields....")
             //验证结果,当没有错误时error对象则为null
             if (!error) {
+                const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual } = form.getFieldsValue();
                 let shopInfo = {};
                 shopInfo.shopId = shopId;
                 shopInfo.shopName = shopName;
                 shopInfo.shopAddr = shopAddr;
-                shopInfo.area = {areaId: areaId[0]};
-                shopInfo.shopCategory = {shopCategoryId: shopCategoryId[0]};
+                shopInfo.area = { areaId: areaId[0] };
+                //商店类别Picker value: [1,2] 
+                shopInfo.shopCategory = { parentId: shopCategoryId[0], shopCategoryId: shopCategoryId[1] };
                 shopInfo.phone = phone;
                 shopInfo.shopDesc = shopDesc;
                 let formData = new FormData();
@@ -137,13 +139,23 @@ class ShopForm extends React.Component {
         if (value && value.length >= 3) {
             callback(); //调用无参的callback则代表验证通过
         } else {
-            callback("店铺名称不能小于三个字！");  //给callback传递参数则代表验证失败
+            callback("商店名称不能小于三个字！");  //给callback传递参数则代表验证失败
+        }
+    }
+    /**
+     * shopCategory自定义验证器
+     */
+    shopCategoryValidator = (rule, value, callback) => {
+        if (value && value.length >= 2) {
+            callback();
+        } else {
+            callback("请选择商店类别，如没有合适类别请前往类别管理页面添加类别");
         }
     }
 
     phoneValidator = (rule, value, callback) => {
         //必须先判断value值是否有值,否则该处报错的话不会打印在控制台上，form.validateFields也不会执行，因为后续没有callback执行了
-        if (!!value) {
+        if (value) {
             if (value.replace(/\s/g, '').length < 11) {
                 callback("号码必须为11位");
             } else {
@@ -156,76 +168,83 @@ class ShopForm extends React.Component {
 
     imgValidator = (rule, value, callback) => {
         //根据shopId是否为null来判断是修改还是注册
-        if (!this.state.shopId) {
+        if (this.state.shopId) {
+            callback();
+        } else {
             //注册
             if (!value) {
-                callback('店铺的图片是必须的')
+                callback('商店的图片是必须的')
             }
             if (value.length <= 0) {
-                callback('店铺的图片是必须的')
+                callback('商店的图片是必须的')
             }
         }
-        callback();
     }
 
     render() {
-        const {shopCategoryList, areaList} = this.props;
-        const {getFieldProps, getFieldError, getFieldValue} = this.props.form;
+        const { shopCategoryList, areaList } = this.props;
+        const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
         return <React.Fragment>
-            <List renderHeader={() => !this.state.shopId ? '注册店铺' : '修改店铺信息'}
-                  renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
-                      || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
-                      getFieldError('shopDesc') || getFieldError('verifyCodeActual')
-                  }>
+            <List renderHeader={() => !this.state.shopId ? '注册商店' : '修改商店信息'}
+                renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
+                    || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
+                    getFieldError('shopDesc') || getFieldError('verifyCodeActual')
+                }>
                 <InputItem clear="true" maxLength="12"
-                           {...getFieldProps('shopName', {
-                               validateFirst: true,
-                               rules: [
-                                   //申明式验证
-                                   {required: true, message: '店铺名称是必须的！'},
-                                   {whitespace: true, message: '店铺名称中不能含有空格！'},
-                                   {max: 12, message: '店铺名不能长于12位！'},
-                                   //自定义验证器
-                                   {validator: this.shopNameValidator},
-                               ]
-                           })}
-                           whitespace="true"
-                           error={!!getFieldError('shopName')}
-                           placeholder="输入店铺名称">
-                    店铺名称
+                    {...getFieldProps('shopName', {
+                        validateFirst: true,
+                        rules: [
+                            //申明式验证
+                            { required: true, message: '商店名称是必须的！' },
+                            { whitespace: true, message: '商店名称中不能含有空格！' },
+                            { max: 12, message: '商店名不能长于12位！' },
+                            //自定义验证器
+                            { validator: this.shopNameValidator },
+                        ]
+                    })}
+                    whitespace="true"
+                    error={!!getFieldError('shopName')}
+                    placeholder="输入商店名称">
+                    商店名称
                 </InputItem>
-                <Picker data={shopCategoryList.toJS()} cols={1}
-                        onOk={(val) => {
-                            this.setState({currentPickerShopCategoryId: val})
-                        }}
-                        error={!!getFieldError('shopCategoryId')}
-                        {...getFieldProps('shopCategoryId', {
-                            rules: [
-                                {required: true, message: '必须选择一个店铺类别!'}
-                            ]
-                        })} className="forss">
-                    <Item arrow="horizontal">店铺类别</Item>
+                <Picker data={shopCategoryList.toJS()} cols={2}
+                    title="商店类别"
+                    cascade={true}
+                    onOk={(val) => {
+                        console.log(val)
+                        this.setState({ currentPickerShopCategoryId: val })
+                    }}
+                    error={!!getFieldError('shopCategoryId')}
+                    {...getFieldProps('shopCategoryId', {
+                        rules: [
+                            { required: true, message: '必须选择一个商店类别!' },
+                            {
+                                validator: this.shopCategoryValidator
+                            }
+                        ]
+                    })} >
+                    <Item arrow="horizontal">商店类别</Item>
                 </Picker>
                 <Picker data={areaList.toJS()} cols={1}
-                        onOk={(val) => {
-                            this.setState({currnetPickerAareaId: val})
-                        }}
-                        error={!!getFieldError('areaId')}
-                        {...getFieldProps('areaId', {
-                            rules: [
-                                {required: true, message: '必须选择一个区域类别!'}
-                            ]
-                        })} className="forss">
+                    onOk={(val) => {
+                        this.setState({ currnetPickerAareaId: val })
+                    }}
+                    error={!!getFieldError('areaId')}
+                    {...getFieldProps('areaId', {
+                        rules: [
+                            { required: true, message: '必须选择一个区域类别!' }
+                        ]
+                    })} className="forss">
                     <Item arrow="horizontal">所属地区</Item>
                 </Picker>
                 <InputItem clear="true" maxLength="40"
-                           error={!!getFieldError('shopAddr')}
-                           {...getFieldProps('shopAddr', {
-                               rules: [
-                                   {required: true, message: '店铺详细地址是必须的'}
-                               ]
-                           })}
-                           placeholder="输入店铺详细地址">
+                    error={!!getFieldError('shopAddr')}
+                    {...getFieldProps('shopAddr', {
+                        rules: [
+                            { required: true, message: '商店详细地址是必须的' }
+                        ]
+                    })}
+                    placeholder="输入商店详细地址">
                     详细地址
                 </InputItem>
                 <InputItem
@@ -234,14 +253,14 @@ class ShopForm extends React.Component {
                     error={!!getFieldError('phone')}
                     {...getFieldProps('phone', {
                         rules: [
-                            {validator: this.phoneValidator},
+                            { validator: this.phoneValidator },
                         ]
                     })}
                     onErrorClick={this.onErrorClick}
                 >
                     联系号码
                 </InputItem>
-                <Item>店铺图片</Item>
+                <Item>商店图片</Item>
                 <ImagePicker
                     files={getFieldValue('shopImg')}
                     error={!!getFieldError('shopImg')}
@@ -251,19 +270,19 @@ class ShopForm extends React.Component {
                         //处理表单获取值的事件
                         getValueFromEvent: this.onImagePickerChange,
                         rules: [
-                            {validator: this.imgValidator}
+                            { validator: this.imgValidator }
                         ]
                     })}
                     //只能选择一张图片
                     selectable={this.state.isAddImg}>
                 </ImagePicker>
                 <TextareaItem
-                    title="店铺描述"
-                    placeholder="介绍你的店铺...."
+                    title="商店描述"
+                    placeholder="介绍你的商店...."
                     data-seed="logId"
                     {...getFieldProps('shopDesc', {
                         rules: [
-                            {required: true, message: '店铺描述是必须的！'}
+                            { required: true, message: '商店描述是必须的！' }
                         ]
                     })}
                     error={!!getFieldError('shopDesc')}
@@ -283,15 +302,15 @@ class ShopForm extends React.Component {
                     })}
                 >
                     <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => {
-                        this.setState({verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime()})
-                    }} style={{height: 'auto', width: '100%'}}></img>
+                        this.setState({ verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime() })
+                    }} style={{ height: 'auto', width: '100%' }}></img>
                 </InputItem>
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">
                     <Flex>
                         <Flex.Item><Button size="large" onClick={this.back}>取消</Button></Flex.Item>
                         <Flex.Item><Button type="primary" size="large"
-                                           onClick={this.onSubmitData}>确认</Button></Flex.Item>
+                            onClick={this.onSubmitData}>确认</Button></Flex.Item>
                     </Flex>
                 </WingBlank>
                 <WhiteSpace size="lg"></WhiteSpace>
@@ -303,8 +322,7 @@ class ShopForm extends React.Component {
 const mapStateToProps = (state) => {
     return {
         shopCategoryList: state.getIn(["shopReducer", "shopOperationInitData", "shopCategoryList"]),
-        areaList: state.getIn(["shopReducer", "shopOperationInitData", "areaList"]),
-        shopInfo: state.getIn(["shopReducer", "shopOperationInitData", "shopInfo"])
+        areaList: state.getIn(["shopReducer", "shopOperationInitData", "areaList"])
     }
 }
 
@@ -317,4 +335,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 //createForm:高级函数，将一个组件给它，将返回一个新的组件
-export default connect(mapStateToProps, mapDispatchToProps)(createForm()(ShopForm));
+export default createForm()(connect(mapStateToProps, mapDispatchToProps)(ShopForm));

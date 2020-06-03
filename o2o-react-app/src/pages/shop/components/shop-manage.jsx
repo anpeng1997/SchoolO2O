@@ -32,6 +32,14 @@ export default class ShopManage extends React.Component {
                     }
                 }>商品管理</Button>
             </WingBlank>
+            <WhiteSpace size="xl"/>
+            <WingBlank size="lg">
+                <Button type="primary" size="large" onClick={
+                    () => {
+                        history.push(`/shop/shopcategory`)
+                    }
+                }>添加商店类别</Button>
+            </WingBlank>
         </React.Fragment>
     }
 }

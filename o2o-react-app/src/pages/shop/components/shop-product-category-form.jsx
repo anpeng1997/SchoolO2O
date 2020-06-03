@@ -27,9 +27,7 @@ class ShopProductCategoryForm extends React.PureComponent {
     async componentDidMount() {
         const categoryId = this.state.categoryId;
         if (categoryId) {
-            Toast.loading('正在加载...', 0);
             const response = await reqProductCategory(categoryId);
-            Toast.hide();
             if (response.success) {
                 this.props.form.setFieldsValue({
                     "productCategoryName": response.data.productCategoryName,
@@ -54,7 +52,6 @@ class ShopProductCategoryForm extends React.PureComponent {
                     ...form.getFieldsValue()
                 }
                 let response;
-                Toast.loading('正在提交...', 0);
                 if (categoryId) {
                     //modify
                     response = await reqModifyProductCategory(formData)
@@ -62,7 +59,6 @@ class ShopProductCategoryForm extends React.PureComponent {
                     //add
                     response = await reqAddProductCategory(formData);
                 }
-                Toast.hide();
                 if (response.success) {
                     Toast.success('操作成功！', 2);
                     setTimeout(() => {
@@ -91,7 +87,6 @@ class ShopProductCategoryForm extends React.PureComponent {
                                    {required: true, message: '商品类别名称是必须的！'},
                                    {whitespace: true, message: '商品类别名称中不能含有空格！'},
                                    {max: 12, message: '商品类别名不能长于12位！'},
-                                   //自定义验证器
                                ]
                            })} >
                     类别名称:

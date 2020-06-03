@@ -1,5 +1,5 @@
 import React from "react";
-import {IMGSERVERURL} from "../.././/../common/Constant";
+import {IMGSERVERURL} from "../../../common/Constant";
 
 export default class ThumbImg extends React.Component {
 

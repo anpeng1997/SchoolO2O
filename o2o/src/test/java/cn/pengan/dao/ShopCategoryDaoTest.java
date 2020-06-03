@@ -1,10 +1,12 @@
 package cn.pengan.dao;
 
 import cn.pengan.BaseTest;
+import cn.pengan.dto.ShopCategoryPickerModel;
 import cn.pengan.entity.ShopCategory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.List;
 
@@ -34,5 +36,11 @@ public class ShopCategoryDaoTest extends BaseTest {
         shopCategory.setShopCategoryImg("/test/testpath");
         shopCategoryDao.insertShopCategory(shopCategory);
         System.out.println(shopCategory);
+    }
+
+    @Test
+    public void findShopCategoryPickerTest() {
+        List<ShopCategoryPickerModel> shopCategoryPickerList = shopCategoryDao.findShopCategoryPickerList();
+        shopCategoryPickerList.forEach(System.out::println);
     }
 }

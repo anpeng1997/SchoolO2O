@@ -3,6 +3,7 @@ package cn.pengan.controller.superadmin.api;
 import cn.pengan.cache.JedisUtil;
 import cn.pengan.dto.Result;
 import cn.pengan.dto.ShopCategoryExecution;
+import cn.pengan.dto.ShopCategoryPickerModel;
 import cn.pengan.dto.ShopExecution;
 import cn.pengan.entity.Area;
 import cn.pengan.entity.PersonInfo;
@@ -58,9 +59,9 @@ public class ShopApiController {
     @ApiOperation(value = "操作商铺所需的初始数据")
     public Result operationShopInitData() {
         Map<String, Object> data = new HashMap<>();
-        ShopCategoryExecution execution = shopCategoryService.findShopCategoryList(new ShopCategory());
+        List<ShopCategoryPickerModel> shopCategoryPickerData = shopCategoryService.findShopCategoryPickerList();
         List<Area> areaList = areaService.findAll();
-        data.put("shopCategoryList", execution.getShopCategoryList());
+        data.put("shopCategoryPickerData",shopCategoryPickerData);
         data.put("areaList", areaList);
         return new Result(true, data);
     }
@@ -68,24 +69,27 @@ public class ShopApiController {
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     @ApiOperation(value = "注册商铺")
     public Result shopRegister(String shopInfo, HttpServletRequest request,
-                               @RequestParam("shopImg") MultipartFile shopImg) throws JsonProcessingException {
-        boolean isVerify = CodeUtil.checkVerifyCode(request);
+                               @RequestParam("shopImg") MultipartFile shopImg) {
+//        boolean isVerify = CodeUtil.checkVerifyCode(request);
 //        if (!isVerify) {
 //            return new Result(false, "验证码错误!", ShopStatusEnum.NULL_SHOP_INFO.getState());
 //        }
-        if (shopImg.isEmpty()) {
-            return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
-        }
-        Shop shopEntity = objectMapper.readValue(shopInfo, Shop.class);
-        if (shopEntity.getShopName() == null || "".equals(shopEntity.getShopName().trim())) {
-            return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
-        }
         Result result;
-        PersonInfo personInfo = tokenService.getPersonByToken(request);
-        shopEntity.setOwner(personInfo);
         try {
+            if (shopImg.isEmpty()) {
+                return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
+            }
+            Shop shopEntity = objectMapper.readValue(shopInfo, Shop.class);
+            if (shopEntity.getShopName() == null || "".equals(shopEntity.getShopName().trim())) {
+                return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
+            }
+            PersonInfo personInfo = tokenService.getPersonByToken(request);
+            shopEntity.setOwner(personInfo);
             ShopExecution shopExecution = shopService.addShop(shopEntity, shopImg.getInputStream(), shopImg.getOriginalFilename());
             result = new Result(true, shopExecution);
+        }catch (JsonProcessingException JsonEx){
+            JsonEx.printStackTrace();
+            result = new Result(false, "提交的商店数据有误", ShopStatusEnum.INNER_ERROR.getState());
         } catch (Exception e) {
             e.printStackTrace();
             result = new Result(false, "服务器内部错误", ShopStatusEnum.INNER_ERROR.getState());
@@ -96,10 +100,10 @@ public class ShopApiController {
     @RequestMapping(value = "/modify", method = {RequestMethod.POST})
     @ApiOperation(value = "修改商铺信息")
     public Result shopModify(String shopInfo, HttpServletRequest request, MultipartFile shopImg) throws JsonProcessingException {
-        boolean isVerify = CodeUtil.checkVerifyCode(request);
-        if (!isVerify) {
-            return new Result(false, "验证码错误！");
-        }
+//        boolean isVerify = CodeUtil.checkVerifyCode(request);
+//        if (!isVerify) {
+//            return new Result(false, "验证码错误！");
+//        }
         Shop shop = objectMapper.readValue(shopInfo, Shop.class);
         ShopExecution shopExecution;
         Result result;

@@ -33,10 +33,7 @@ class ShopCategoryForm extends React.Component {
         let shopCategoryArray = [];
         const response = await reqShopOperationInitData()
         if (response.success) {
-            response.data.shopCategoryList.map(function (item, index) {
-                shopCategoryArray.push({value: item.shopCategoryId, label: item.shopCategoryName});
-                return index;
-            });
+            shopCategoryArray = response.data.shopCategoryPickerData;
             this.setState({shopCategoryList: shopCategoryArray})
         } else {
             console.error(response);
@@ -62,7 +59,7 @@ class ShopCategoryForm extends React.Component {
         if (!this.state.shopCategoryId) {
             //注册
             if (!value || value.length <= 0) {
-                callback('店铺类别的图片是必须的！')
+                callback('商店类别的图片是必须的！')
             }
         }
         callback();
@@ -75,11 +72,10 @@ class ShopCategoryForm extends React.Component {
     onSubmitData = () => {
         const {history, form} = this.props;
         this.props.form.validateFields(async (error) => {
-            const {shopCategoryName, shopCategoryDesc, shopCategoryImg, priority, parentId} = form.getFieldsValue();
-
             //验证结果,当没有错误时error对象则为null
             const shopCategoryId = this.state.shopCategoryId;
             if (!error) {
+                const {shopCategoryName, shopCategoryDesc, shopCategoryImg, priority, parentId} = form.getFieldsValue();
                 let categoryInfo = {};
                 categoryInfo.shopCategoryId = shopCategoryId;
                 categoryInfo.shopCategoryName = shopCategoryName;
@@ -114,7 +110,7 @@ class ShopCategoryForm extends React.Component {
     render() {
         const {getFieldError, getFieldProps, getFieldValue} = this.props.form;
         return <React.Fragment>
-            <List renderHeader={() => !this.state.shopCategoryId ? "添加店铺类别" : "修改店铺类别"} renderFooter={() =>
+            <List renderHeader={() => !this.state.shopCategoryId ? "添加商店类别" : "修改商店类别"} renderFooter={() =>
                 getFieldError("shopCategoryName") ||
                 getFieldError("shopCategoryDesc") ||
                 getFieldError("priority") ||
@@ -125,9 +121,9 @@ class ShopCategoryForm extends React.Component {
                                validateFirst: true,
                                rules: [
                                    //申明式验证
-                                   {required: true, message: '店铺类别名称是必须的！'},
-                                   {whitespace: true, message: '店铺类别中不能含有空格！'},
-                                   {max: 12, message: '店铺类别名不能长于12位！'}
+                                   {required: true, message: '商店类别名称是必须的！'},
+                                   {whitespace: true, message: '商店类别中不能含有空格！'},
+                                   {max: 12, message: '商店类别名不能长于12位！'}
                                ]
                            })}
                            whitespace="true"
@@ -141,7 +137,7 @@ class ShopCategoryForm extends React.Component {
                     data-seed="logId"
                     {...getFieldProps('shopCategoryDesc', {
                         rules: [
-                            {required: true, message: '店铺类别描述是必须的！'}
+                            {required: true, message: '商店类别描述是必须的！'}
                         ]
                     })}
                     error={!!getFieldError('shopCategoryDesc')}
@@ -161,7 +157,7 @@ class ShopCategoryForm extends React.Component {
                     error={!!getFieldError('priority')}
                     {...getFieldProps('priority', {
                         rules: [
-                            {required: true, message: '店铺类别权重是必须的！'}
+                            {required: true, message: '商店类别权重是必须的！'}
                         ]
                     })}
                     type="money"

@@ -3,6 +3,7 @@ package cn.pengan.service.impl;
 import cn.pengan.annotations.DataOperationLog;
 import cn.pengan.dao.IShopCategoryDao;
 import cn.pengan.dto.ShopCategoryExecution;
+import cn.pengan.dto.ShopCategoryPickerModel;
 import cn.pengan.entity.ShopCategory;
 import cn.pengan.enums.ShopCategoryEnum;
 import cn.pengan.exceptions.ShopCategoryOperationException;
@@ -68,6 +69,11 @@ public class ShopCategoryServiceImpl implements IShopCategoryService {
         int count = shopCategoryDao.findCount(shopCategory);
         ShopCategoryExecution shopCategoryExecution = new ShopCategoryExecution(ShopCategoryEnum.SUCCESS, shopCategoryList, count);
         return shopCategoryExecution;
+    }
+
+    @Override
+    public List<ShopCategoryPickerModel> findShopCategoryPickerList() {
+        return shopCategoryDao.findShopCategoryPickerList();
     }
 
     @DataOperationLog("添加了一个商店类别信息")

@@ -4,6 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.pengan.dao.IShopCategoryDao">
+
+    <resultMap id="shopCategoryPickerMap" type="cn.pengan.dto.ShopCategoryPickerModel">
+        <id property="value" column="parent_Id"></id>
+        <result property="label" column="parent_Name"></result>
+        <collection property="children" ofType="cn.pengan.dto.ShopCategoryPickerModel">
+            <id property="value" column="child_Id"></id>
+            <result property="label" column="child_Name"></result>
+        </collection>
+    </resultMap>
+
     <select id="findShopCategoryById" parameterType="Long" resultType="ShopCategory">
         SELECT * FROM tb_shop_category
         WHERE shop_category_id = #{shopCategoryId}
@@ -73,4 +83,20 @@
         </set>
         WHERE shop_category_id = #{shopCategoryId}
     </update>
+
+    <select id="findShopCategoryPickerList" resultMap="shopCategoryPickerMap">
+   SELECT
+        parent.shop_category_id AS parent_Id,
+        parent.shop_category_name AS parent_Name,
+        child.shop_category_id AS child_Id,
+        child.shop_category_name AS child_Name
+    FROM
+	    `tb_shop_category` AS parent
+	LEFT JOIN `tb_shop_category` AS child ON parent.shop_category_id = child.parent_id
+	WHERE
+	parent.parent_id IS NULL
+    ORDER BY
+	    parent.priority,
+	    child.priority DESC
+    </select>
 </mapper>

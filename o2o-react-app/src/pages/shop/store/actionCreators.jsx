@@ -49,11 +49,10 @@ export const getShopOperationInitDataAction = () => {
         let shopCategoryArray = [];
         let areaArray = [];
         const initData = await reqShopOperationInitData();
+        console.log(initData);
         if (initData.success) {
-            initData.data.shopCategoryList.map(function (item, index) {
-                shopCategoryArray.push({value: item.shopCategoryId, label: item.shopCategoryName});
-                return index;
-            });
+            shopCategoryArray =  initData.data.shopCategoryPickerData;
+           
             initData.data.areaList.map((item, index) => {
                 areaArray.push({value: item.areaId, label: item.areaName});
                 return index;
