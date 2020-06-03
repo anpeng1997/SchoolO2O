@@ -1,13 +1,13 @@
 import React from 'react';
-import {List} from 'antd-mobile';
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import { List, Button } from 'antd-mobile';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import * as shopActions from "../store/actionCreators";
 
 const Item = List.Item;
 
 
-class ShopList extends React.PureComponent {
+class ShopList extends React.Component {
 
     componentDidMount() {
         //在mapDispatchToProps中使用了bindActionCreators,所以是调用props.actions
@@ -21,31 +21,30 @@ class ShopList extends React.PureComponent {
         })
     }
 
-    getShopStatus = code => {
-        if (code === -1) {
-            return "审核失败";
-        } else if (code === 0) {
-            return "审核中"
-        } else {
-            return "审核通过"
-        }
-    }
-
     render() {
         const shopList = this.props.shopList.toJS();
+        const { history } = this.props;
         return (<React.Fragment>
             <List renderHeader={() => "欢迎你"} className="my-list">
                 {
                     shopList.map((item, index) => {
                         return <Item key={index}
-                                     extra={this.getShopStatus(item.enableStatus)}
-                                     arrow="horizontal"
-                                     onClick={this.shopManage.bind(this, item.shopId)}>
+                            extra={item.advice}
+                            arrow="horizontal"
+                            onClick={this.shopManage.bind(this, item.shopId)}>
                             {item.shopName}
                         </Item>
                     })
                 }
+                <Item>
+                    <Button style={{ marginTop: "50px" }} type="primary" size="large" onClick={
+                        () => {
+                            history.push(`/shop/shopoperation`)
+                        }
+                    }>注册商店</Button>
+                </Item>
             </List>
+
         </React.Fragment>)
     }
 

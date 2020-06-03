@@ -65,6 +65,7 @@ public class ShopFrontDeskApiController {
                               @RequestParam(name = "pageIndex", required = false) Integer pageIndex) {
         Shop shopCondition = new Shop();
         shopCondition.setParentCategoryId(parentId);
+        shopCondition.setEnableStatus(1);
         if (!StringUtils.isEmpty(searchKey)) {
             shopCondition.setShopName(searchKey);
         }

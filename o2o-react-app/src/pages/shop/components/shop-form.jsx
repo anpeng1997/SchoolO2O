@@ -92,6 +92,7 @@ class ShopForm extends React.Component {
     onSubmitData = () => {
         const { history, form } = this.props;
         const { shopId } = this.state;
+        console.log("onSubmitData..")
         form.validateFields(async (error) => {
             console.log("validateFields....")
             //验证结果,当没有错误时error对象则为null
@@ -139,9 +140,11 @@ class ShopForm extends React.Component {
         if (value && value.length >= 3) {
             callback(); //调用无参的callback则代表验证通过
         } else {
-            callback("商店名称不能小于三个字！");  //给callback传递参数则代表验证失败
+            callback("商店名称不能大于三个字！");  //给callback传递参数则代表验证失败
         }
+        callback();
     }
+
     /**
      * shopCategory自定义验证器
      */
@@ -149,12 +152,17 @@ class ShopForm extends React.Component {
         if (value && value.length >= 2) {
             callback();
         } else {
-            callback("请选择商店类别，如没有合适类别请前往类别管理页面添加类别");
+            callback("请选择商店类别，如没有合适类别可在类别管理页面添加");
         }
+        callback();
     }
 
     phoneValidator = (rule, value, callback) => {
-        //必须先判断value值是否有值,否则该处报错的话不会打印在控制台上，form.validateFields也不会执行，因为后续没有callback执行了
+        /**
+         * 
+         * 必须先判断value值是否有值,否则该处报错的话不会打印在控制台上，【form.validateFields】也不会执行，因为后续没有callback执行了
+         * 一定要 callback() !!!!!!,假如有的地方出现了异常并不会抛出，导致callback不会再执行
+         */
         if (value) {
             if (value.replace(/\s/g, '').length < 11) {
                 callback("号码必须为11位");
@@ -164,21 +172,21 @@ class ShopForm extends React.Component {
         } else {
             callback("号码为必填的！");
         }
+        callback();
     }
 
     imgValidator = (rule, value, callback) => {
         //根据shopId是否为null来判断是修改还是注册
-        if (this.state.shopId) {
-            callback();
-        } else {
+        if (!this.state.shopId) {
             //注册
             if (!value) {
-                callback('商店的图片是必须的')
+                callback('商店的图片是必须的');
+            } else if (value.length <= 0) {
+                callback('商店的图片是必须的');
             }
-            if (value.length <= 0) {
-                callback('商店的图片是必须的')
-            }
+            callback();
         }
+        callback();
     }
 
     render() {
@@ -186,9 +194,14 @@ class ShopForm extends React.Component {
         const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
         return <React.Fragment>
             <List renderHeader={() => !this.state.shopId ? '注册商店' : '修改商店信息'}
-                renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
-                    || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
-                    getFieldError('shopDesc') || getFieldError('verifyCodeActual')
+                renderFooter={() => getFieldError('shopName') ||
+                    getFieldError('shopCategoryId') ||
+                    getFieldError("areaId") ||
+                    getFieldError('shopAddr') ||
+                    getFieldError('phone') ||
+                    getFieldError('shopImg') ||
+                    getFieldError('shopDesc') ||
+                    getFieldError('verifyCodeActual')
                 }>
                 <InputItem clear="true" maxLength="12"
                     {...getFieldProps('shopName', {
@@ -335,4 +348,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 //createForm:高级函数，将一个组件给它，将返回一个新的组件
-export default createForm()(connect(mapStateToProps, mapDispatchToProps)(ShopForm));
+export default connect(mapStateToProps, mapDispatchToProps)(createForm()(ShopForm));

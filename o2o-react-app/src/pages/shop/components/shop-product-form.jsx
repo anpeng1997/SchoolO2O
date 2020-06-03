@@ -1,9 +1,9 @@
 import React from "react";
-import {List, Button, InputItem, ImagePicker, Picker, WhiteSpace, WingBlank, Flex, Toast} from "antd-mobile";
-import {createForm} from "rc-form";
-import {reqProductCategoryList, reqAddOrModifyProduct, reqProduct} from "../../../api/shopAPI";
-import {Redirect} from "react-router-dom";
-import {IMGSERVERURL} from "../../../common/Constant";
+import { List, Button, InputItem, ImagePicker, Picker, WhiteSpace, WingBlank, Flex, Toast } from "antd-mobile";
+import { createForm } from "rc-form";
+import { reqProductCategoryList, reqAddOrModifyProduct, reqProduct } from "../../../api/shopAPI";
+import { IMGSERVERURL } from "../../../common/Constant";
+
 
 const Item = List.Item;
 
@@ -32,14 +32,13 @@ class ShopProductForm extends React.PureComponent {
     }
 
     async componentDidMount() {
-        Toast.loading('正在加载...', 0);
-        const {shopId, productId} = this.state;
+        const { shopId, productId } = this.state;
         if (shopId) {
             const response = await reqProductCategoryList(shopId);
             if (response.success) {
                 let categoryArray = [];
                 response.data.map(function (item, index) {
-                    categoryArray.push({value: item.productCategoryId, label: item.productCategoryName})
+                    categoryArray.push({ value: item.productCategoryId, label: item.productCategoryName })
                     return index;
                 })
                 this.setState({
@@ -54,7 +53,7 @@ class ShopProductForm extends React.PureComponent {
                     const data = response.data;
                     let imgs = [];
                     data.product.productImgs.map((item, index) => {
-                        imgs.push({url: IMGSERVERURL + item.imgAddr, id: item.productImgId})
+                        imgs.push({ url: IMGSERVERURL + item.imgAddr, id: item.productImgId })
                         return index;
                     });
                     form.setFieldsValue({
@@ -69,7 +68,6 @@ class ShopProductForm extends React.PureComponent {
                 }
             }
         }
-        Toast.hide();
     }
 
 
@@ -78,11 +76,12 @@ class ShopProductForm extends React.PureComponent {
     }
 
     onSubmitData = () => {
-        const {shopId, productId} = this.state;
-        const {form, history} = this.props;
-        const {productName, productDesc, normalPrice, promotionPrice, productCategoryId, priority, productImgs} = form.getFieldsValue();
+        const { shopId, productId } = this.state;
+        const { form, history } = this.props;
+
         form.validateFields(async (error) => {
             if (!error) {
+                const { productName, productDesc, normalPrice, promotionPrice, productCategoryId, priority, productImgs } = form.getFieldsValue();
                 const productInfo = {
                     productId,
                     shopId,
@@ -101,9 +100,7 @@ class ShopProductForm extends React.PureComponent {
                 })
                 const requestType = !productId ? "add" : "modify";
                 //send request
-                Toast.loading("submit...", 0)
                 const response = await reqAddOrModifyProduct(requestType, formData);
-                Toast.hide();
                 if (response.success) {
                     Toast.success("操作成功", 2);
                     setTimeout(() => {
@@ -147,38 +144,35 @@ class ShopProductForm extends React.PureComponent {
 
 
     render() {
-        const {getFieldProps, getFieldError, getFieldValue} = this.props.form;
-        if (!this.state.shopId) {
-            return <Redirect to="/shop/shoplist"/>;
-        }
+        const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
         return <React.Fragment>
             <List renderHeader={() => !this.state.productId ? '添加商品' : '修改商品'}
-                  renderFooter={() => getFieldError('productName') ||
-                      getFieldError('productDesc') || getFieldError('normalPrice') ||
-                      getFieldError('promotionPrice') || getFieldError('productCategoryId') ||
-                      getFieldError('priority') || getFieldError('productImgs')}
+                renderFooter={() => getFieldError('productName') ||
+                    getFieldError('productDesc') || getFieldError('normalPrice') ||
+                    getFieldError('promotionPrice') || getFieldError('productCategoryId') ||
+                    getFieldError('priority') || getFieldError('productImgs')}
             >
                 <InputItem {...getFieldProps('productName', {
                     rules: [
-                        {required: true, message: '商品名称是必须的！'},
-                        {max: 10, message: '商品名称长度不能大于10'}
+                        { required: true, message: '商品名称是必须的！' },
+                        { max: 10, message: '商品名称长度不能大于10' }
                     ]
                 })}
-                           error={!!getFieldError('productName')}
+                    error={!!getFieldError('productName')}
                 >
                     商品名称：
                 </InputItem>
                 <InputItem {...getFieldProps('productDesc', {
                     rules: []
                 })}
-                           error={!!getFieldError('productDesc')}
+                    error={!!getFieldError('productDesc')}
                 >
                     商品描述：
                 </InputItem>
                 <InputItem
                     {...getFieldProps('normalPrice', {
                         rules: [
-                            {required: true, message: '商品原价是必须的！'}
+                            { required: true, message: '商品原价是必须的！' }
                         ]
                     })}
                     error={!!getFieldError('normalPrice')}
@@ -190,7 +184,7 @@ class ShopProductForm extends React.PureComponent {
                 <InputItem
                     {...getFieldProps('promotionPrice', {
                         rules: [
-                            {required: true, message: '商品促销价是必须的！'}
+                            { required: true, message: '商品促销价是必须的！' }
                         ]
                     })}
                     type="money"
@@ -202,7 +196,7 @@ class ShopProductForm extends React.PureComponent {
                 <Picker
                     {...getFieldProps('productCategoryId', {
                         rules: [
-                            {required: true, message: '商品类别是必须的！'}
+                            { required: true, message: '商品类别是必须的！' }
                         ]
                     })}
                     data={this.state.productCategorys}
@@ -214,7 +208,7 @@ class ShopProductForm extends React.PureComponent {
                     error={!!getFieldError('priority')}
                     {...getFieldProps('priority', {
                         rules: [
-                            {required: true, message: '商品类别权重是必须的！'}
+                            { required: true, message: '商品类别权重是必须的！' }
                         ]
                     })}
                     type="money"
@@ -234,7 +228,7 @@ class ShopProductForm extends React.PureComponent {
                         //处理表单获取值的事件
                         getValueFromEvent: this.onImagePickerChange,
                         rules: [
-                            {validator: this.imgValidator}
+                            { validator: this.imgValidator }
                         ]
                     })}
                     selectable={this.state.isAddImg}
@@ -247,7 +241,7 @@ class ShopProductForm extends React.PureComponent {
                     <Flex>
                         <Flex.Item><Button size="large" onClick={this.back}>取消</Button></Flex.Item>
                         <Flex.Item><Button type="primary" size="large"
-                                           onClick={this.onSubmitData}>确认</Button></Flex.Item>
+                            onClick={this.onSubmitData}>确认</Button></Flex.Item>
                     </Flex>
                 </WingBlank>
                 <WhiteSpace size="lg"></WhiteSpace>
@@ -255,5 +249,6 @@ class ShopProductForm extends React.PureComponent {
         </React.Fragment>
     }
 }
+
 
 export default createForm()(ShopProductForm);
