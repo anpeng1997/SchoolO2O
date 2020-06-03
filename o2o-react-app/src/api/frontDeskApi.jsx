@@ -25,3 +25,23 @@ export const reqShopList = (parentId, searchKey = null, shopCategoryIds = null, 
     }
     return axiosRequest(url, data);
 }
+
+export const reqShopDetail = (shopId) => axiosRequest(`/api/frontdesk/shop/shopdetail/${shopId}`);
+
+export const reqProductList = (shopId, searchKey = null, productCategoryIds = null, pageSize = null, pageIndex = null) => {
+    let data = {};
+    const url = `/api/frontdesk/product/${shopId}`;
+    if (searchKey) {
+        data["searchKey"] = searchKey;
+    }
+    if (productCategoryIds) {
+        data["productCategoryIds"] = productCategoryIds;
+    }
+    if (pageSize) {
+        data["pageSize"] = pageSize;
+    }
+    if (pageIndex) {
+        data["pageIndex"] = pageIndex;
+    }
+    return axiosRequest(url, data);
+}

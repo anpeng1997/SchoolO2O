@@ -62,13 +62,17 @@ public class ProductDaoTest extends BaseTest {
 
     @Test
     public void d_findProductListTest() {
-        List<Product> productList = productDao.findProductList(45L, 2, 2);
+        Product product = new Product();
+        product.setShopId(45L);
+        List<Product> productList = productDao.findProductList(product,null, 2, 2);
         productList.stream().forEach(System.out::println);
     }
 
     @Test
     public void e_findProductCount() {
-        int productCount = productDao.findProductCount(45L);
+        Product product = new Product();
+        product.setShopId(45L);
+        int productCount = productDao.findProductCount(product,null);
         System.out.println(productCount);
     }
 }

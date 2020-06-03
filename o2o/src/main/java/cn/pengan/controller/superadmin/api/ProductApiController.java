@@ -95,7 +95,9 @@ public class ProductApiController {
         if (pagesize == null) {
             pagesize = 100;
         }
-        ProductExecution execution = productService.findProductList(shopId, pageindex, pagesize);
+        Product productCondition = new Product();
+        productCondition.setShopId(shopId);
+        ProductExecution execution = productService.findProductList(productCondition, null, pageindex, pagesize);
         return new Result(true, execution);
     }
 

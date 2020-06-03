@@ -1,8 +1,16 @@
 import React from "react";
+<<<<<<< HEAD
 import {SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button} from "antd-mobile";
 import {reqShopList, reqShopCategoryList} from "../../../api/frontDeskApi";
 import {IMGSERVERURL} from "../../../common/Constant";
 import {DateTimeFormat} from "../../../common/utils";
+=======
+import { SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button, Toast } from "antd-mobile";
+import { reqShopList, reqShopCategoryList } from "../../../api/frontDeskApi";
+import { IMGSERVERURL } from "../../../common/Constant";
+import { DateTimeFormat } from "../../../common/utils";
+import { Link } from "react-router-dom";
+>>>>>>> refs/remotes/origin/master
 
 class Index extends React.Component {
 
@@ -10,7 +18,6 @@ class Index extends React.Component {
     constructor(props) {
         super(props);
         const parentId = props.match.params.parentId
-        console.log("parent", parentId);
         this.state = {
             parentId,
             searchValue: "",
@@ -33,9 +40,11 @@ class Index extends React.Component {
                     shopList
                 }
             });
+        } else {
+            Toast.fail(shopResponse.errorInfo, 2)
+            console.error(shopResponse);
         }
         const shopCategoryResponse = await reqShopCategoryList(parentId);
-        console.log(shopCategoryResponse)
         if (shopCategoryResponse.success) {
             const {shopCategoryList, areas} = shopCategoryResponse.data;
             let areasData = [{label: "全部区域", value: -1}];
@@ -47,6 +56,9 @@ class Index extends React.Component {
                 shopCategoryList,
                 areas: areasData
             })
+        } else {
+            Toast.fail(shopCategoryResponse.errorInfo, 2)
+            console.error(shopCategoryResponse);
         }
     }
 
@@ -91,6 +103,9 @@ class Index extends React.Component {
                     shopList
                 }
             });
+        } else {
+            Toast.fail(shopResponse.errorInfo, 2)
+            console.error(shopResponse);
         }
     }
 
@@ -124,7 +139,6 @@ class Index extends React.Component {
         }, async () => {
             await this.byConditionGetShopData();
         })
-
     }
 
     isSelectCondition = (conditionName) => {
@@ -165,12 +179,11 @@ class Index extends React.Component {
                 <WhiteSpace/>
                 {
                     shopDate.shopList.map((item, index) => {
-                        return <div key={index}>
+                        return <Link to={"/frontdesk/shopdetail/" + item.shopId} key={index}>
                             <Card>
                                 <Card.Header
                                     title={item.shopName}
                                 />
-                                {/* TODO: 前端的条件搜索 */}
                                 <Card.Body>
                                     <img alt={item.shopName} src={`${IMGSERVERURL}/${item.shopImg}`} style={{
                                         float: "left",
@@ -183,8 +196,13 @@ class Index extends React.Component {
                                 <Card.Footer content={"更新于：" + DateTimeFormat(item.lastEditTime, "YYYY-MM-DD HH:mm")}
                                              extra={<div>点击查看</div>}/>
                             </Card>
+<<<<<<< HEAD
                             <WhiteSpace/>
                         </div>
+=======
+                            <WhiteSpace />
+                        </Link>
+>>>>>>> refs/remotes/origin/master
                     })
                 }
             </WingBlank>

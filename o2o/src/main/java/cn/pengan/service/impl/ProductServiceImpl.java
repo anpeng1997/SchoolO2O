@@ -100,10 +100,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ProductExecution findProductList(Long shopId, int pageIndex, int pageSize) {
+    public ProductExecution findProductList(Product productCondition, Long[] productCategoryIds, int pageIndex, int pageSize) {
         int offset = CalculatorPaging.calcRowIndex(pageIndex, pageSize);
-        List<Product> productList = productDao.findProductList(shopId, offset, pageSize);
-        int productCount = productDao.findProductCount(shopId);
+        //防止传入一个长度为0的数组
+        if (productCategoryIds != null && productCategoryIds.length <= 0) {
+            productCategoryIds = null;
+        }
+        List<Product> productList = productDao.findProductList(productCondition, productCategoryIds, offset, pageSize);
+        int productCount = productDao.findProductCount(productCondition, productCategoryIds);
         ProductExecution execution = new ProductExecution(ProductStatusEnum.SUCCESS, productList, productCount);
         return execution;
     }
