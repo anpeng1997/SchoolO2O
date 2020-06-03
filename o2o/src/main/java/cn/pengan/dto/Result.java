@@ -18,6 +18,7 @@ public class Result<T> {
         this.success = success;
         this.errorInfo = errorInfo;
     }
+
     public Result(boolean success, String errorInfo, int errorCode) {
         this.success = success;
         this.errorInfo = errorInfo;

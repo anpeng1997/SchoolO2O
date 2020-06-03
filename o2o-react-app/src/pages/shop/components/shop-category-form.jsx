@@ -1,8 +1,19 @@
 import React from "react";
-import { List, InputItem, TextareaItem, Picker, ImagePicker, WingBlank, Flex, Button, WhiteSpace, Toast } from "antd-mobile";
-import { createForm } from "rc-form";
-import { reqShopOperationInitData } from "../../../api/shopAPI";
-import { reqAddOrModifyShopCategory } from "../../../api/shopAPI";
+import {
+    List,
+    InputItem,
+    TextareaItem,
+    Picker,
+    ImagePicker,
+    WingBlank,
+    Flex,
+    Button,
+    WhiteSpace,
+    Toast
+} from "antd-mobile";
+import {createForm} from "rc-form";
+import {reqShopOperationInitData} from "../../../api/shopAPI";
+import {reqAddOrModifyShopCategory} from "../../../api/shopAPI";
 
 const Item = List.Item;
 
@@ -23,10 +34,10 @@ class ShopCategoryForm extends React.Component {
         const response = await reqShopOperationInitData()
         if (response.success) {
             response.data.shopCategoryList.map(function (item, index) {
-                shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
+                shopCategoryArray.push({value: item.shopCategoryId, label: item.shopCategoryName});
                 return index;
             });
-            this.setState({ shopCategoryList: shopCategoryArray })
+            this.setState({shopCategoryList: shopCategoryArray})
         } else {
             console.error(response);
             Toast.fail("列表数据加载失败", 2);
@@ -56,15 +67,15 @@ class ShopCategoryForm extends React.Component {
         }
         callback();
     }
-    
+
     back = () => {
         this.props.history.goBack();
     }
 
     onSubmitData = () => {
-        const { history, form } = this.props;
+        const {history, form} = this.props;
         this.props.form.validateFields(async (error) => {
-            const { shopCategoryName, shopCategoryDesc, shopCategoryImg, priority, parentId } = form.getFieldsValue();
+            const {shopCategoryName, shopCategoryDesc, shopCategoryImg, priority, parentId} = form.getFieldsValue();
 
             //验证结果,当没有错误时error对象则为null
             const shopCategoryId = this.state.shopCategoryId;
@@ -101,7 +112,7 @@ class ShopCategoryForm extends React.Component {
 
 
     render() {
-        const { getFieldError, getFieldProps, getFieldValue } = this.props.form;
+        const {getFieldError, getFieldProps, getFieldValue} = this.props.form;
         return <React.Fragment>
             <List renderHeader={() => !this.state.shopCategoryId ? "添加店铺类别" : "修改店铺类别"} renderFooter={() =>
                 getFieldError("shopCategoryName") ||
@@ -110,18 +121,18 @@ class ShopCategoryForm extends React.Component {
                 getFieldError("shopCategoryImg")
             }>
                 <InputItem clear="true" maxLength="12"
-                    {...getFieldProps('shopCategoryName', {
-                        validateFirst: true,
-                        rules: [
-                            //申明式验证
-                            { required: true, message: '店铺类别名称是必须的！' },
-                            { whitespace: true, message: '店铺类别中不能含有空格！' },
-                            { max: 12, message: '店铺类别名不能长于12位！' }
-                        ]
-                    })}
-                    whitespace="true"
-                    error={!!getFieldError('shopCategoryName')}
-                    placeholder="输入类别名称">
+                           {...getFieldProps('shopCategoryName', {
+                               validateFirst: true,
+                               rules: [
+                                   //申明式验证
+                                   {required: true, message: '店铺类别名称是必须的！'},
+                                   {whitespace: true, message: '店铺类别中不能含有空格！'},
+                                   {max: 12, message: '店铺类别名不能长于12位！'}
+                               ]
+                           })}
+                           whitespace="true"
+                           error={!!getFieldError('shopCategoryName')}
+                           placeholder="输入类别名称">
                     类别名称
                 </InputItem>
                 <TextareaItem
@@ -130,7 +141,7 @@ class ShopCategoryForm extends React.Component {
                     data-seed="logId"
                     {...getFieldProps('shopCategoryDesc', {
                         rules: [
-                            { required: true, message: '店铺类别描述是必须的！' }
+                            {required: true, message: '店铺类别描述是必须的！'}
                         ]
                     })}
                     error={!!getFieldError('shopCategoryDesc')}
@@ -150,7 +161,7 @@ class ShopCategoryForm extends React.Component {
                     error={!!getFieldError('priority')}
                     {...getFieldProps('priority', {
                         rules: [
-                            { required: true, message: '店铺类别权重是必须的！' }
+                            {required: true, message: '店铺类别权重是必须的！'}
                         ]
                     })}
                     type="money"
@@ -169,17 +180,18 @@ class ShopCategoryForm extends React.Component {
                         //处理表单获取值的事件
                         getValueFromEvent: this.onImagePickerChange,
                         rules: [
-                            { validator: this.imgValidator }
+                            {validator: this.imgValidator}
                         ]
                     })}
                     //只能选择一张图片
-                    selectable={this.state.isAddImg} >
+                    selectable={this.state.isAddImg}>
                 </ImagePicker>
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">
                     <Flex>
-                        <Flex.Item><Button size="large" onClick={this.back} >取消</Button></Flex.Item>
-                        <Flex.Item><Button type="primary" size="large" onClick={this.onSubmitData} >确认</Button></Flex.Item>
+                        <Flex.Item><Button size="large" onClick={this.back}>取消</Button></Flex.Item>
+                        <Flex.Item><Button type="primary" size="large"
+                                           onClick={this.onSubmitData}>确认</Button></Flex.Item>
                     </Flex>
                 </WingBlank>
                 <WhiteSpace size="lg"></WhiteSpace>

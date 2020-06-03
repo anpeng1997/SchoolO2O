@@ -8,7 +8,8 @@
         WHERE user_id = #{id};
     </select>
 
-    <insert id="" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true" parameterType="PersonInfo">
+    <insert id="" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true"
+            parameterType="PersonInfo">
 
     </insert>
 </mapper>

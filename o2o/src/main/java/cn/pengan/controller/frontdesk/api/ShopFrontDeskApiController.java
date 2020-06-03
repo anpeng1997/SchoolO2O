@@ -45,8 +45,8 @@ public class ShopFrontDeskApiController {
         ShopCategoryExecution shopCategory = shopCategoryService.findShopCategoryList(shopCategoryCondition);
         List<Area> areas = areaService.findAll();
         Map<String, Object> data = new HashMap<>();
-        data.put("shopCategoryList",shopCategory.getShopCategoryList());
-        data.put("areas",areas);
+        data.put("shopCategoryList", shopCategory.getShopCategoryList());
+        data.put("areas", areas);
         return new Result(true, data);
     }
 

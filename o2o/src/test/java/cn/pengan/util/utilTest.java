@@ -84,7 +84,7 @@ public class utilTest {
     @Test
     public void test5() {
         long l = System.currentTimeMillis();
-        int[] numbers = {123, 321, 8888, 78979,454565497,78361984,576456};
+        int[] numbers = {123, 321, 8888, 78979, 454565497, 78361984, 576456};
         StringBuilder build = new StringBuilder();
         for (String i : Arrays.stream(numbers).boxed().map(String::valueOf).sorted((n1, n2) -> (n2 + n1).compareTo(n1 + n2)).toArray(String[]::new)
         ) {

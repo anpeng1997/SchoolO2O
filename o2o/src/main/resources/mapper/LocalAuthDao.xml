@@ -29,32 +29,32 @@
     </resultMap>
 
     <select id="findLocalAuth" parameterType="String" resultMap="localAuthMap">
-            SELECT
-            auth.local_auth_id,
-            auth.user_id,
-            auth.user_name,
-            auth.`password`,
-            auth.create_time,
-            auth.last_edit_time,
-            per.user_id AS p_user_id,
-            per.`name`,
-            per.birthday,
-            per.gender,
-            per.phone,
-            per.email,
-            per.profile_img,
-            per.customer_flag,
-            per.shop_owner_flag,
-            per.admin_flag,
-            per.create_time AS p_create_time,
-            per.last_edit_time AS p_last_edit_time,
-            per.enable_status
+        SELECT
+        auth.local_auth_id,
+        auth.user_id,
+        auth.user_name,
+        auth.`password`,
+        auth.create_time,
+        auth.last_edit_time,
+        per.user_id AS p_user_id,
+        per.`name`,
+        per.birthday,
+        per.gender,
+        per.phone,
+        per.email,
+        per.profile_img,
+        per.customer_flag,
+        per.shop_owner_flag,
+        per.admin_flag,
+        per.create_time AS p_create_time,
+        per.last_edit_time AS p_last_edit_time,
+        per.enable_status
         FROM
-            tb_local_auth AS auth
-            LEFT JOIN tb_person_info AS per ON auth.user_id = per.user_id
+        tb_local_auth AS auth
+        LEFT JOIN tb_person_info AS per ON auth.user_id = per.user_id
         WHERE
-            auth.user_name = #{username}
-            AND auth.`password` = #{password}
+        auth.user_name = #{username}
+        AND auth.`password` = #{password}
     </select>
 
     <insert id="insertLocalAuth" keyColumn="local_auth_id" keyProperty="localAuthId" useGeneratedKeys="true"

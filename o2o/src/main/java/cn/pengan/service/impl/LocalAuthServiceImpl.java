@@ -37,7 +37,7 @@ public class LocalAuthServiceImpl implements ILocalAuthService {
             int result = localAuthDao.insertLocalAuth(auth);
             if (result >= 1) {
                 execution = new LocalAuthExecution(LocalAuthStatusEnum.SUCCESS);
-            }else {
+            } else {
                 execution = new LocalAuthExecution(LocalAuthStatusEnum.FAIL);
             }
         } catch (DuplicateKeyException duplicateKeyEx) {

@@ -1,6 +1,6 @@
-import { reqShopList, reqProductCategoryList, reqShopOperationInitData, reqProductList } from "../../../api/shopAPI";
-import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST } from "./actionType";
-import { Toast } from "antd-mobile";
+import {reqShopList, reqProductCategoryList, reqShopOperationInitData, reqProductList} from "../../../api/shopAPI";
+import {GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST} from "./actionType";
+import {Toast} from "antd-mobile";
 
 
 const createShopListAction = (data) => {
@@ -51,11 +51,11 @@ export const getShopOperationInitDataAction = () => {
         const initData = await reqShopOperationInitData();
         if (initData.success) {
             initData.data.shopCategoryList.map(function (item, index) {
-                shopCategoryArray.push({ value: item.shopCategoryId, label: item.shopCategoryName });
+                shopCategoryArray.push({value: item.shopCategoryId, label: item.shopCategoryName});
                 return index;
             });
             initData.data.areaList.map((item, index) => {
-                areaArray.push({ value: item.areaId, label: item.areaName });
+                areaArray.push({value: item.areaId, label: item.areaName});
                 return index;
             });
             dispatch(createShopOperationInitDataAction(shopCategoryArray, areaArray));

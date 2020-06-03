@@ -1,8 +1,8 @@
 import React from "react";
-import { SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button } from "antd-mobile";
-import { reqShopList, reqShopCategoryList } from "../../../api/frontDeskApi";
-import { IMGSERVERURL } from "../../../common/Constant";
-import { DateTimeFormat } from "../../../common/utils";
+import {SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button} from "antd-mobile";
+import {reqShopList, reqShopCategoryList} from "../../../api/frontDeskApi";
+import {IMGSERVERURL} from "../../../common/Constant";
+import {DateTimeFormat} from "../../../common/utils";
 
 class Index extends React.Component {
 
@@ -17,16 +17,16 @@ class Index extends React.Component {
             categoryFilterCondition: [-1],
             selectAreaId: null,
             shopCategoryList: [],
-            shopDate: { count: 0, shopList: [] },
+            shopDate: {count: 0, shopList: []},
             areas: []
         }
     }
 
     async componentDidMount() {
-        const { parentId } = this.state;
+        const {parentId} = this.state;
         const shopResponse = await reqShopList(parentId);
         if (shopResponse.success) {
-            const { count, shopList } = shopResponse.data;
+            const {count, shopList} = shopResponse.data;
             this.setState({
                 shopDate: {
                     count,
@@ -37,10 +37,10 @@ class Index extends React.Component {
         const shopCategoryResponse = await reqShopCategoryList(parentId);
         console.log(shopCategoryResponse)
         if (shopCategoryResponse.success) {
-            const { shopCategoryList, areas } = shopCategoryResponse.data;
-            let areasData = [{ label: "全部区域", value: -1 }];
+            const {shopCategoryList, areas} = shopCategoryResponse.data;
+            let areasData = [{label: "全部区域", value: -1}];
             areas.map((item, index) => {
-                areasData.push({ label: item.areaName, value: item.areaId });
+                areasData.push({label: item.areaName, value: item.areaId});
                 return index;
             })
             this.setState({
@@ -71,7 +71,7 @@ class Index extends React.Component {
     }
 
     byConditionGetShopData = async () => {
-        const { parentId, searchValue, categoryFilterCondition, selectAreaId } = this.state;
+        const {parentId, searchValue, categoryFilterCondition, selectAreaId} = this.state;
         let shopCategoryIds;
         if (categoryFilterCondition.includes(-1)) {
             shopCategoryIds = null;
@@ -84,7 +84,7 @@ class Index extends React.Component {
         }
         const shopResponse = await reqShopList(parentId, searchValue, shopCategoryIds, areaId, null, null);
         if (shopResponse.success) {
-            const { count, shopList } = shopResponse.data;
+            const {count, shopList} = shopResponse.data;
             this.setState({
                 shopDate: {
                     count,
@@ -96,7 +96,7 @@ class Index extends React.Component {
 
     conditionBtnClick = (value) => {
         let newArray;
-        const { categoryFilterCondition } = this.state;
+        const {categoryFilterCondition} = this.state;
         const index = categoryFilterCondition.indexOf(value);
         if (value === -1 && index >= 0) {
             return;
@@ -128,13 +128,13 @@ class Index extends React.Component {
     }
 
     isSelectCondition = (conditionName) => {
-        const { categoryFilterCondition } = this.state;
+        const {categoryFilterCondition} = this.state;
         return categoryFilterCondition.includes(conditionName) ? "primary" : "ghost";
     }
 
     areaPickOnOk = (val) => {
         const oldVal = this.state.selectAreaId;
-        this.setState({ selectAreaId: val }, async () => {
+        this.setState({selectAreaId: val}, async () => {
             if (oldVal !== val) {
                 await this.byConditionGetShopData();
             }
@@ -142,24 +142,27 @@ class Index extends React.Component {
     }
 
     render() {
-        const { searchValue, areas, shopCategoryList, shopDate, selectAreaId } = this.state;
+        const {searchValue, areas, shopCategoryList, shopDate, selectAreaId} = this.state;
         return <React.Fragment>
             <SearchBar value={searchValue} placeholder="输入店铺关键字" maxLength={10}
-                onChange={(val) => this.searchBarChange(val)}
-                onSubmit={(val) => this.searchBarSubmit(val)}
-                onCancel={(val) => this.searchBarCancel(val)}
+                       onChange={(val) => this.searchBarChange(val)}
+                       onSubmit={(val) => this.searchBarSubmit(val)}
+                       onCancel={(val) => this.searchBarCancel(val)}
             />
             <WingBlank size="sm">
-                <Button type={this.isSelectCondition(-1)} onClick={() => this.conditionBtnClick(-1)} inline size="small" style={{ margin: '5px 10px 5px 0px' }}>全部类别</Button>
+                <Button type={this.isSelectCondition(-1)} onClick={() => this.conditionBtnClick(-1)} inline size="small"
+                        style={{margin: '5px 10px 5px 0px'}}>全部类别</Button>
                 {
                     shopCategoryList.map((item, index) => {
-                        return <Button key={item.shopCategoryId} type={this.isSelectCondition(item.shopCategoryId)} onClick={() => this.conditionBtnClick(item.shopCategoryId)} inline size="small" style={{ margin: '5px 10px 5px 0px' }}>{item.shopCategoryName}</Button>
+                        return <Button key={item.shopCategoryId} type={this.isSelectCondition(item.shopCategoryId)}
+                                       onClick={() => this.conditionBtnClick(item.shopCategoryId)} inline size="small"
+                                       style={{margin: '5px 10px 5px 0px'}}>{item.shopCategoryName}</Button>
                     })
                 }
                 <Picker data={areas} cols={1} value={selectAreaId} onOk={(val) => this.areaPickOnOk(val)}>
-                    <List.Item style={{ maxHeight: "30px", minHeight: "10px" }} arrow="horizontal">区域</List.Item>
+                    <List.Item style={{maxHeight: "30px", minHeight: "10px"}} arrow="horizontal">区域</List.Item>
                 </Picker>
-                <WhiteSpace />
+                <WhiteSpace/>
                 {
                     shopDate.shopList.map((item, index) => {
                         return <div key={index}>
@@ -169,17 +172,23 @@ class Index extends React.Component {
                                 />
                                 {/* TODO: 前端的条件搜索 */}
                                 <Card.Body>
-                                    <img alt={item.shopName} src={`${IMGSERVERURL}/${item.shopImg}`} style={{ float: "left", width: "120px", height: "60px", marginBottom: "15px" }}></img>
-                                    <div style={{ float: "left", marginLeft: "20px" }}>{item.shopDesc}</div>
+                                    <img alt={item.shopName} src={`${IMGSERVERURL}/${item.shopImg}`} style={{
+                                        float: "left",
+                                        width: "120px",
+                                        height: "60px",
+                                        marginBottom: "15px"
+                                    }}></img>
+                                    <div style={{float: "left", marginLeft: "20px"}}>{item.shopDesc}</div>
                                 </Card.Body>
-                                <Card.Footer content={"更新于：" + DateTimeFormat(item.lastEditTime, "YYYY-MM-DD HH:mm")} extra={<div>点击查看</div>} />
+                                <Card.Footer content={"更新于：" + DateTimeFormat(item.lastEditTime, "YYYY-MM-DD HH:mm")}
+                                             extra={<div>点击查看</div>}/>
                             </Card>
-                            <WhiteSpace />
+                            <WhiteSpace/>
                         </div>
                     })
                 }
             </WingBlank>
-        </React.Fragment >
+        </React.Fragment>
     }
 }
 

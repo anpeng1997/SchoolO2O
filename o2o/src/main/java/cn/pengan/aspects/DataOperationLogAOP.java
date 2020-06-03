@@ -19,15 +19,16 @@ public class DataOperationLogAOP {
      * 记录操作日志
      * 声明该方法是一个返回通知:在目标方法正常结束之后返回(目标方法执行出现异常时不再执行)
      * 返回通知可以访问目标方法的执行结果
+     *
      * @param joinPoint
      * @param dataOperationLog
      * @param result
      */
-    @AfterReturning(value = "@annotation(dataOperationLog)",returning = "result")
-    public void afterReturningLog(JoinPoint joinPoint,DataOperationLog dataOperationLog,Object result){
+    @AfterReturning(value = "@annotation(dataOperationLog)", returning = "result")
+    public void afterReturningLog(JoinPoint joinPoint, DataOperationLog dataOperationLog, Object result) {
         String declaringTypeName = joinPoint.getSignature().getDeclaringTypeName();
         String value = dataOperationLog.value();
-        logger.debug("【{}】：【{}】,【{}】", declaringTypeName, value,result);
+        logger.debug("【{}】：【{}】,【{}】", declaringTypeName, value, result);
     }
 
 //    @Around("@annotation(dataOperationLog)")

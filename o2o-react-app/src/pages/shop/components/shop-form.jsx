@@ -1,8 +1,8 @@
 import React from "react";
-import { createForm } from "rc-form";
-import { connect } from "react-redux";
-import { getShopOperationInitDataAction } from "../store/actionCreators";
-import { reqRegisterOrModifyShop, reqShopInfo } from "../../../api/shopAPI"
+import {createForm} from "rc-form";
+import {connect} from "react-redux";
+import {getShopOperationInitDataAction} from "../store/actionCreators";
+import {reqRegisterOrModifyShop, reqShopInfo} from "../../../api/shopAPI"
 import {
     List,
     InputItem,
@@ -15,7 +15,7 @@ import {
     WingBlank,
     Toast
 } from "antd-mobile";
-import { VERIFY_CODE_URL } from "../../../common/Constant";
+import {VERIFY_CODE_URL} from "../../../common/Constant";
 
 const Item = List.Item;
 
@@ -90,9 +90,9 @@ class ShopForm extends React.Component {
     }
 
     onSubmitData = () => {
-        const { history, form } = this.props;
+        const {history, form} = this.props;
         this.props.form.validateFields(async (error) => {
-            const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual } = form.getFieldsValue();
+            const {shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual} = form.getFieldsValue();
             let shopId = this.state.shopId;
             //验证结果,当没有错误时error对象则为null
             if (!error) {
@@ -100,8 +100,8 @@ class ShopForm extends React.Component {
                 shopInfo.shopId = shopId;
                 shopInfo.shopName = shopName;
                 shopInfo.shopAddr = shopAddr;
-                shopInfo.area = { areaId: areaId[0] };
-                shopInfo.shopCategory = { shopCategoryId: shopCategoryId[0] };
+                shopInfo.area = {areaId: areaId[0]};
+                shopInfo.shopCategory = {shopCategoryId: shopCategoryId[0]};
                 shopInfo.phone = phone;
                 shopInfo.shopDesc = shopDesc;
                 let formData = new FormData();
@@ -131,7 +131,7 @@ class ShopForm extends React.Component {
 
     /**
      * shopName自定义验证器
-     * 
+     *
      */
     shopNameValidator = (rule, value, callback) => {
         if (value && value.length >= 3) {
@@ -169,58 +169,63 @@ class ShopForm extends React.Component {
     }
 
     render() {
-        const { shopCategoryList, areaList } = this.props;
-        const { getFieldProps, getFieldError, getFieldValue } = this.props.form;
+        const {shopCategoryList, areaList} = this.props;
+        const {getFieldProps, getFieldError, getFieldValue} = this.props.form;
         return <React.Fragment>
-            <List renderHeader={() => !this.state.shopId ? '注册店铺' : '修改店铺信息'} renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
-                || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
-                getFieldError('shopDesc') || getFieldError('verifyCodeActual')
-            }>
+            <List renderHeader={() => !this.state.shopId ? '注册店铺' : '修改店铺信息'}
+                  renderFooter={() => getFieldError('shopName') || getFieldError('shopCategoryId')
+                      || getFieldError("areaId") || getFieldError('shopAddr') || getFieldError('phone') || getFieldError('shopImg') ||
+                      getFieldError('shopDesc') || getFieldError('verifyCodeActual')
+                  }>
                 <InputItem clear="true" maxLength="12"
-                    {...getFieldProps('shopName', {
-                        validateFirst: true,
-                        rules: [
-                            //申明式验证
-                            { required: true, message: '店铺名称是必须的！' },
-                            { whitespace: true, message: '店铺名称中不能含有空格！' },
-                            { max: 12, message: '店铺名不能长于12位！' },
-                            //自定义验证器
-                            { validator: this.shopNameValidator },
-                        ]
-                    })}
-                    whitespace="true"
-                    error={!!getFieldError('shopName')}
-                    placeholder="输入店铺名称">
+                           {...getFieldProps('shopName', {
+                               validateFirst: true,
+                               rules: [
+                                   //申明式验证
+                                   {required: true, message: '店铺名称是必须的！'},
+                                   {whitespace: true, message: '店铺名称中不能含有空格！'},
+                                   {max: 12, message: '店铺名不能长于12位！'},
+                                   //自定义验证器
+                                   {validator: this.shopNameValidator},
+                               ]
+                           })}
+                           whitespace="true"
+                           error={!!getFieldError('shopName')}
+                           placeholder="输入店铺名称">
                     店铺名称
                 </InputItem>
                 <Picker data={shopCategoryList.toJS()} cols={1}
-                    onOk={(val) => { this.setState({ currentPickerShopCategoryId: val }) }}
-                    error={!!getFieldError('shopCategoryId')}
-                    {...getFieldProps('shopCategoryId', {
-                        rules: [
-                            { required: true, message: '必须选择一个店铺类别!' }
-                        ]
-                    })} className="forss">
+                        onOk={(val) => {
+                            this.setState({currentPickerShopCategoryId: val})
+                        }}
+                        error={!!getFieldError('shopCategoryId')}
+                        {...getFieldProps('shopCategoryId', {
+                            rules: [
+                                {required: true, message: '必须选择一个店铺类别!'}
+                            ]
+                        })} className="forss">
                     <Item arrow="horizontal">店铺类别</Item>
                 </Picker>
                 <Picker data={areaList.toJS()} cols={1}
-                    onOk={(val) => { this.setState({ currnetPickerAareaId: val }) }}
-                    error={!!getFieldError('areaId')}
-                    {...getFieldProps('areaId', {
-                        rules: [
-                            { required: true, message: '必须选择一个区域类别!' }
-                        ]
-                    })} className="forss">
+                        onOk={(val) => {
+                            this.setState({currnetPickerAareaId: val})
+                        }}
+                        error={!!getFieldError('areaId')}
+                        {...getFieldProps('areaId', {
+                            rules: [
+                                {required: true, message: '必须选择一个区域类别!'}
+                            ]
+                        })} className="forss">
                     <Item arrow="horizontal">所属地区</Item>
                 </Picker>
                 <InputItem clear="true" maxLength="40"
-                    error={!!getFieldError('shopAddr')}
-                    {...getFieldProps('shopAddr', {
-                        rules: [
-                            { required: true, message: '店铺详细地址是必须的' }
-                        ]
-                    })}
-                    placeholder="输入店铺详细地址">
+                           error={!!getFieldError('shopAddr')}
+                           {...getFieldProps('shopAddr', {
+                               rules: [
+                                   {required: true, message: '店铺详细地址是必须的'}
+                               ]
+                           })}
+                           placeholder="输入店铺详细地址">
                     详细地址
                 </InputItem>
                 <InputItem
@@ -229,7 +234,7 @@ class ShopForm extends React.Component {
                     error={!!getFieldError('phone')}
                     {...getFieldProps('phone', {
                         rules: [
-                            { validator: this.phoneValidator },
+                            {validator: this.phoneValidator},
                         ]
                     })}
                     onErrorClick={this.onErrorClick}
@@ -246,11 +251,11 @@ class ShopForm extends React.Component {
                         //处理表单获取值的事件
                         getValueFromEvent: this.onImagePickerChange,
                         rules: [
-                            { validator: this.imgValidator }
+                            {validator: this.imgValidator}
                         ]
                     })}
                     //只能选择一张图片
-                    selectable={this.state.isAddImg} >
+                    selectable={this.state.isAddImg}>
                 </ImagePicker>
                 <TextareaItem
                     title="店铺描述"
@@ -258,7 +263,7 @@ class ShopForm extends React.Component {
                     data-seed="logId"
                     {...getFieldProps('shopDesc', {
                         rules: [
-                            { required: true, message: '店铺描述是必须的！' }
+                            {required: true, message: '店铺描述是必须的！'}
                         ]
                     })}
                     error={!!getFieldError('shopDesc')}
@@ -277,18 +282,21 @@ class ShopForm extends React.Component {
                         ]
                     })}
                 >
-                    <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => { this.setState({ verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime() }) }} style={{ height: 'auto', width: '100%' }}></img>
+                    <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => {
+                        this.setState({verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime()})
+                    }} style={{height: 'auto', width: '100%'}}></img>
                 </InputItem>
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">
                     <Flex>
-                        <Flex.Item><Button size="large" onClick={this.back} >取消</Button></Flex.Item>
-                        <Flex.Item><Button type="primary" size="large" onClick={this.onSubmitData} >确认</Button></Flex.Item>
+                        <Flex.Item><Button size="large" onClick={this.back}>取消</Button></Flex.Item>
+                        <Flex.Item><Button type="primary" size="large"
+                                           onClick={this.onSubmitData}>确认</Button></Flex.Item>
                     </Flex>
                 </WingBlank>
                 <WhiteSpace size="lg"></WhiteSpace>
             </List>
-        </React.Fragment >
+        </React.Fragment>
     }
 }
 

@@ -9,6 +9,7 @@ public class JedisUtil {
     public Jedis getJedis() {
         return jedisPool.getResource();
     }
+
     /**
      * 设置过期时间
      *
@@ -34,6 +35,7 @@ public class JedisUtil {
 
         /**
          * 根据key值来获取value
+         *
          * @param key
          * @return
          */
@@ -43,6 +45,7 @@ public class JedisUtil {
             jedis.close();
             return value;
         }
+
         public byte[] get(byte[] key) {
             Jedis jedis = getJedis();
             byte[] bytes = jedis.get(key);
@@ -52,6 +55,7 @@ public class JedisUtil {
 
         /**
          * 添加一条记录，如果存在记录就覆盖
+         *
          * @param key
          * @param value
          * @return
@@ -63,7 +67,7 @@ public class JedisUtil {
             return str;
         }
 
-        public String set(byte[] key,byte[] value){
+        public String set(byte[] key, byte[] value) {
             Jedis jedis = getJedis();
             String str = jedis.set(key, value);
             jedis.close();
@@ -76,7 +80,7 @@ public class JedisUtil {
          * @param key
          * @param value
          * @return long 状态码，1插入成功且key不存在，0未插入，key存在
-         * */
+         */
         public long setnx(String key, String value) {
             Jedis jedis = getJedis();
             Long setnx = jedis.setnx(key, value);
@@ -86,24 +90,26 @@ public class JedisUtil {
 
         /**
          * 添加有过期时间的value
+         *
          * @param key
          * @param value
          * @param seconds 以秒为单位
          * @return
          */
-        public String setEx(String key,String value,int seconds){
+        public String setEx(String key, String value, int seconds) {
             Jedis jedis = getJedis();
             String str = jedis.setex(key, seconds, value);
             jedis.close();
             return str;
         }
 
-        public String setEx(byte[] key,byte[] value,int seconds){
+        public String setEx(byte[] key, byte[] value, int seconds) {
             Jedis jedis = getJedis();
-            String str = jedis.setex(key,seconds,value);
+            String str = jedis.setex(key, seconds, value);
             jedis.close();
             return str;
         }
+
         /**
          * 从指定位置开始插入数据，插入的数据会覆盖指定位置以后的数据<br/>
          * 例:String str1="123456789";<br/>
@@ -113,7 +119,7 @@ public class JedisUtil {
          * @param offset
          * @param value
          * @return long value的长度
-         * */
+         */
         public long setRange(String key, long offset, String value) {
             Jedis jedis = getJedis();
             long len = jedis.setrange(key, offset, value);
@@ -127,7 +133,7 @@ public class JedisUtil {
          * @param key
          * @param value
          * @return long 追加后value的长度
-         * **/
+         **/
         public long append(String key, String value) {
             Jedis jedis = getJedis();
             long len = jedis.append(key, value);

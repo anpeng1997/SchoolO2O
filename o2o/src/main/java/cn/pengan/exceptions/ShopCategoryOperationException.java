@@ -1,6 +1,6 @@
 package cn.pengan.exceptions;
 
-public class ShopCategoryOperationException extends RuntimeException{
+public class ShopCategoryOperationException extends RuntimeException {
     public ShopCategoryOperationException() {
         super();
     }

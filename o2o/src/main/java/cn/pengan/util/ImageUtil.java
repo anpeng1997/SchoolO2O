@@ -85,6 +85,7 @@ public class ImageUtil {
 
     /**
      * 获取文件名的后缀
+     *
      * @param fileName
      * @return
      */

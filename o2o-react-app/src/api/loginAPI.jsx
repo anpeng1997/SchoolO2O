@@ -1,3 +1,3 @@
-import { axiosRequest } from './myAxios';
+import {axiosRequest} from './myAxios';
 
-export const reqLogin = (data) => axiosRequest("/api/login",data,"POST");
+export const reqLogin = (data) => axiosRequest("/api/login", data, "POST");

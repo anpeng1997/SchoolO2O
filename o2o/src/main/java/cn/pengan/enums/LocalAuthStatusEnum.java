@@ -5,10 +5,10 @@ import java.util.Optional;
 
 public enum LocalAuthStatusEnum {
     SUCCESS(1, "操作成功"),
-    USER_OR_PWD_ERROR(2,"用户名或密码错误"),
+    USER_OR_PWD_ERROR(2, "用户名或密码错误"),
     FAIL(-1, "操作失败"),
     DUPLICATE_KEY(-1003, "添加数据时重复key错误"),
-    NOT_IS_ADMIN(-1000,"不是管理员"),
+    NOT_IS_ADMIN(-1000, "不是管理员"),
     INNER_ERROR(-1001, "内部错误");
 
     private int state;

@@ -32,6 +32,6 @@ public class LocalAuthDaoTest extends BaseTest {
 
     @Test
     public void Test() {
-        System.out.println( 5<< 3);
+        System.out.println(5 << 3);
     }
 }

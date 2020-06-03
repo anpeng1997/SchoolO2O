@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Toast } from 'antd-mobile';
-import { createHashHistory } from 'history';
+import {Toast} from 'antd-mobile';
+import {createHashHistory} from 'history';
 
 
 const history = createHashHistory();
@@ -19,7 +19,7 @@ const myAxiosInstance = axios.create({
      * 必须指定明确的、与请求网页一致的域名。
      * 同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，
      * 且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。
-     * 
+     *
      * https://www.ruanyifeng.com/blog/2016/04/cors.html
      */
 
@@ -28,11 +28,11 @@ const myAxiosInstance = axios.create({
 
 myAxiosInstance.interceptors.request.use(function (config) {
     Toast.loading("Loading....", 0);
-    
+
     // get参数编码,防止api接收不到含有特殊字符的参数
     // statement: https://segmentfault.com/a/1190000018384777
     let url = config.url
-    
+
     if (config.method === 'get' && config.params) {
         url += '?'
         let keys = Object.keys(config.params)
@@ -43,7 +43,7 @@ myAxiosInstance.interceptors.request.use(function (config) {
         config.params = {}
     }
     config.url = url
-    
+
     let token = window.localStorage.getItem("Authenticate-Token")
     if (token) {
         //将token放到请求头发送给服务器,将tokenkey放在请求头中

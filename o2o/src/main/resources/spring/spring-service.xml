@@ -13,7 +13,7 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!--    配置扫描service下的注解，交由IOC容器管理 -->
-    <context:component-scan base-package="cn.pengan.service.impl" />
+    <context:component-scan base-package="cn.pengan.service.impl"/>
 
     <!-- 单独将AOPDataOperationLog切面类交由IOC容器管理，因为上面只配置了自动扫描server包下的类，
     当然我们也可以配置它自动扫描
@@ -26,7 +26,7 @@
     <!-- 启动AspectJ支持
         AspectJ:解析切面表达式
         -->
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
     <!--    service的spring配置,在这里我们需要进行申明式事务的配置-->
     <!--    配置事务管理器-->

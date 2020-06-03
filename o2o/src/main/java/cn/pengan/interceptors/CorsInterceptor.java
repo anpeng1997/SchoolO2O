@@ -25,7 +25,7 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
 
         //Access-Control-Allow-Headers ： 设置允许那些报文头跨域(不能用*通配符)
         //x-requested-with是代表在请求头包含时必须响应
-       // response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        // response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Accept,Authenticate-Token");
         return true;
     }

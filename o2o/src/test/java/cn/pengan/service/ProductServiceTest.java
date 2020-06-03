@@ -41,7 +41,7 @@ public class ProductServiceTest extends BaseTest {
     }
 
     @Test
-    public void changeStatusTest(){
+    public void changeStatusTest() {
         ProductExecution execution = productService.changeProductStatus(13L);
         System.out.println(execution);
     }

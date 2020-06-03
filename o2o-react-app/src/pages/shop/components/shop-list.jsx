@@ -1,7 +1,7 @@
 import React from 'react';
-import { List } from 'antd-mobile';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {List} from 'antd-mobile';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import * as shopActions from "../store/actionCreators";
 
 const Item = List.Item;
@@ -34,13 +34,13 @@ class ShopList extends React.PureComponent {
     render() {
         const shopList = this.props.shopList.toJS();
         return (<React.Fragment>
-            <List renderHeader={() => "欢迎你"} className="my-list" >
+            <List renderHeader={() => "欢迎你"} className="my-list">
                 {
                     shopList.map((item, index) => {
                         return <Item key={index}
-                            extra={this.getShopStatus(item.enableStatus)}
-                            arrow="horizontal"
-                            onClick={this.shopManage.bind(this, item.shopId)}>
+                                     extra={this.getShopStatus(item.enableStatus)}
+                                     arrow="horizontal"
+                                     onClick={this.shopManage.bind(this, item.shopId)}>
                             {item.shopName}
                         </Item>
                     })

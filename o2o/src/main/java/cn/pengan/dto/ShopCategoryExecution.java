@@ -14,6 +14,7 @@ public class ShopCategoryExecution {
 
     public ShopCategoryExecution() {
     }
+
     public ShopCategoryExecution(ShopCategoryEnum shopCategoryEnum) {
         state = shopCategoryEnum.getState();
         stateInfo = shopCategoryEnum.getStateInfo();

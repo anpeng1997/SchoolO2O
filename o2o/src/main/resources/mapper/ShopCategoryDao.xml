@@ -16,10 +16,10 @@
                 parent_id = #{parentId}
             </if>
             <if test="parentId == null">
-               AND parent_id is null
+                AND parent_id is null
             </if>
             <if test="shopCategoryName != null">
-               AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
+                AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
             </if>
         </where>
         order by priority desc

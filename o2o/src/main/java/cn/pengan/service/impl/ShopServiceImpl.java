@@ -107,7 +107,7 @@ public class ShopServiceImpl implements IShopService {
     public ShopExecution findShopList(Shop shopCondition, List<Long> shopCategoryIds, int pageIndex, int pageSize) {
         int offset = CalculatorPaging.calcRowIndex(pageIndex, pageSize);
         List<Shop> shopList = shopDao.findShopList(shopCondition, shopCategoryIds, offset, pageSize);
-        int shopCount = shopDao.findShopCount(shopCondition,shopCategoryIds);
+        int shopCount = shopDao.findShopCount(shopCondition, shopCategoryIds);
         ShopExecution shopExecution = new ShopExecution();
         if (shopList != null) {
             shopExecution.setShopList(shopList);

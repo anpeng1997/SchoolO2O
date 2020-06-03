@@ -1,7 +1,7 @@
 import React from "react";
-import { createForm } from "rc-form";
-import { List, InputItem, TextareaItem, Flex, WhiteSpace, WingBlank, Button, Toast } from "antd-mobile";
-import { reqAddProductCategory, reqModifyProductCategory, reqProductCategory } from "../../../api/shopAPI";
+import {createForm} from "rc-form";
+import {List, InputItem, TextareaItem, Flex, WhiteSpace, WingBlank, Button, Toast} from "antd-mobile";
+import {reqAddProductCategory, reqModifyProductCategory, reqProductCategory} from "../../../api/shopAPI";
 
 // 通过自定义 moneyKeyboardWrapProps 修复虚拟键盘滚动穿透问题
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
@@ -44,7 +44,7 @@ class ShopProductCategoryForm extends React.PureComponent {
         this.props.history.goBack();
     }
     onSubmitData = () => {
-        const { shopId, categoryId } = this.state;
+        const {shopId, categoryId} = this.state;
         const form = this.props.form;
         form.validateFields(async (error) => {
             if (!error) {
@@ -76,31 +76,31 @@ class ShopProductCategoryForm extends React.PureComponent {
     }
 
     render() {
-        const { getFieldProps, getFieldError } = this.props.form;
+        const {getFieldProps, getFieldError} = this.props.form;
         return <React.Fragment>
             <List
                 renderHeader={() => !this.state.categoryId ? "添加商品类别" : "修改商品类别信息"}
                 renderFooter={() => getFieldError('productCategoryName') || getFieldError('priority')}>
                 <InputItem clear="true"
-                    error={!!getFieldError('productCategoryName')}
-                    {...getFieldProps("productCategoryName", {
-                        validateFirst: true,
-                        defaultValue: 100,
-                        rules: [
-                            //申明式验证
-                            { required: true, message: '商品类别名称是必须的！' },
-                            { whitespace: true, message: '商品类别名称中不能含有空格！' },
-                            { max: 12, message: '商品类别名不能长于12位！' },
-                            //自定义验证器
-                        ]
-                    })} >
+                           error={!!getFieldError('productCategoryName')}
+                           {...getFieldProps("productCategoryName", {
+                               validateFirst: true,
+                               defaultValue: 100,
+                               rules: [
+                                   //申明式验证
+                                   {required: true, message: '商品类别名称是必须的！'},
+                                   {whitespace: true, message: '商品类别名称中不能含有空格！'},
+                                   {max: 12, message: '商品类别名不能长于12位！'},
+                                   //自定义验证器
+                               ]
+                           })} >
                     类别名称:
                 </InputItem>
                 <InputItem
                     error={!!getFieldError('priority')}
                     {...getFieldProps('priority', {
                         rules: [
-                            { required: true, message: '商品类别权重是必须的！' }
+                            {required: true, message: '商品类别权重是必须的！'}
                         ]
                     })}
                     type="money"
@@ -115,8 +115,9 @@ class ShopProductCategoryForm extends React.PureComponent {
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">
                     <Flex>
-                        <Flex.Item><Button size="large" onClick={this.back} >取消</Button></Flex.Item>
-                        <Flex.Item><Button type="primary" size="large" onClick={this.onSubmitData} >确认</Button></Flex.Item>
+                        <Flex.Item><Button size="large" onClick={this.back}>取消</Button></Flex.Item>
+                        <Flex.Item><Button type="primary" size="large"
+                                           onClick={this.onSubmitData}>确认</Button></Flex.Item>
                     </Flex>
                 </WingBlank>
                 <WhiteSpace size="lg"></WhiteSpace>

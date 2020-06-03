@@ -15,6 +15,7 @@ public interface ITokenService {
 
     /**
      * 根据request Header token获取redis中的personInfo
+     *
      * @param request
      * @return 当不存在时，返回null
      */

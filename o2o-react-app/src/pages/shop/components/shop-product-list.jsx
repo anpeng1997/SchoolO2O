@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, List, WingBlank, Modal, WhiteSpace, Toast } from "antd-mobile";
-import { connect } from "react-redux";
-import { getProductListAction } from "../store/actionCreators";
-import { reqChangeStatus,reqDeleteProduct } from "../../../api/shopAPI";
+import {Button, List, WingBlank, Modal, WhiteSpace, Toast} from "antd-mobile";
+import {connect} from "react-redux";
+import {getProductListAction} from "../store/actionCreators";
+import {reqChangeStatus, reqDeleteProduct} from "../../../api/shopAPI";
 import ThumbImg from "./thumbImg";
 
 const Item = List.Item;
@@ -39,37 +39,40 @@ class ShopProductList extends React.PureComponent {
 
     render() {
         const shopId = this.state.shopId;
-        const { history, match, productList } = this.props;
+        const {history, match, productList} = this.props;
         const products = productList.toJS();
         return <React.Fragment>
             <List renderHeader={'商品列表'}>
                 {
                     products.map((item, index) => {
-                        return <Item key={index} thumb={<ThumbImg src={item.imgAddr} alt={item.productDesc}></ThumbImg>} align="top" multipleLine
-                            extra={
-                                <div>
-                                    <Button type="warning" size="small" onClick={() =>
-                                        alert('Delete', 'confirm delete?', [
-                                            { text: 'Cancel', onPress: () => console.log('cancel') },
-                                            {
-                                                text: 'Ok',
-                                                onPress: () =>
-                                                    new Promise(async (resolve) => {
-                                                        const response = await reqDeleteProduct(item.productId)
-                                                        if(response.success){
-                                                            Toast.info("操作成功", 2);
-                                                            setTimeout(this.getProductList, 2000);
-                                                        }
-                                                        resolve();
-                                                    }),
-                                            },
-                                        ])} >删除</Button>
-                                    <WhiteSpace size="md"></WhiteSpace>
-                                    <Button type="primary" size="small" onClick={() => history.push(`/shop/productoperation/${shopId}/${item.productId}`)} >编辑</Button>
-                                    <WhiteSpace size="md"></WhiteSpace>
-                                    <Button type="ghost" size="small" onClick={() => this.changeStatus(item.productId)} >{item.enableStatus === 0 ? "上架" : "下架"}</Button>
-                                </div>
-                            }
+                        return <Item key={index} thumb={<ThumbImg src={item.imgAddr} alt={item.productDesc}></ThumbImg>}
+                                     align="top" multipleLine
+                                     extra={
+                                         <div>
+                                             <Button type="warning" size="small" onClick={() =>
+                                                 alert('Delete', 'confirm delete?', [
+                                                     {text: 'Cancel', onPress: () => console.log('cancel')},
+                                                     {
+                                                         text: 'Ok',
+                                                         onPress: () =>
+                                                             new Promise(async (resolve) => {
+                                                                 const response = await reqDeleteProduct(item.productId)
+                                                                 if (response.success) {
+                                                                     Toast.info("操作成功", 2);
+                                                                     setTimeout(this.getProductList, 2000);
+                                                                 }
+                                                                 resolve();
+                                                             }),
+                                                     },
+                                                 ])}>删除</Button>
+                                             <WhiteSpace size="md"></WhiteSpace>
+                                             <Button type="primary" size="small"
+                                                     onClick={() => history.push(`/shop/productoperation/${shopId}/${item.productId}`)}>编辑</Button>
+                                             <WhiteSpace size="md"></WhiteSpace>
+                                             <Button type="ghost" size="small"
+                                                     onClick={() => this.changeStatus(item.productId)}>{item.enableStatus === 0 ? "上架" : "下架"}</Button>
+                                         </div>
+                                     }
                         >
                             {item.productName}
                             <Brief>{item.enableStatus === 0 ? "未上架" : "已上架"}</Brief>
@@ -83,7 +86,7 @@ class ShopProductList extends React.PureComponent {
             <WingBlank>
                 <Button type="primary" onClick={() => {
                     history.push(`/shop/productoperation/${match.params.id}`);
-                }} >添加商品</Button>
+                }}>添加商品</Button>
             </WingBlank>
         </React.Fragment>
     }

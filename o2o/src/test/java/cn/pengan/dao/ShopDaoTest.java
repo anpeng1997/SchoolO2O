@@ -79,7 +79,7 @@ public class ShopDaoTest extends BaseTest {
 //        PersonInfo owner = new PersonInfo();
 //        owner.setUserId(1L);
 //        shopCondition.setOwner(owner);
-        int shopCount = shopDao.findShopCount(shopCondition,null);
+        int shopCount = shopDao.findShopCount(shopCondition, null);
         System.out.println(shopCount);
     }
 

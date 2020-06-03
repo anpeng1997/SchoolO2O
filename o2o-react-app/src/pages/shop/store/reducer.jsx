@@ -1,5 +1,5 @@
-import { GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST } from "./actionType";
-import { fromJS } from "immutable";
+import {GET_SHOP_LIST, GET_PRODUCT_CATEGORY_LIST, GET_SHOP_OPERATION_INIT_DATE, GET_PRODUCT_LIST} from "./actionType";
+import {fromJS} from "immutable";
 
 const defaultState = fromJS({
     shopList: [],

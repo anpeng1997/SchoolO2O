@@ -1,6 +1,6 @@
 import React from "react";
-import { NavBar, Icon } from "antd-mobile";
-import { Route, Switch } from "react-router-dom";
+import {NavBar, Icon} from "antd-mobile";
+import {Route, Switch} from "react-router-dom";
 
 import ShopManage from "./components/shop-manage";
 import ShopList from "./components/shop-list";
@@ -21,7 +21,7 @@ class ShopIndex extends React.Component {
         return <React.Fragment>
             <NavBar
                 mode="light"
-                icon={<Icon type="left" />}
+                icon={<Icon type="left"/>}
                 onLeftClick={this.back}
             >我的店铺</NavBar>
             <Switch>
@@ -38,4 +38,5 @@ class ShopIndex extends React.Component {
         </React.Fragment>
     }
 }
+
 export default ShopIndex;

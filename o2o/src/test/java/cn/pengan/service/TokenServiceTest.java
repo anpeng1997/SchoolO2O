@@ -14,7 +14,7 @@ public class TokenServiceTest extends BaseTest {
     private ITokenService tokenService;
 
     @Test
-    public void getToken(){
+    public void getToken() {
 //        LocalAuth localAuth = new LocalAuth();
 //        localAuth.setUserName("test");
 //        localAuth.setPassword("password");

@@ -15,7 +15,7 @@
         <constructor-arg name="host" value="${redis.host}"></constructor-arg>
         <constructor-arg name="port" value="${redis.port}"></constructor-arg>
     </bean>
-    <bean id="jedisUtil" class="cn.pengan.cache.JedisUtil" >
+    <bean id="jedisUtil" class="cn.pengan.cache.JedisUtil">
         <property name="jedisPool" ref="jedisPool"></property>
     </bean>
     <!-- 将封装好的操作不同redis类型的内部注册到IOC容器中-->

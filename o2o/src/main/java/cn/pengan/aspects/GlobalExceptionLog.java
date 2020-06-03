@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 public class GlobalExceptionLog {
     private final static Logger logger = LoggerFactory.getLogger(GlobalExceptionLog.class);
 
-    @AfterThrowing(value = "execution(* cn.pengan.*.*.*.*(..))",throwing = "ex")
-    public void recordException(JoinPoint joinPoint,Exception ex) {
+    @AfterThrowing(value = "execution(* cn.pengan.*.*.*.*(..))", throwing = "ex")
+    public void recordException(JoinPoint joinPoint, Exception ex) {
         String declaringTypeName = joinPoint.getSignature().getDeclaringTypeName();
-        logger.error("【{}】： {}",declaringTypeName,ex.getMessage());
+        logger.error("【{}】： {}", declaringTypeName, ex.getMessage());
     }
 }

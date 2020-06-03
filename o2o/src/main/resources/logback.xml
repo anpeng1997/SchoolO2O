@@ -5,8 +5,8 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <property name="log.level" value="debug"/>
     <property name="log.maxHistory" value="30"></property>
-<!--    配置日志的存放位置-->
-<!--    <property name="log.filePath" value="${catalina.base}/logs/webapps"></property>-->
+    <!--    配置日志的存放位置-->
+    <!--    <property name="log.filePath" value="${catalina.base}/logs/webapps"></property>-->
     <property name="log.filePath" value="C:/o2o/logs/"></property>
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50} - %msg%n"></property>
     <!--         %-5level：级别从左显示5个字符宽度；logger{50}：那个类中输出的信息 -->

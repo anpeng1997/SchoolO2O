@@ -11,14 +11,15 @@ public class LocalAuthExecution {
     public LocalAuthExecution() {
 
     }
+
     public LocalAuthExecution(LocalAuthStatusEnum statusEnum) {
-        this.stateCode=statusEnum.getState();
-        this.stateInfo=statusEnum.getStateInfo();
+        this.stateCode = statusEnum.getState();
+        this.stateInfo = statusEnum.getStateInfo();
     }
 
-    public LocalAuthExecution(LocalAuthStatusEnum statusEnum,LocalAuth localAuth) {
-        this.stateCode=statusEnum.getState();
-        this.stateInfo=statusEnum.getStateInfo();
+    public LocalAuthExecution(LocalAuthStatusEnum statusEnum, LocalAuth localAuth) {
+        this.stateCode = statusEnum.getState();
+        this.stateInfo = statusEnum.getStateInfo();
         this.localAuth = localAuth;
     }
 

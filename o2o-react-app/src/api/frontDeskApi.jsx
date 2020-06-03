@@ -1,4 +1,4 @@
-import { axiosRequest } from "./myAxios";
+import {axiosRequest} from "./myAxios";
 
 
 export const reqHomeInitData = () => axiosRequest("/api/frontdesk/home/initdata");

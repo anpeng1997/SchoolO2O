@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { NavBar, Icon } from "antd-mobile";
+import {Route, Switch} from "react-router-dom";
+import {NavBar, Icon} from "antd-mobile";
 import Home from "./home";
 import ShopList from "./shop-list"
 
@@ -10,10 +10,10 @@ class Index extends React.Component {
         return <React.Fragment>
             <NavBar
                 mode="light"
-                icon={<Icon type="left" />}
+                icon={<Icon type="left"/>}
                 onLeftClick={() => console.log('onLeftClick')}
                 rightContent={[
-                    <Icon key="1" type="ellipsis" />,
+                    <Icon key="1" type="ellipsis"/>,
                 ]}
             >O2O</NavBar>
             <Switch>

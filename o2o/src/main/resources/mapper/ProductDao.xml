@@ -29,7 +29,8 @@
 
     <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="productId"
             keyColumn="product_id">
-        insert into tb_product value(null,#{productName},#{productDesc},null,#{normalPrice},#{promotionPrice},#{priority},
+        insert into tb_product
+        value(null,#{productName},#{productDesc},null,#{normalPrice},#{promotionPrice},#{priority},
         #{createTime},#{lastEditTime},#{enableStatus},#{point},#{productCategoryId},#{shopId});
     </insert>
     <update id="updateProduct" parameterType="Product">
@@ -74,7 +75,7 @@
 
     <select id="findProductById" parameterType="Long" resultMap="productMap">
         SELECT
-       	p.*,
+        p.*,
         pi.product_img_id,
         pi.img_addr AS pi_img_addr,
         pi.img_desc AS pi_img_desc,
@@ -83,23 +84,23 @@
         pi.product_id AS pi_prodict_id
         FROM
         tb_product AS p
-	    LEFT JOIN tb_product_img AS pi
-	    ON p.product_id = pi.product_id
+        LEFT JOIN tb_product_img AS pi
+        ON p.product_id = pi.product_id
         WHERE
         p.product_id = #{productId}
         ORDER BY
-	    P.priority DESC
+        P.priority DESC
     </select>
 
     <select id="findProductList" resultType="product">
         SELECT
-            *
+        *
         FROM
-            tb_product
+        tb_product
         WHERE
-            shop_id = #{shopId}
+        shop_id = #{shopId}
         ORDER BY
-            priority DESC
+        priority DESC
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
