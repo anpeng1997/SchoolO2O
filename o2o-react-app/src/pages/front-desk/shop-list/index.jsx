@@ -1,16 +1,9 @@
 import React from "react";
-<<<<<<< HEAD
-import {SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button} from "antd-mobile";
-import {reqShopList, reqShopCategoryList} from "../../../api/frontDeskApi";
-import {IMGSERVERURL} from "../../../common/Constant";
-import {DateTimeFormat} from "../../../common/utils";
-=======
 import { SearchBar, WhiteSpace, Card, Picker, WingBlank, List, Button, Toast } from "antd-mobile";
 import { reqShopList, reqShopCategoryList } from "../../../api/frontDeskApi";
 import { IMGSERVERURL } from "../../../common/Constant";
 import { DateTimeFormat } from "../../../common/utils";
 import { Link } from "react-router-dom";
->>>>>>> refs/remotes/origin/master
 
 class Index extends React.Component {
 
@@ -196,13 +189,8 @@ class Index extends React.Component {
                                 <Card.Footer content={"更新于：" + DateTimeFormat(item.lastEditTime, "YYYY-MM-DD HH:mm")}
                                              extra={<div>点击查看</div>}/>
                             </Card>
-<<<<<<< HEAD
-                            <WhiteSpace/>
-                        </div>
-=======
                             <WhiteSpace />
                         </Link>
->>>>>>> refs/remotes/origin/master
                     })
                 }
             </WingBlank>

@@ -97,10 +97,6 @@
         *
         FROM
         tb_product
-<<<<<<< HEAD
-        WHERE
-        shop_id = #{shopId}
-=======
         <where>
             <if test="condition.shopId != null">
                 shop_id = #{condition.shopId}
@@ -118,7 +114,6 @@
                 </foreach>
             </if>
         </where>
->>>>>>> refs/remotes/origin/master
         ORDER BY
         priority DESC
         LIMIT #{pageSize} OFFSET #{offset}

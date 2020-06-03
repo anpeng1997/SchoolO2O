@@ -1,7 +1,6 @@
 package cn.pengan.dto;
 
 import cn.pengan.entity.Product;
-import cn.pengan.entity.Shop;
 import cn.pengan.enums.ProductStatusEnum;
 
 import java.util.List;

@@ -15,13 +15,8 @@ class Index extends React.Component {
         return <React.Fragment>
             <NavBar
                 mode="light"
-<<<<<<< HEAD
-                icon={<Icon type="left"/>}
-                onLeftClick={() => console.log('onLeftClick')}
-=======
                 icon={<Icon type="left" />}
                 onLeftClick={this.back}
->>>>>>> refs/remotes/origin/master
                 rightContent={[
                     <Icon key="1" type="ellipsis"/>,
                 ]}

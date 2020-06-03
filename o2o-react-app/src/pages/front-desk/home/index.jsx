@@ -23,7 +23,6 @@ class Index extends React.Component {
     async componentDidMount() {
         // simulate img loading
         const initData = await reqHomeInitData();
-        console.log(initData)
         if (initData.success) {
             this.setState({
                 categorys: initData.data.shopCategoryList,
