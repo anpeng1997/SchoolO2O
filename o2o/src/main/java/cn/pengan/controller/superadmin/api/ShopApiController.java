@@ -70,10 +70,6 @@ public class ShopApiController {
     @ApiOperation(value = "注册商铺")
     public Result shopRegister(String shopInfo, HttpServletRequest request,
                                @RequestParam("shopImg") MultipartFile shopImg) {
-//        boolean isVerify = CodeUtil.checkVerifyCode(request);
-//        if (!isVerify) {
-//            return new Result(false, "验证码错误!", ShopStatusEnum.NULL_SHOP_INFO.getState());
-//        }
         Result result;
         try {
             if (shopImg.isEmpty()) {
@@ -99,11 +95,7 @@ public class ShopApiController {
 
     @RequestMapping(value = "/modify", method = {RequestMethod.POST})
     @ApiOperation(value = "修改商铺信息")
-    public Result shopModify(String shopInfo, HttpServletRequest request, MultipartFile shopImg) throws JsonProcessingException {
-//        boolean isVerify = CodeUtil.checkVerifyCode(request);
-//        if (!isVerify) {
-//            return new Result(false, "验证码错误！");
-//        }
+    public Result shopModify(String shopInfo, MultipartFile shopImg) throws JsonProcessingException {
         Shop shop = objectMapper.readValue(shopInfo, Shop.class);
         ShopExecution shopExecution;
         Result result;

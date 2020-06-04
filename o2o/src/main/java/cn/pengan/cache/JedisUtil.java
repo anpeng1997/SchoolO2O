@@ -25,11 +25,27 @@ public class JedisUtil {
         jedis.close();
     }
 
+    public class Keys{
+        public Keys(JedisUtil jedisUtil) {
+        }
+
+        public boolean KeyExist(String key) {
+            Jedis jedis = getJedis();
+            return jedis.exists(key);
+        }
+
+        public Long deleteKey(String key) {
+            Jedis jedis = getJedis();
+            return jedis.del(key);
+        }
+    }
+
     /**
      * redis string 类型操作
      */
     public class Strings {
-
+        //内部类的默认构造函数就是要传入所在类的外部类实例
+        //这里显示的声明，只是为了在spring-redis.xml中配置依赖注入时有智能提示
         public Strings(JedisUtil jedisUtil) {
         }
 

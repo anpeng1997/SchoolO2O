@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
+import java.util.List;
 
 public class HeadLineServiceTest extends BaseTest {
     @Autowired
@@ -22,5 +23,13 @@ public class HeadLineServiceTest extends BaseTest {
         int i = headLineService.insertHeadLine(headLine, inputStream, file.getName());
         inputStream.close();
         System.out.println(headLine);
+    }
+
+    @Test
+    public void findListTest() {
+        HeadLine headLine = new HeadLine();
+        headLine.setEnableStatus(1);
+        List<HeadLine> headLineList = headLineService.findHeadLineList(headLine);
+        headLineList.forEach(System.out::println);
     }
 }

@@ -7,7 +7,15 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:application.properties"/>
+<!--    <context:property-placeholder location="classpath:application.properties"/>-->
+<!--    使用自定义解密Property配置-->
+    <bean class="cn.pengan.config.EncryptPropertyPlaceholderConfig">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
     <!--    在该配置文件下配置mybatis等配置-->
     <!--    dataSources-->
     <bean id="dataSource" destroy-method="close"

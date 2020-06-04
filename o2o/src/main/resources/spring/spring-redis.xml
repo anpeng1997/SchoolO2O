@@ -23,5 +23,8 @@
         <!--非静态的内部类默认的构造函数有一个参数，这个参数指向其外部类的实例-->
         <constructor-arg ref="jedisUtil"></constructor-arg>
     </bean>
+    <bean id="jedisKeys" class="cn.pengan.cache.JedisUtil$Keys">
+        <constructor-arg ref="jedisUtil"></constructor-arg>
+    </bean>
 
 </beans>

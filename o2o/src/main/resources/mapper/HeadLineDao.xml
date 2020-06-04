@@ -6,7 +6,7 @@
     <select id="findHeadLineList" resultType="HeadLine" parameterType="int">
         SELECT * FROM tb_head_line
         <where>
-            <if test="#{enableStatus} != null">
+            <if test="enableStatus != null">
                 enable_status = #{enableStatus}
             </if>
         </where>

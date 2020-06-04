@@ -15,7 +15,6 @@ import {
     WingBlank,
     Toast
 } from "antd-mobile";
-import { VERIFY_CODE_URL } from "../../../common/Constant";
 
 const Item = List.Item;
 
@@ -26,8 +25,7 @@ class ShopForm extends React.Component {
         let shopId = !!props.match.params.id ? props.match.params.id : null;
         this.state = {
             shopId: shopId,
-            isAddImg: true,
-            verifyCodeUrl: VERIFY_CODE_URL
+            isAddImg: true  
         }
     }
 
@@ -92,12 +90,10 @@ class ShopForm extends React.Component {
     onSubmitData = () => {
         const { history, form } = this.props;
         const { shopId } = this.state;
-        console.log("onSubmitData..")
         form.validateFields(async (error) => {
-            console.log("validateFields....")
             //验证结果,当没有错误时error对象则为null
             if (!error) {
-                const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc, verifyCodeActual } = form.getFieldsValue();
+                const { shopName, shopCategoryId, areaId, shopAddr, phone, shopImg, shopDesc } = form.getFieldsValue();
                 let shopInfo = {};
                 shopInfo.shopId = shopId;
                 shopInfo.shopName = shopName;
@@ -109,7 +105,6 @@ class ShopForm extends React.Component {
                 shopInfo.shopDesc = shopDesc;
                 let formData = new FormData();
                 formData.append("shopInfo", JSON.stringify(shopInfo));
-                formData.append("verifyCodeActual", verifyCodeActual)
                 let currentFile = null;
                 if (!!shopImg && shopImg.length > 0) {
                     currentFile = shopImg[0].file;
@@ -200,8 +195,7 @@ class ShopForm extends React.Component {
                     getFieldError('shopAddr') ||
                     getFieldError('phone') ||
                     getFieldError('shopImg') ||
-                    getFieldError('shopDesc') ||
-                    getFieldError('verifyCodeActual')
+                    getFieldError('shopDesc')
                 }>
                 <InputItem clear="true" maxLength="12"
                     {...getFieldProps('shopName', {
@@ -302,22 +296,6 @@ class ShopForm extends React.Component {
                     rows={3}
                     count={100}
                 />
-                <WhiteSpace size="md"></WhiteSpace>
-                <InputItem
-                    placeholder="输入验证码（点击图片更换）"
-                    error={!!getFieldError('verifyCodeActual')}
-                    {...getFieldProps('verifyCodeActual', {
-                        rules: [
-                            {
-                                required: true, message: '验证码是必须的！'
-                            }
-                        ]
-                    })}
-                >
-                    <img alt="验证码" src={this.state.verifyCodeUrl} onClick={() => {
-                        this.setState({ verifyCodeUrl: VERIFY_CODE_URL + new Date().getTime() })
-                    }} style={{ height: 'auto', width: '100%' }}></img>
-                </InputItem>
                 <WhiteSpace size="lg"></WhiteSpace>
                 <WingBlank size="lg">
                     <Flex>

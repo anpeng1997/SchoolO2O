@@ -36,9 +36,10 @@ public class HeadLineDaoTest extends BaseTest {
     @Test
     public void b_FindHeadLineList() {
         HeadLine headLine = new HeadLine();
+       // headLine.setEnableStatus(1);
         List<HeadLine> headLineList = headLineDao.findHeadLineList(headLine);
         headLineList.forEach(System.out::println);
-        Assert.assertEquals(5, headLineList.size());
+        Assert.assertEquals(4, headLineList.size());
     }
 
     @Test

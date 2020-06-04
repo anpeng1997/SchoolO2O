@@ -1,13 +1,14 @@
 package cn.pengan.util;
 
+import cn.pengan.entity.HeadLine;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.SocketUtils;
+import org.springframework.util.StringUtils;
+import sun.misc.BASE64Encoder;
 
 import javax.sound.midi.Soundbank;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class utilTest {
@@ -100,4 +101,37 @@ public class utilTest {
         System.out.println(l1 - l);
     }
 
+    @Test
+    public void randomCard() {
+        List<String> cards = new LinkedList();
+        //普通
+        for (int i = 1; i <= 50; i++) {
+            cards.add("普通卡" + i);
+        }
+        //白银
+        for (int i = 1; i <= 30; i++) {
+            cards.add("白银卡" + i);
+        }
+        //黄金
+        for (int i = 1; i <= 10; i++) {
+            cards.add("黄金卡" + i);
+        }
+        //铂金
+        for (int i = 1; i <= 9; i++) {
+            cards.add("铂金卡" + i);
+        }
+        //钻石
+        cards.add("钻石卡");
+        Collections.shuffle(cards);
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            System.out.println(cards.get(random.nextInt(cards.size())));
+            Collections.shuffle(cards);
+        }
+    }
+
+    @Test
+    public void test() {
+
+    }
 }
