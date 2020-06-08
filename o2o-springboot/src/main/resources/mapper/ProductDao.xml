@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pengan.dao.IProductDao">
+    <resultMap id="productMap" type="product">
+        <id property="productId" column="product_id"></id>
+        <result property="productName" column="product_name"></result>
+        <result property="productDesc" column="product_desc"></result>
+        <result property="imgAddr" column="img_addr"></result>
+        <result property="normalPrice" column="normal_price"></result>
+        <result property="promotionPrice" column="promotion_price"></result>
+        <result property="priority" column="priority"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="lastEditTime" column="last_edit_time"></result>
+        <result property="enableStatus" column="enable_status"></result>
+        <result property="point" column="point"></result>
+        <result property="productCategoryId" column="product_category_id"></result>
+        <result property="shopId" column="shop_id"></result>
+        <collection property="productImgs" ofType="ProductImg">
+            <id property="productImgId" column="product_img_id"></id>
+            <result property="imgAddr" column="pi_img_addr"></result>
+            <result property="imgDesc" column="pi_img_desc"></result>
+            <result property="priority" column="pi_priority"></result>
+            <result property="createTime" column="pi_create_time"></result>
+            <result property="productId" column="pi_product_id"></result>
+        </collection>
+    </resultMap>
+
+    <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="productId"
+            keyColumn="product_id">
+        insert into tb_product
+        value(null,#{productName},#{productDesc},null,#{normalPrice},#{promotionPrice},#{priority},
+        #{createTime},#{lastEditTime},#{enableStatus},#{point},#{productCategoryId},#{shopId});
+    </insert>
+    <update id="updateProduct" parameterType="Product">
+        update tb_product
+        <set>
+            <if test="productName != null">
+                product_name = #{productName},
+            </if>
+            <if test="productDesc != null">
+                product_desc = #{productDesc},
+            </if>
+            <if test="imgAddr != null">
+                img_addr = #{imgAddr},
+            </if>
+            <if test="normalPrice != null">
+                normal_price = #{normalPrice},
+            </if>
+            <if test="promotionPrice != null">
+                promotion_price = #{promotionPrice},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="enableStatus != null">
+                enable_status = #{enableStatus},
+            </if>
+            <if test="point != null">
+                point = point,
+            </if>
+            <if test="productCategoryId != null">
+                product_category_id = #{productCategoryId},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId}
+            </if>
+        </set>
+        where product_id = #{productId}
+    </update>
+
+    <select id="findProductById" parameterType="Long" resultMap="productMap">
+        SELECT
+        p.*,
+        pi.product_img_id,
+        pi.img_addr AS pi_img_addr,
+        pi.img_desc AS pi_img_desc,
+        pi.priority AS pi_priority,
+        pi.create_time AS pi_create_tiem,
+        pi.product_id AS pi_prodict_id
+        FROM
+        tb_product AS p
+        LEFT JOIN tb_product_img AS pi
+        ON p.product_id = pi.product_id
+        WHERE
+        p.product_id = #{productId}
+        ORDER BY
+        P.priority DESC
+    </select>
+
+    <select id="findProductList" resultType="product">
+        SELECT
+        *
+        FROM
+        tb_product
+        <where>
+            <if test="condition.shopId != null">
+                shop_id = #{condition.shopId}
+            </if>
+            <if test="condition.enableStatus != null">
+                AND enable_status = #{condition.enableStatus}
+            </if>
+            <if test="condition.productName != null">
+                AND product_name LIKE CONCAT('%',#{condition.productName},'%')
+            </if>
+            <if test="categoryIds != null">
+                AND product_category_id IN
+                <foreach collection="categoryIds" item="category" index="index" separator="," open="(" close=")">
+                    #{category}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY
+        priority DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <select id="findProductCount" resultType="int" parameterType="Long">
+        SELECT
+        COUNT(*)
+        FROM
+        tb_product
+        <where>
+            <if test="condition.shopId != null">
+                shop_id = #{condition.shopId}
+            </if>
+            <if test="condition.enableStatus != null">
+                AND enable_status = #{condition.enableStatus}
+            </if>
+            <if test="condition.productName != null">
+                AND product_name LIKE CONCAT('%',#{condition.productName},'%')
+            </if>
+            <if test="categoryIds != null">
+                AND product_category_id IN
+                <foreach collection="categoryIds" item="category" index="index" separator="," open="(" close=")">
+                    #{category}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteProduct" parameterType="Long">
+        DELETE FROM tb_product
+        WHERE product_id = #{productId};
+    </delete>
+
+    <update id="updateProductCategoryToNull" parameterType="long">
+        UPDATE tb_product
+        SET product_category_id = NULL
+        WHERE product_category_id = #{productCategoryId}
+    </update>
+
+</mapper>

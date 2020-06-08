@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pengan.dao.IShopCategoryDao">
+
+    <resultMap id="shopCategoryPickerMap" type="cn.pengan.dto.ShopCategoryPickerModel">
+        <id property="value" column="parent_Id"></id>
+        <result property="label" column="parent_Name"></result>
+        <collection property="children" ofType="cn.pengan.dto.ShopCategoryPickerModel">
+            <id property="value" column="child_Id"></id>
+            <result property="label" column="child_Name"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findShopCategoryById" parameterType="Long" resultType="ShopCategory">
+        SELECT * FROM tb_shop_category
+        WHERE shop_category_id = #{shopCategoryId}
+    </select>
+
+    <select id="findShopCategoryList" parameterType="ShopCategory" resultType="ShopCategory">
+        select * from tb_shop_category
+        <where>
+            <if test="parentId != null">
+                parent_id = #{parentId}
+            </if>
+            <if test="parentId == null">
+                AND parent_id is null
+            </if>
+            <if test="shopCategoryName != null">
+                AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
+            </if>
+        </where>
+        order by priority desc
+    </select>
+
+    <insert id="insertShopCategory" parameterType="ShopCategory" useGeneratedKeys="true" keyProperty="shopCategoryId">
+        INSERT INTO tb_shop_category
+        VALUES
+        (NULL,#{shopCategoryName},#{shopCategoryDesc},#{shopCategoryImg},#{priority},#{createTime},#{lastEditTime},#{parentId});
+    </insert>
+
+    <select id="findCount" resultType="int" parameterType="ShopCategory">
+        SELECT COUNT(*) FROM tb_shop_category
+        <where>
+            <if test="parentId != null">
+                parent_id = #{parentId}
+            </if>
+            <if test="parentId == null">
+                AND parent_id is null
+            </if>
+            <if test="shopCategoryName != null">
+                AND shop_category_name LIKE CONCAT('%',#{shopCategoryName},'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateShopCategory" parameterType="ShopCategory">
+        UPDATE tb_shop_category
+        <set>
+            <if test="shopCategoryName != null">
+                shop_category_name = #{shopCategoryName},
+            </if>
+            <if test="shopCategoryDesc != null">
+                shop_category_desc = #{shopCategoryDesc},
+            </if>
+            <if test="shopCategoryImg != null">
+                shop_category_img = #{shopCategoryImg},
+            </if>
+            <if test="priority != null">
+                priority = #{priority},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lastEditTime != null">
+                last_edit_time = #{lastEditTime},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId}
+            </if>
+        </set>
+        WHERE shop_category_id = #{shopCategoryId}
+    </update>
+
+    <select id="findShopCategoryPickerList" resultMap="shopCategoryPickerMap">
+   SELECT
+        parent.shop_category_id AS parent_Id,
+        parent.shop_category_name AS parent_Name,
+        child.shop_category_id AS child_Id,
+        child.shop_category_name AS child_Name
+    FROM
+	    `tb_shop_category` AS parent
+	LEFT JOIN `tb_shop_category` AS child ON parent.shop_category_id = child.parent_id
+	WHERE
+	parent.parent_id IS NULL
+    ORDER BY
+	    parent.priority,
+	    child.priority DESC
+    </select>
+</mapper>
