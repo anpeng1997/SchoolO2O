@@ -1,7 +1,7 @@
-package cn.pengan;
+package cn.pengan.serviceTest;
 
-import cn.pengan.dao.IAreaDao;
 import cn.pengan.entity.Area;
+import cn.pengan.service.IAreaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,15 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-class O2oSpringbootApplicationTests {
+public class AreaServiceImplTest {
 
     @Autowired
-    private IAreaDao areaDao;
+    private IAreaService areaService;
 
     @Test
-    void contextLoads() {
-        List<Area> all = areaDao.findAll();
+    void findAllTest() {
+        List<Area> all = areaService.findAll();
         all.forEach(System.out::println);
     }
-
 }

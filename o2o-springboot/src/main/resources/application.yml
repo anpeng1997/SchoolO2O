@@ -1,34 +1,27 @@
 server:
+  tomcat:
+    threads:
+      max: 1000
+      min-spare: 30
   port: 8080
   servlet:
     context-path: /
 
-#数据库连接
 spring:
-  datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1/o2odb?serverTimezone=GMT&autoReconnect=true&failOverReadOnly=false&verifyServerCertificate=false
-      username: root
-      password: root
-      # 配置初始化大小（默认0）、最小、最大（默认8）
-      initial-size: 1
-      min-idle: 1
-      max-active: 20
-      # 配置获取连接等待超时的时间
-      max-wait: 60000
-      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大。 默认为false
-      pool-prepared-statements: true
-      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
-      max-open-prepared-statements: 20
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      time-between-eviction-runs-millis: 60000
-      # 配置一个连接在池中最小和最大生存的时间，单位是毫秒
-      min-evictable-idle-time-millis: 300000
-      max-evictable-idle-time-millis: 900000
+  profiles:
+    #环境 dev|prod
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
   redis:
     host: localhost
     port: 6379
-      # redis连接池配置
+    # redis连接池配置
     pool:
       # 最大可用连接数（默认为8，负数表示无限）
       max-active: 8
@@ -40,6 +33,7 @@ spring:
       max-wait: -1
 
 
+#mybatis
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.pengan.entity
@@ -51,3 +45,14 @@ mybatis:
     aggressive-lazy-loading: false
 
 
+#配置logback log的配置文件路径（springboot中slf4j的实现默认使用的是logback）
+logging:
+  config: classpath:logback.xml
+
+
+tokensessionkey:
+  key: USER_SESSION_KEY
+  expired: 21600
+uploadfile:
+  mapping: upload
+  path: C:/o2o/upload/  #文件路径最后的 / 不能省略

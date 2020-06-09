@@ -2,11 +2,11 @@ package cn.pengan.dao;
 
 import cn.pengan.dto.ShopCategoryPickerModel;
 import cn.pengan.entity.ShopCategory;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface IShopCategoryDao {
     ShopCategory findShopCategoryById(Long shopCategoryId);
 

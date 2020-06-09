@@ -61,6 +61,7 @@ myAxiosInstance.interceptors.response.use((response) => {
 }, (error) => {
     Toast.hide();
     try {
+        
         if (error.response.status === 401) {
             history.push("/login");
         }

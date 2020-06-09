@@ -1,10 +1,10 @@
 package cn.pengan.dao;
 
 import cn.pengan.entity.LocalAuth;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-@Mapper
+@Repository
 public interface ILocalAuthDao {
     LocalAuth findLocalAuth(@Param("username") String name, @Param("password") String pwd);
 

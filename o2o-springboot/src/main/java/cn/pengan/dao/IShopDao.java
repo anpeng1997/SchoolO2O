@@ -1,12 +1,12 @@
 package cn.pengan.dao;
 
 import cn.pengan.entity.Shop;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface IShopDao {
     Shop findShopById(Long shopId);
 

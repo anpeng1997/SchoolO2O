@@ -1,12 +1,12 @@
 package cn.pengan.dao;
 
 import cn.pengan.entity.Product;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface IProductDao {
     int insertProduct(Product product);
 

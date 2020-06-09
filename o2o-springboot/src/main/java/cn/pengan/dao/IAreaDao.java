@@ -1,12 +1,11 @@
 package cn.pengan.dao;
 
 import cn.pengan.entity.Area;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface IAreaDao {
     List<Area> findAll();
 
