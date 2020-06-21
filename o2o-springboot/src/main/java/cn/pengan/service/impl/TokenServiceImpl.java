@@ -14,6 +14,7 @@ import java.time.Duration;
 import java.util.UUID;
 
 @Service
+@Deprecated //如今使用的是jwt token验证，已不使用redis来保存当前登录用户的信息了
 public class TokenServiceImpl implements ITokenService {
 
     private final String HEADER_TOKEN_KEY = "Authenticate-Token";

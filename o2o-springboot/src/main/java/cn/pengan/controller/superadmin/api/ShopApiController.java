@@ -9,10 +9,7 @@ import cn.pengan.entity.PersonInfo;
 import cn.pengan.entity.Shop;
 import cn.pengan.entity.ShopCategory;
 import cn.pengan.enums.ShopStatusEnum;
-import cn.pengan.service.IAreaService;
-import cn.pengan.service.IShopCategoryService;
-import cn.pengan.service.IShopService;
-import cn.pengan.service.ITokenService;
+import cn.pengan.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
@@ -37,6 +34,7 @@ public class ShopApiController {
     private final IAreaService areaService;
     private final ObjectMapper objectMapper;
     private final ITokenService tokenService;
+    private final IJwtService jwtService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(ShopApiController.class);
@@ -45,12 +43,14 @@ public class ShopApiController {
                              IAreaService areaService,
                              ObjectMapper objectMapper,
                              @Qualifier("shopCategoryService") IShopCategoryService shopCategoryService,
-                             ITokenService tokenService) {
+                             ITokenService tokenService,
+                             IJwtService jwtService) {
         this.shopService = shopService;
         this.areaService = areaService;
         this.objectMapper = objectMapper;
         this.shopCategoryService = shopCategoryService;
         this.tokenService = tokenService;
+        this.jwtService = jwtService;
     }
 
     @RequestMapping(value = "/operationinitdata", method = RequestMethod.GET)
@@ -77,7 +77,8 @@ public class ShopApiController {
             if (shopEntity.getShopName() == null || "".equals(shopEntity.getShopName().trim())) {
                 return new Result(false, "商店图片不能为空！", ShopStatusEnum.NULL_SHOP_INFO.getState());
             }
-            PersonInfo personInfo = tokenService.getPersonByToken(request);
+            //获取JWT token中的personInfo
+            PersonInfo personInfo = jwtService.getPersonInfoByJwtToken(request);
             shopEntity.setOwner(personInfo);
             ShopExecution shopExecution = shopService.addShop(shopEntity, shopImg.getInputStream(), shopImg.getOriginalFilename());
             result = new Result(true, shopExecution);
@@ -130,7 +131,7 @@ public class ShopApiController {
                                @ApiParam(value = "页面数据大小")
                                @RequestParam(value = "pagesize", required = false) Integer pagesize,
                                HttpServletRequest request) {
-        PersonInfo personInfo = tokenService.getPersonByToken(request);
+        PersonInfo personInfo = jwtService.getPersonInfoByJwtToken(request);
         Shop shopCondition = new Shop();
         shopCondition.setOwner(personInfo);
         if (pageindex == null) {

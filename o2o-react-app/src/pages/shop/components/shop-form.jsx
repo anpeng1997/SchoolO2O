@@ -147,7 +147,7 @@ class ShopForm extends React.Component {
         if (value && value.length >= 2) {
             callback();
         } else {
-            callback("请选择商店类别，如没有合适类别可在类别管理页面添加");
+            callback("请选择商店类别，如没有合适类别可在类别管理页面添加！");
         }
         callback();
     }
@@ -160,7 +160,7 @@ class ShopForm extends React.Component {
          */
         if (value) {
             if (value.replace(/\s/g, '').length < 11) {
-                callback("号码必须为11位");
+                callback("号码必须为11位！");
             } else {
                 callback();
             }
@@ -218,7 +218,6 @@ class ShopForm extends React.Component {
                     title="商店类别"
                     cascade={true}
                     onOk={(val) => {
-                        console.log(val)
                         this.setState({ currentPickerShopCategoryId: val })
                     }}
                     error={!!getFieldError('shopCategoryId')}

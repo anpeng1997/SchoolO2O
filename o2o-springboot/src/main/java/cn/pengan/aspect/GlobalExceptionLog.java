@@ -14,6 +14,7 @@ public class GlobalExceptionLog {
 
     @AfterThrowing(value = "execution(* cn.pengan.*.*.*.*(..))", throwing = "ex")
     public void recordException(JoinPoint point, Exception ex) {
+
         String declaringTypeName = point.getSignature().getDeclaringTypeName();
         logger.error("【{}】： {}", declaringTypeName, ex.getMessage());
     }

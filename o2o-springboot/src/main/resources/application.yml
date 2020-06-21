@@ -56,3 +56,9 @@ tokensessionkey:
 uploadfile:
   mapping: upload
   path: C:/o2o/upload/  #文件路径最后的 / 不能省略
+
+jwt:
+  #自定义的jwt加密密钥
+  encryption-key: das!@$~dk%1*^ds9323
+  #秒
+  expired: 21600

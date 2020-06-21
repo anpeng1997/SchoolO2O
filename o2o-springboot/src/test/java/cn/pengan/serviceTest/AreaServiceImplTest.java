@@ -17,7 +17,6 @@ public class AreaServiceImplTest {
     @Test
     void findAllTest() {
         List<Area> all = areaService.findAll();
-        int i = 1/0;
         all.forEach(System.out::println);
     }
 }
