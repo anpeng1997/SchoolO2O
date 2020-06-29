@@ -22,7 +22,9 @@ public class LocalAuthServiceImpl implements ILocalAuthService {
     @Override
 
     public LocalAuth findLocalAuth(String name, String pwd) {
-        LocalAuth localAuth = localAuthDao.findLocalAuth(name, pwd);
+        //密码加密后在比对
+        String md5Pwd = DigestUtils.md5DigestAsHex(pwd.getBytes());
+        LocalAuth localAuth = localAuthDao.findLocalAuth(name, md5Pwd);
         return localAuth;
     }
 

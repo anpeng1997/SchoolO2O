@@ -1,6 +1,7 @@
 package cn.pengan.config;
 
 import cn.pengan.interceptors.LoginInterceptor;
+import cn.pengan.interceptors.ShopOperationInterceptors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
 
+    @Bean
+    public ShopOperationInterceptors addShopOperationInterceptors() {
+        return new ShopOperationInterceptors();
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //上传文件映射目录
@@ -33,8 +39,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //登录拦截器
+        //TODO: 登录拦截器
         registry.addInterceptor(addLoginInterceptor()).addPathPatterns("/api/**")
                 .excludePathPatterns("/api/login", "/api/frontdesk/**");
+        registry.addInterceptor(addShopOperationInterceptors()).addPathPatterns("/api/shop/modify");
     }
 }

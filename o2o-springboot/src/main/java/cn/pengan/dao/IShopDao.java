@@ -29,4 +29,5 @@ public interface IShopDao {
 
     int deleteShop(String shopId);
 
+    List<Shop> findShopListByOwnerId(Long ownerId);
 }

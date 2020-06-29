@@ -36,13 +36,10 @@ public class LoginApiController {
 
     @PostMapping("")
     @ApiOperation("login")
-    public Result login(@RequestBody LocalAuth user, HttpServletRequest servletRequest) {
+    public Result login(@RequestBody LocalAuth user) {
         if (StringUtils.isEmpty(user.getUserName().trim()) || StringUtils.isEmpty(user.getPassword().trim())) {
             return new Result(false, "账号和密码不能为空");
         }
-        //密码加密后在比对
-        String md5Pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-        user.setPassword(md5Pwd);
         LocalAuth localAuth = localAuthService.findLocalAuth(user.getUserName(), user.getPassword());
         if (localAuth == null) {
             return new Result(false, "账号或密码错误");
@@ -51,7 +48,6 @@ public class LoginApiController {
         if (personInfo.getAdminFlag() != 1) {
             return new Result(false, "当前登录用户不是管理员");
         }
-        //String token = tokenService.generateAuthenticateToken(personInfo);
         String token = jwtService.generateJwtToken(personInfo);
         if (StringUtils.isEmpty(token)) {
             return new Result(false, "登录失败，获取token为null");

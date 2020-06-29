@@ -18,4 +18,5 @@ public interface IShopService {
 
     ShopExecution findShopList(Shop shopCondition, List<Long> shopCategoryIds, int pageIndex, int pageSize);
 
+    List<Shop> findShopListByOwnerId(Long ownerId);
 }

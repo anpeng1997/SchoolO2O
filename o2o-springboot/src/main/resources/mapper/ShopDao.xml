@@ -168,6 +168,11 @@
         </where>
     </select>
 
+    <select id="findShopListByOwnerId" resultType="shop" parameterType="Long">
+        SELECT * FROM tb_shop
+        WHERE owner_id = #{ownerId};
+    </select>
+
     <delete id="deleteShop" parameterType="long">
         DELETE FROM tb_shop
         WHERE shop_id = #{shopId}

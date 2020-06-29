@@ -112,4 +112,9 @@ public class ShopServiceImpl implements IShopService {
         }
         return shopExecution;
     }
+
+    @Override
+    public List<Shop> findShopListByOwnerId(Long ownerId) {
+        return shopDao.findShopListByOwnerId(ownerId);
+    }
 }
