@@ -39,9 +39,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //TODO: 登录拦截器
+        //登录拦截器
         registry.addInterceptor(addLoginInterceptor()).addPathPatterns("/api/**")
                 .excludePathPatterns("/api/login", "/api/frontdesk/**");
+        //店铺修改拦截器（判断当前用户是否有权限修改该店铺）
         registry.addInterceptor(addShopOperationInterceptors()).addPathPatterns("/api/shop/modify");
     }
 }
